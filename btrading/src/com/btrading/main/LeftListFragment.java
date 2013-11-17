@@ -32,11 +32,8 @@ public class LeftListFragment extends ListFragment {
 		adapter.add(new SampleItem("Search", android.R.drawable.ic_menu_search));
 		adapter.add(new SampleItem("Profile", android.R.drawable.ic_menu_myplaces));
 		adapter.add(new SampleItem("Events", android.R.drawable.ic_menu_my_calendar));
-		adapter.add(new SampleItem("My Pets", android.R.drawable.ic_menu_compass));
-		adapter.add(new SampleItem("Lost and Found", android.R.drawable.ic_menu_search));
 		adapter.add(new SampleItem("Analysis", android.R.drawable.ic_menu_mapmode));
 		adapter.add(new SampleItem("Settings", android.R.drawable.ic_menu_preferences));
-		adapter.add(new SampleItem("Nearby", android.R.drawable.ic_menu_directions));
 		setListAdapter(adapter);
 	}
 
