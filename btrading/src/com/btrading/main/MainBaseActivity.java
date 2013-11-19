@@ -1,17 +1,29 @@
 package com.btrading.main;
 
-import com.example.btrading.R;
+
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.app.ActionBar;
+import android.app.SearchManager;
+import android.app.SearchableInfo;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
+import android.view.View;
 import android.widget.Toast;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.widget.SearchView;
+import com.example.btrading.R;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
+@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 public class MainBaseActivity extends SlidingFragmentActivity {
 
 	private int mTitleRes;
@@ -19,6 +31,10 @@ public class MainBaseActivity extends SlidingFragmentActivity {
 
 	public MainBaseActivity(int titleRes) {
 		mTitleRes = titleRes;
+	}
+	
+	public MainBaseActivity() {
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -61,13 +77,12 @@ public class MainBaseActivity extends SlidingFragmentActivity {
 		case android.R.id.home:
 			toggle();
 			return true;
-		case R.id.github:
-			getSlidingMenu().showSecondaryMenu(true);
-			return true;
+			
 		}
 		return super.onOptionsItemSelected(item);
 	}
 
+	@SuppressLint("NewApi")
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getSupportMenuInflater().inflate(R.menu.main_base, menu);
