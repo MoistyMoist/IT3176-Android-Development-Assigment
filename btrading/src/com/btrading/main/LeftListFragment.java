@@ -6,6 +6,7 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
@@ -93,6 +94,15 @@ public class LeftListFragment extends ListFragment {
 			icon.setImageResource(getItem(position).iconRes);
 			TextView title = (TextView) convertView.findViewById(R.id.row_title);
 			title.setText(getItem(position).tag);
+			
+			if (getItem(position).iconRes == R.drawable.ic_left_menu_title) {
+				convertView.setBackgroundColor(Color.GRAY);  
+				title.setTextColor(Color.WHITE);
+			}
+			else{
+				//convertView.setBackgroundColor(Color.TRANSPARENT); 
+				convertView.setBackgroundColor(Color.WHITE); 
+			}
 
 			return convertView;
 		}
