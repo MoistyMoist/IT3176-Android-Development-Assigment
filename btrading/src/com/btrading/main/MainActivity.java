@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.view.Menu;
 import com.btrading.httprequests.*;
-import com.btrading.main.BaseActivity;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 public class MainActivity extends MainBaseActivity {

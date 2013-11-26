@@ -7,4 +7,11 @@
 
     <string name="github">GitHub</string>
     <string name="github_label">GitHub Label</string>
+    
+        <string name="title_activity_add_product">AddProductActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_wishlist">WishlistActivity</string>
+    <string name="title_activity_add_wishlist">AddWishlistActivity</string>
+    <string name="title_activity_trading">TradingActivity</string>
+    <string name="title_activity_product">ProductActivity</string>
 </resources>

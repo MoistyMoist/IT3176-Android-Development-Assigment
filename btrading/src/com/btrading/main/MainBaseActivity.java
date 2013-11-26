@@ -8,18 +8,24 @@ import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.btrading.R;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.widget.SearchView;
-import com.example.btrading.R;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
@@ -27,7 +33,7 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 public class MainBaseActivity extends SlidingFragmentActivity {
 
 	private int mTitleRes;
-	protected ListFragment mFrag;
+	protected ListFragment l_Frag;
 
 	public MainBaseActivity(int titleRes) {
 		mTitleRes = titleRes;
@@ -42,18 +48,18 @@ public class MainBaseActivity extends SlidingFragmentActivity {
 		super.onCreate(savedInstanceState);
 
 		setTitle(mTitleRes);
-
+		
 		// set the Behind View
 		setBehindContentView(R.layout.menu_frame);
 		if (savedInstanceState == null) {
 			FragmentTransaction t = this.getSupportFragmentManager().beginTransaction();
-			mFrag = new LeftListFragment();
-			t.replace(R.id.menu_frame, mFrag);
+			l_Frag = new LeftListFragment();
+			t.replace(R.id.menu_frame, l_Frag);
 			t.commit();
 		} else {
-			mFrag = (ListFragment)this.getSupportFragmentManager().findFragmentById(R.id.menu_frame);
+			l_Frag = (ListFragment)this.getSupportFragmentManager().findFragmentById(R.id.menu_frame);
 		}
-
+		
 		// customize the SlidingMenu
 		SlidingMenu sm = getSlidingMenu();
 		sm.setShadowWidthRes(R.dimen.shadow_width);
@@ -69,6 +75,7 @@ public class MainBaseActivity extends SlidingFragmentActivity {
 		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN); //getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
 		
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		
 	}
 
 	@Override
@@ -77,7 +84,6 @@ public class MainBaseActivity extends SlidingFragmentActivity {
 		case android.R.id.home:
 			toggle();
 			return true;
-			
 		}
 		return super.onOptionsItemSelected(item);
 	}

@@ -26,14 +26,14 @@ public class LeftListFragment extends ListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		SampleAdapter adapter = new SampleAdapter(getActivity());
-		//for (int i = 0; i < 20; i++) {
-		//	adapter.add(new SampleItem("Sample List"+i, android.R.drawable.ic_menu_search));
-		//}
-		adapter.add(new SampleItem("Search", android.R.drawable.ic_menu_search));
+		//0-5
+		adapter.add(new SampleItem("Account", R.drawable.ic_left_menu_title)); //int 0 for title, custom set	
 		adapter.add(new SampleItem("Profile", android.R.drawable.ic_menu_myplaces));
-		adapter.add(new SampleItem("Events", android.R.drawable.ic_menu_my_calendar));
-		adapter.add(new SampleItem("Analysis", android.R.drawable.ic_menu_mapmode));
+		adapter.add(new SampleItem("My Items", android.R.drawable.ic_menu_search));
+		adapter.add(new SampleItem("Others", R.drawable.ic_left_menu_title)); //int 0 for title, custom set
+		adapter.add(new SampleItem("Wish List", android.R.drawable.ic_menu_my_calendar));
 		adapter.add(new SampleItem("Settings", android.R.drawable.ic_menu_preferences));
+		
 		setListAdapter(adapter);
 	}
 
