@@ -8,9 +8,7 @@ public class StaticObjects {
 	//============================//
 	//	  Objects for Parameters  //
 	//============================//
-	static User userToCreate;
-	static User userToLogin;
-	static Location locationToCreate;
+
 	
 	
 	
