@@ -937,10 +937,11 @@ containing a value of this type.
         public static final int abs__bright_foreground_disabled_holo_light=0x7f060005;
         public static final int abs__bright_foreground_holo_dark=0x7f060002;
         public static final int abs__bright_foreground_holo_light=0x7f060003;
-        public static final int abs__primary_text_disable_only_holo_dark=0x7f060010;
-        public static final int abs__primary_text_disable_only_holo_light=0x7f060011;
-        public static final int abs__primary_text_holo_dark=0x7f060012;
-        public static final int abs__primary_text_holo_light=0x7f060013;
+        public static final int abs__primary_text_disable_only_holo_dark=0x7f060011;
+        public static final int abs__primary_text_disable_only_holo_light=0x7f060012;
+        public static final int abs__primary_text_holo_dark=0x7f060013;
+        public static final int abs__primary_text_holo_light=0x7f060014;
+        public static final int blue=0x7f060010;
         public static final int common_action_bar_splitter=0x7f06000f;
         /**  Sign-in Button Colors 
          */
@@ -953,8 +954,8 @@ containing a value of this type.
         public static final int common_signin_btn_light_text_disabled=0x7f06000c;
         public static final int common_signin_btn_light_text_focused=0x7f06000d;
         public static final int common_signin_btn_light_text_pressed=0x7f06000b;
-        public static final int common_signin_btn_text_dark=0x7f060014;
-        public static final int common_signin_btn_text_light=0x7f060015;
+        public static final int common_signin_btn_text_dark=0x7f060015;
+        public static final int common_signin_btn_text_light=0x7f060016;
     }
     public static final class dimen {
         /**  Default height of an action bar. 
@@ -1209,8 +1210,9 @@ containing a value of this type.
         public static final int ic_plusone_small_off_client=0x7f02008c;
         public static final int ic_plusone_standard_off_client=0x7f02008d;
         public static final int ic_plusone_tall_off_client=0x7f02008e;
-        public static final int shadow=0x7f02008f;
-        public static final int shadowright=0x7f020090;
+        public static final int row_selector=0x7f02008f;
+        public static final int shadow=0x7f020090;
+        public static final int shadowright=0x7f020091;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f040029;
