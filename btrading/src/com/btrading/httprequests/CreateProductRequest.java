@@ -23,7 +23,7 @@ public class CreateProductRequest implements Runnable{
 	public CreateProductRequest(Product INproduct)
 	{
 		this.productToCreate=INproduct;
-		setStaticObjects(new StaticObjects());
+		this.staticObjects = new StaticObjects();
 	}
 	
 	@Override
@@ -32,7 +32,7 @@ public class CreateProductRequest implements Runnable{
 		HttpClient httpclient = new DefaultHttpClient();
 
 		//PREPARE REQUEST OBJECT
-		HttpGet httpget = new HttpGet(""); 
+		HttpGet httpget = new HttpGet("http://bartertrading.azurewebsites.net/api/CreateProduct?token="+staticObjects.getToken()+"&INuserID="+this.productToCreate.getUser().getUserID()+"&INname="+this.productToCreate.getName()+"&INdescription="+this.productToCreate.getDescription()+"&INqty="+this.productToCreate.getQty()+"&INstatus=0&INx="+this.productToCreate.getX()+"&INy="+this.productToCreate.getY()+"&INquality="+this.productToCreate.getQuality()+"&INimageURL="+this.productToCreate.getImageURL()); 
         
         Log.i("CREATE PRODUCT REQUEST :",httpget.getURI().toString());
         //EXCUTE REQUEST
@@ -63,14 +63,6 @@ public class CreateProductRequest implements Runnable{
 
 	public void setProductToCreate(Product productToCreate) {
 		this.productToCreate = productToCreate;
-	}
-
-	public StaticObjects getStaticObjects() {
-		return staticObjects;
-	}
-
-	public void setStaticObjects(StaticObjects staticObjects) {
-		this.staticObjects = staticObjects;
 	}
 
 }

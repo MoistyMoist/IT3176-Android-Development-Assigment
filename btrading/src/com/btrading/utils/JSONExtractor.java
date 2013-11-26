@@ -47,5 +47,34 @@ public class JSONExtractor {
 		
 	}
 	
+	//THIS METHOD EXTRACTS THE RESULTS FOR REMOVING PRODUCT
+	public void ExtractRemoveProduct(HttpResponse data) throws IllegalStateException, IOException, JSONException
+	{
+		
+	}
+	
+	//THIS METHOD EXTRACTS THE RESULT FOR RETRIEVING PRODUCT BY ID
+	public void ExtractProductByIDRequest(HttpResponse data) throws IllegalStateException, IOException, JSONException
+	{
+		
+	}
+	
+	//THIS METHOD EXTRACTS THE RESULT FOR RETRIEVING PRODUCT BY USER
+	public void ExtractUserProductRequest(HttpResponse data) throws IllegalStateException, IOException, JSONException
+	{
+		
+	}
+	
+	//THIS METHOD EXTRACTS THE RESULT FOR CREATING A NEW PRODUCT
+	public void ExtractCreateProductRequest(HttpResponse data) throws IllegalStateException, IOException, JSONException
+	{
+		
+	}
+	
+	//THIS METHOD EXTRACTS THE RRESULT FOR UPDATING A PRODUCT
+	public void ExtractUpdateProductRequest(HttpResponse data) throws IllegalStateException, IOException, JSONException
+	{
+		
+	}
 	
 }
