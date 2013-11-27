@@ -2,59 +2,50 @@ package com.btrading.main;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
+import com.btrading.models.Product;
+import com.example.btrading.R;
+
 import android.content.Context;
-import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
-public class ProductListAdapter extends BaseAdapter{
+public class ProductListAdapter extends ArrayAdapter<Product>{
 
-	 private Activity activity;
-     private ArrayList data;
-     private static LayoutInflater inflater=null;
-     public Resources res;
-     
-     int i=0;
-	
-     
-     /*************  CustomAdapter Constructor *****************/
-     public ProductListAdapter(Activity a, ArrayList d,Resources resLocal) {
-          
-            /********** Take passed values **********/
-             activity = a;
-             data=d;
-             res = resLocal;
-          
-             /***********  Layout inflator to call external xml layout () ***********/
-              inflater = ( LayoutInflater )activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-          
+	 private final Context context;
+     private final ArrayList<Product> productList;
+
+     public ProductListAdapter(Context context, ArrayList<Product> productList) {
+
+         super(context, R.layout.custom_product_row, productList);
+
+         this.context = context;
+         this.productList = productList;
      }
+
      
-	
-	@Override
-	public int getCount() {
-		if(data.size()<=0)
-            return 1;
-        return data.size();
-	}
+     @Override
+     public View getView(int position, View convertView, ViewGroup parent) {
 
-	@Override
-	public Object getItem(int position) {
-		 return position;
-	}
+         // 1. Create inflater 
+         LayoutInflater inflater = (LayoutInflater) context
+             .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-	@Override
-	public long getItemId(int position) {
-		 return position;
-	}
+         // 2. Get rowView from inflater
+         View rowView = inflater.inflate(R.layout.row, parent, false);
 
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+         // 3. Get the two text view from the rowView
+         TextView productName = (TextView) rowView.findViewById(R.id.productName);
+         TextView productDescription = (TextView) rowView.findViewById(R.id.productDescription);
+
+         // 4. Set the text for textView 
+         productName.setText(productList.get(position).getName());
+         productDescription.setText(productList.get(position).getDescription());
+
+         // 5. retrn rowView
+         return rowView;
+     }
 
 }

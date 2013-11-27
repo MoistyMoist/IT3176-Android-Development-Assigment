@@ -20,13 +20,13 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.view.Menu;
 import com.btrading.httprequests.*;
+import com.btrading.models.Product;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 public class MainActivity extends MainBaseActivity {
 
 	ListView lv_products;
 	ArrayAdapter<CharSequence> adapter;
-	String[] product_list = {"AA Battery","AAA Battery","Blue Balloon","Cotton Wool"};
 	
 	public MainActivity() {
 		super(R.string.app_name);
@@ -35,40 +35,32 @@ public class MainActivity extends MainBaseActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.activity_main);
-		setSlidingActionBarEnabled(true);
-		
-		RightListFragment rightFrag = new RightListFragment();		
 		SlidingMenu sm = getSlidingMenu();
-		sm.setMode(SlidingMenu.LEFT_RIGHT);
-		
-		sm.setSecondaryMenu(R.layout.menu_frame_two);
-		getSupportFragmentManager().beginTransaction()
-		.replace(R.id.menu_frame_two, rightFrag).commit();					
+		sm.setMode(SlidingMenu.LEFT);
 		sm.setSecondaryShadowDrawable(R.drawable.shadowright);
 		sm.setShadowDrawable(R.drawable.shadow);
+	
 		
-		ListView listview = (ListView) findViewById(R.id.productList);
-	    String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-	        "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-	        "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
-	        "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
-	        "Android", "iPhone", "WindowsMobile" };
+		final ListView listview = (ListView) findViewById(R.id.productList);
 
-	    final ArrayList<String> list = new ArrayList<String>();
-	    for (int i = 0; i < values.length; ++i) {
-	      list.add(values[i]);
+
+	    ArrayList<Product> list = new ArrayList<Product>();
+	    for (int i = 0; i <10; ++i) {
+	    	Product p= new Product();
+	    	p.setDescription("description");
+	    	p.setName("name");
+	      list.add(p);
 	    }
-	   
-         
+	    ProductListAdapter adapter = new ProductListAdapter(this, list);
+	    //listview.setAdapter(adapter);
         
         
         ExecutorService executor = Executors.newFixedThreadPool(1);
         
           RetrieveAllProductRequest worker = new RetrieveAllProductRequest();
           
-         // executor.execute(worker);
+          executor.execute(worker);
         // This will make the executor accept no new threads
         // and finish all existing threads in the queue
 //        executor.shutdown();
