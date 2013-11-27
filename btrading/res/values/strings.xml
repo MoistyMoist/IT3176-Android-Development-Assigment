@@ -16,4 +16,15 @@
     <string name="title_activity_product">ProductActivity</string>
     <string name="title_activity_setting">Settings</string>
     
+    <string-array name="abc_entries">
+        <item>AAA</item>
+        <item>BBB</item>
+        <item>CCC</item>
+    </string-array>
+    <string-array name="abc_values">
+		<item>DDD</item>
+        <item>EEE</item>
+        <item>FFF</item>
+    </string-array>
+    
 </resources>

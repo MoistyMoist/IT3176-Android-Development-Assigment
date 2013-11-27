@@ -54,6 +54,10 @@
             android:name="com.btrading.main.products.ProductActivity"
             android:label="@string/title_activity_product" >
         </activity>
+		<activity
+            android:name="com.btrading.main.SettingActivity"
+            android:label="@string/title_activity_setting" >
+        </activity>
     </application>
 
 </manifest>
