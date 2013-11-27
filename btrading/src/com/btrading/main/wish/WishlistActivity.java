@@ -31,14 +31,9 @@ public class WishlistActivity extends MainBaseActivity {
 		lv_wish.setAdapter(adapter);
 	}
 	
-	
-	
-	/*
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.wishlist, menu);
+		getSupportMenuInflater().inflate(R.menu.wishlist, menu);
 		return true;
 	}
-	*/
 }
