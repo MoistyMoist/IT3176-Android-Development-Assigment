@@ -1329,13 +1329,14 @@ containing a value of this type.
         public static final int activity_main_trading=0x7f03001b;
         public static final int activity_main_wish=0x7f03001c;
         public static final int custom_product_list=0x7f03001d;
-        public static final int list=0x7f03001e;
-        public static final int menu_frame=0x7f03001f;
-        public static final int menu_frame_two=0x7f030020;
-        public static final int row=0x7f030021;
-        public static final int sherlock_spinner_dropdown_item=0x7f030022;
-        public static final int sherlock_spinner_item=0x7f030023;
-        public static final int slidingmenumain=0x7f030024;
+        public static final int custom_product_row=0x7f03001e;
+        public static final int list=0x7f03001f;
+        public static final int menu_frame=0x7f030020;
+        public static final int menu_frame_two=0x7f030021;
+        public static final int row=0x7f030022;
+        public static final int sherlock_spinner_dropdown_item=0x7f030023;
+        public static final int sherlock_spinner_item=0x7f030024;
+        public static final int slidingmenumain=0x7f030025;
     }
     public static final class menu {
         public static final int add_product=0x7f0b0000;
