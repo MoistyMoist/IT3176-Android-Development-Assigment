@@ -321,6 +321,7 @@ int drawable ic_plusone_tall_off_client 0x7f02008e
 int drawable row_selector 0x7f02008f
 int drawable shadow 0x7f020090
 int drawable shadowright 0x7f020091
+int drawable shape 0x7f020092
 int id abs__action_bar 0x7f040029
 int id abs__action_bar_container 0x7f040028
 int id abs__action_bar_subtitle 0x7f04001a

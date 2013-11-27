@@ -54,18 +54,17 @@ public class MainActivity extends MainBaseActivity {
         
           RetrieveAllProductRequest worker = new RetrieveAllProductRequest();
           
-          executor.execute(worker);
+         // executor.execute(worker);
         // This will make the executor accept no new threads
         // and finish all existing threads in the queue
-        executor.shutdown();
-        // Wait until all threads are finish
-        try {
-			executor.awaitTermination(1000, null);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        System.out.println("Finished all threads");
+//        executor.shutdown();
+//        // Wait until all threads are finish
+//        try {
+//			executor.awaitTermination(1000, null);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
         
         
         

@@ -1213,6 +1213,7 @@ containing a value of this type.
         public static final int row_selector=0x7f02008f;
         public static final int shadow=0x7f020090;
         public static final int shadowright=0x7f020091;
+        public static final int shape=0x7f020092;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f040029;

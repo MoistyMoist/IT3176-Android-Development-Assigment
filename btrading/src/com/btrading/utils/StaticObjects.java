@@ -18,6 +18,6 @@ public class StaticObjects {
 	
 	public String getToken()
 	{
-		return this.token;
+		return StaticObjects.token;
 	}
 }
