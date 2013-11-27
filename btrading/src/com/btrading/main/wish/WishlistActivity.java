@@ -1,12 +1,12 @@
 package com.btrading.main.wish;
 
+import com.actionbarsherlock.view.MenuItem;
 import com.btrading.main.MainBaseActivity;
 import com.example.btrading.R;
-import com.example.btrading.R.layout;
-import com.example.btrading.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -31,6 +31,19 @@ public class WishlistActivity extends MainBaseActivity {
 		lv_wish.setAdapter(adapter);
 	}
 	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		case R.id.menu_add_wishlist:
+			Intent intent = new Intent();
+			intent.setClass(getBaseContext(), AddWishlistActivity.class);
+			startActivity(intent);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getSupportMenuInflater().inflate(R.menu.wishlist, menu);
