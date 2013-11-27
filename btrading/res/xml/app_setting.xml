@@ -1,23 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory 
-        android:title="Theme"
+	<PreferenceCategory 
+        android:title="Account"
         android:key="pref_key_storage_settings">
-        <CheckBoxPreference
-            android:key="pref_key_auto_delete"
-            android:summary="summaryautodelete"
-            android:title="titleautodelete"
-            android:defaultValue="false" />
-        <Preference 
-            android:key="pref_key_sms_delete_limit"
-            android:dependency="pref_key_auto_delete"
-            android:summary="summarydeletelimit"
-            android:title="titlesmsdelete" />
-        <Preference 
-            android:key="pref_key_mms_delete_limit"
-            android:dependency="pref_key_auto_delete"
-            android:summary="summarydeletelimit"
-            android:title="preftitledelete" />
+		<EditTextPreference
+			android:title="Change Password"
+			android:summary="Change your account password"
+			android:key="prefUsername"/>
+	    
     </PreferenceCategory>
     
 	<PreferenceCategory 
@@ -25,8 +15,8 @@
         android:key="pref_key_storage_settings">
         <CheckBoxPreference
             android:key="pref_key_auto_delete"
-            android:summary="summaryautodelete"
-            android:title="titleautodelete"
+  			android:title="Help Send Crash Reports"
+            android:summary="Helps to fix bugs"
             android:defaultValue="false" />
         <ListPreference
             android:key="prefSyncFrequency"
@@ -37,13 +27,14 @@
     </PreferenceCategory>
     
 	<PreferenceCategory 
-        android:title="Account"
+        android:title="Theme"
         android:key="pref_key_storage_settings">
-		<EditTextPreference
-			android:title="Change Password"
-			android:summary="Change your account password"
-			android:key="prefUsername"/>
-	    
+        <ListPreference
+            android:key="prefSyncFrequency"
+            android:entries="@array/theme"
+            android:entryValues="@array/themeValues"
+            android:title="Change Theme"
+            android:summary="Some Theme" />
     </PreferenceCategory>
 
 </PreferenceScreen>
