@@ -11,7 +11,7 @@ import android.widget.ListView;
 
 public class WishlistActivity extends Activity {
 
-	ListView lv_wish;;
+	ListView lv_wish;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
