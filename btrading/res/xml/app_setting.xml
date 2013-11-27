@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory 
-        android:title="smsstoragetitle"
+        android:title="Theme"
         android:key="pref_key_storage_settings">
         <CheckBoxPreference
             android:key="pref_key_auto_delete"
@@ -19,4 +19,31 @@
             android:summary="summarydeletelimit"
             android:title="preftitledelete" />
     </PreferenceCategory>
+    
+	<PreferenceCategory 
+        android:title="Update Settings"
+        android:key="pref_key_storage_settings">
+        <CheckBoxPreference
+            android:key="pref_key_auto_delete"
+            android:summary="summaryautodelete"
+            android:title="titleautodelete"
+            android:defaultValue="false" />
+        <ListPreference
+            android:key="prefSyncFrequency"
+            android:entries="@array/syncFrequency"
+            android:entryValues="@array/syncFrequencyValues"
+            android:title="Sync Frequency"
+            android:summary="Set the sync frequency" />
+    </PreferenceCategory>
+    
+	<PreferenceCategory 
+        android:title="Account"
+        android:key="pref_key_storage_settings">
+		<EditTextPreference
+			android:title="Change Password"
+			android:summary="Change your account password"
+			android:key="prefUsername"/>
+	    
+    </PreferenceCategory>
+
 </PreferenceScreen>
