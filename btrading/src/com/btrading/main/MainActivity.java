@@ -1,10 +1,15 @@
 package com.btrading.main;
 
 import com.example.btrading.R;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
+import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
@@ -44,9 +49,20 @@ public class MainActivity extends MainBaseActivity {
 		sm.setSecondaryShadowDrawable(R.drawable.shadowright);
 		sm.setShadowDrawable(R.drawable.shadow);
 		
-		lv_products = (ListView) findViewById(R.id.lv_products);
-		adapter = new ArrayAdapter<CharSequence>(this,android.R.layout.simple_spinner_dropdown_item,product_list);
-		lv_products.setAdapter(adapter);
+		final ListView listview = (ListView) findViewById(R.id.productList);
+	    String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
+	        "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
+	        "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
+	        "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
+	        "Android", "iPhone", "WindowsMobile" };
+
+	    final ArrayList<String> list = new ArrayList<String>();
+	    for (int i = 0; i < values.length; ++i) {
+	      list.add(values[i]);
+	    }
+	    final StableArrayAdapter adapter = new StableArrayAdapter(this,
+	        android.R.layout.simple_list_item_checked, list);
+	    listview.setAdapter(adapter);
          
         
         
@@ -74,5 +90,31 @@ public class MainActivity extends MainBaseActivity {
 	}
 
 
+
+	
+	private class StableArrayAdapter extends ArrayAdapter<String> {
+
+	    HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
+
+	    public StableArrayAdapter(Context context, int textViewResourceId,
+	        List<String> objects) {
+	      super(context, textViewResourceId, objects);
+	      for (int i = 0; i < objects.size(); ++i) {
+	        mIdMap.put(objects.get(i), i);
+	      }
+	    }
+
+	    @Override
+	    public long getItemId(int position) {
+	      String item = getItem(position);
+	      return mIdMap.get(item);
+	    }
+
+	    @Override
+	    public boolean hasStableIds() {
+	      return true;
+	    }
+
+	  }
 
 }
