@@ -23,6 +23,11 @@ public class ProductListAdapter extends ArrayAdapter<Product>{
 
          this.context = context;
          this.productList = productList;
+         
+         if(productList==null)
+         {
+        	 
+         }
      }
 
      
@@ -37,8 +42,8 @@ public class ProductListAdapter extends ArrayAdapter<Product>{
          View rowView = inflater.inflate(R.layout.custom_product_row, parent, false);
 
          // 3. Get the two text view from the rowView
-         TextView productName = (TextView) rowView.findViewById(R.id.label);
-         TextView productDescription = (TextView) rowView.findViewById(R.id.value);
+         TextView productName = (TextView) rowView.findViewById(R.id.productName);
+         TextView productDescription = (TextView) rowView.findViewById(R.id.productDescription);
 
          // 4. Set the text for textView 
          productName.setText(productList.get(position).getName());
