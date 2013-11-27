@@ -1,5 +1,8 @@
 package com.btrading.main;
 
+import com.btrading.main.login.LoginActivity;
+import com.btrading.main.products.ProductActivity;
+import com.btrading.main.wish.WishlistActivity;
 import com.example.btrading.R;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
@@ -42,27 +45,23 @@ public class LeftListFragment extends ListFragment {
 		Intent intent = new Intent();
 		intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		switch (position) {
-		case 0: //Search
-			//intent.setClass(getActivity(), MainActivity.class);
-			//startActivity(intent);
-			break;
 			
-		case 1: //Profile
-			intent.setClass(getActivity(), MainActivity.class);
+		case 1: //customer Profile
+			intent.setClass(getActivity(), LoginActivity.class);
 			startActivity(intent);
 			break;
 
-		case 2: //Events
-			intent.setClass(getActivity(), MainActivity.class);
+		case 2: //My items
+			intent.setClass(getActivity(), ProductActivity.class);
 			startActivity(intent);
 			break;
 
-		case 5: //Analysis
-			intent.setClass(getActivity(), MainActivity.class);
+		case 4: //wish
+			intent.setClass(getActivity(), WishlistActivity.class);
 			startActivity(intent);
 			break;
 
-		case 6: //Settings
+		case 5: //Settings
 			intent.setClass(getActivity(), SettingActivity.class);
 			startActivity(intent);
 			break;
