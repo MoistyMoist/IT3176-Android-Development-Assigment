@@ -49,7 +49,7 @@ public class MainActivity extends MainBaseActivity {
 		sm.setSecondaryShadowDrawable(R.drawable.shadowright);
 		sm.setShadowDrawable(R.drawable.shadow);
 		
-		final ListView listview = (ListView) findViewById(R.id.productList);
+		ListView listview = (ListView) findViewById(R.id.productList);
 	    String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
 	        "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
 	        "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
@@ -60,9 +60,7 @@ public class MainActivity extends MainBaseActivity {
 	    for (int i = 0; i < values.length; ++i) {
 	      list.add(values[i]);
 	    }
-	    final StableArrayAdapter adapter = new StableArrayAdapter(this,
-	        android.R.layout.simple_list_item_checked, list);
-	    listview.setAdapter(adapter);
+	   
          
         
         
@@ -92,29 +90,6 @@ public class MainActivity extends MainBaseActivity {
 
 
 	
-	private class StableArrayAdapter extends ArrayAdapter<String> {
-
-	    HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
-
-	    public StableArrayAdapter(Context context, int textViewResourceId,
-	        List<String> objects) {
-	      super(context, textViewResourceId, objects);
-	      for (int i = 0; i < objects.size(); ++i) {
-	        mIdMap.put(objects.get(i), i);
-	      }
-	    }
-
-	    @Override
-	    public long getItemId(int position) {
-	      String item = getItem(position);
-	      return mIdMap.get(item);
-	    }
-
-	    @Override
-	    public boolean hasStableIds() {
-	      return true;
-	    }
-
-	  }
+	
 
 }

@@ -33,22 +33,21 @@
 	    
 	    <TextView
 	        android:id="@+id/productDescription"
-	        android:layout_marginTop="15dp"
 	        android:layout_width="fill_parent"
 	        android:layout_height="fill_parent"
+	        android:layout_above="@+id/RequestTrade"
 	        android:layout_below="@+id/productName"
+	        android:layout_marginTop="15dp"
 	        android:text="product descriptionsadsads/ndasdas/nadsadas\ndsadas\nedasdas" />
-	   
 	    
-	    <LinearLayout 
-	        android:id="+id/optionLayout"
-	        android:layout_below="@+id/productDescription"
+"
+	        
+	    <Button
+	        android:id="@+id/RequestTrade"
 	        android:layout_width="fill_parent"
-	        android:layout_height="50dp"
-	        android:orientation="vertical">"
-	        
-	        
-	        
-	    </LinearLayout>
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/productDescription"
+	        android:layout_alignParentBottom="true"
+	        android:text="Request Trade" />
 	    
 </RelativeLayout>
