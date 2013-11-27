@@ -48,29 +48,27 @@ public class MainActivity extends MainBaseActivity {
 		adapter = new ArrayAdapter<CharSequence>(this,android.R.layout.simple_spinner_dropdown_item,product_list);
 		lv_products.setAdapter(adapter);
          
-        /*
+        
         
         ExecutorService executor = Executors.newFixedThreadPool(1);
         
-          AddLocationRequest worker = new AddLocationRequest();
-          LoginRequest worker2= new LoginRequest("super@mail.com","password");
-         // executor.execute(worker);
-          executor.execute(worker2);
+          RetrieveAllProductRequest worker = new RetrieveAllProductRequest();
+          
           executor.execute(worker);
         // This will make the executor accept no new threads
         // and finish all existing threads in the queue
-//        executor.shutdown();
-//        // Wait until all threads are finish
-//        try {
-//			executor.awaitTermination(1000, null);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//        System.out.println("Finished all threads");
+        executor.shutdown();
+        // Wait until all threads are finish
+        try {
+			executor.awaitTermination(1000, null);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        System.out.println("Finished all threads");
         
         
-        */
+        
         
         
 
