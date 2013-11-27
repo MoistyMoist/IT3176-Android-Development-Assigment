@@ -1270,6 +1270,7 @@ containing a value of this type.
         public static final int left=0x7f040010;
         public static final int listMode=0x7f040002;
         public static final int margin=0x7f040012;
+        public static final int menu_add_wishlist=0x7f04004c;
         public static final int menu_frame=0x7f040042;
         public static final int menu_frame_two=0x7f040043;
         public static final int none=0x7f040015;
