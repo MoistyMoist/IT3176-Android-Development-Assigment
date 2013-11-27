@@ -34,11 +34,11 @@ public class ProductListAdapter extends ArrayAdapter<Product>{
              .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
          // 2. Get rowView from inflater
-         View rowView = inflater.inflate(R.layout.row, parent, false);
+         View rowView = inflater.inflate(R.layout.custom_product_row, parent, false);
 
          // 3. Get the two text view from the rowView
-         TextView productName = (TextView) rowView.findViewById(R.id.productName);
-         TextView productDescription = (TextView) rowView.findViewById(R.id.productDescription);
+         TextView productName = (TextView) rowView.findViewById(R.id.label);
+         TextView productDescription = (TextView) rowView.findViewById(R.id.value);
 
          // 4. Set the text for textView 
          productName.setText(productList.get(position).getName());

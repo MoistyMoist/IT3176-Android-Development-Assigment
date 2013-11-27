@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.content.Context;
@@ -55,26 +57,25 @@ public class MainActivity extends MainBaseActivity {
 	      list.add(p);
 	    }
 	    ProductListAdapter adapter = new ProductListAdapter(this, list);
-	    //listview.setAdapter(adapter);
+	    listview.setAdapter(adapter);
         
         
         ExecutorService executor = Executors.newFixedThreadPool(1);
-        
-          RetrieveAllProductRequest worker = new RetrieveAllProductRequest();
+         RetrieveAllProductRequest worker = new RetrieveAllProductRequest();
           
+          executor.execute(worker);
           executor.execute(worker);
         // This will make the executor accept no new threads
         // and finish all existing threads in the queue
         
+          executor.shutdown();
+          try {
+        	  executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+        	  Log.i(" RESPONSE :","ENDED REQUEST");
+          } catch (InterruptedException e) {
+            
+          }
        
-        // Wait until all threads are finish
-        try {
-			executor.awaitTermination(1000, null);
-			 Log.i(" RESPONSE :","ENDED REQUEST");
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
         
         
         
