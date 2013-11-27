@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.view.Menu;
@@ -60,7 +61,7 @@ public class MainActivity extends MainBaseActivity {
 	    listview.setAdapter(adapter);
         
         
-        ExecutorService executor = Executors.newFixedThreadPool(1);
+	    ExecutorService executor = Executors.newFixedThreadPool(1);
          RetrieveAllProductRequest worker = new RetrieveAllProductRequest();
           
           executor.execute(worker);
@@ -75,17 +76,31 @@ public class MainActivity extends MainBaseActivity {
           } catch (InterruptedException e) {
             
           }
-       
-        
-        
-        
-        
-        
-
 	}
 
 
 
+	
+	public void searchProduct(View v)
+	{
+		//add a searching loader
+		
+		TextView tv=(TextView)findViewById(R.id.search);
+		Log.i("serch","searching");
+		
+		ExecutorService executor = Executors.newFixedThreadPool(1);
+		SearchProductRequest searchRequest = new SearchProductRequest(tv.getText().toString());
+		
+		executor.execute(searchRequest);
+		executor.shutdown();
+        try {
+        	executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+       	  	Log.i(" RESPONSE :","ENDED REQUEST");
+        } catch (InterruptedException e) {
+           
+        }
+        
+	}
 	
 	
 

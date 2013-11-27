@@ -77,4 +77,10 @@ public class JSONExtractor {
 		
 	}
 	
+	//THIS METHOD EXTRACTS THE RESULT FOR SEARCHING A PRODUCT 
+	public void ExtractSearchProductRequest(HttpResponse data) throws IllegalStateException, IOException, JSONException
+	{
+		
+	}
+	
 }
