@@ -12,6 +12,7 @@ import android.app.ActionBar;
 import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.view.Menu;
 import com.btrading.httprequests.*;
+import com.btrading.main.login.LoginActivity;
 import com.btrading.models.Product;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
@@ -63,14 +65,16 @@ public class MainActivity extends MainBaseActivity {
           executor.execute(worker);
         // This will make the executor accept no new threads
         // and finish all existing threads in the queue
-//        executor.shutdown();
-//        // Wait until all threads are finish
-//        try {
-//			executor.awaitTermination(1000, null);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+        
+       
+        // Wait until all threads are finish
+        try {
+			executor.awaitTermination(1000, null);
+			 Log.i(" RESPONSE :","ENDED REQUEST");
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
         
         
