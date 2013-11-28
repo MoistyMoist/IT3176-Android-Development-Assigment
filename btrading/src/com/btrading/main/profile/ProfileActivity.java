@@ -1,4 +1,4 @@
-package com.btrading.main.login;
+package com.btrading.main.profile;
 
 import com.example.btrading.R;
 import com.example.btrading.R.layout;
@@ -8,12 +8,12 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class LoginActivity extends Activity {
+public class ProfileActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_login);
+		setContentView(R.layout.activity_main_login);
 	}
 
 	@Override

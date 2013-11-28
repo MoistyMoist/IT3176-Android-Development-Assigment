@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="#d3d3d3"
     android:orientation="vertical"
-    tools:context=".LoginActivity" >
+    tools:context=".ProfileActivity" >
 
     <RelativeLayout
         android:layout_width="fill_parent"

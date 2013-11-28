@@ -1,7 +1,7 @@
 package com.btrading.main;
 
-import com.btrading.main.login.LoginActivity;
 import com.btrading.main.products.ProductActivity;
+import com.btrading.main.profile.ProfileActivity;
 import com.btrading.main.wish.WishlistActivity;
 import com.example.btrading.R;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
@@ -47,7 +47,7 @@ public class LeftListFragment extends ListFragment {
 		switch (position) {
 			
 		case 1: //customer Profile
-			intent.setClass(getActivity(), LoginActivity.class);
+			intent.setClass(getActivity(), ProfileActivity.class);
 			startActivity(intent);
 			break;
 

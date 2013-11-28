@@ -28,9 +28,9 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.view.Menu;
 import com.btrading.httprequests.*;
-import com.btrading.main.login.LoginActivity;
 import com.btrading.main.products.ProductActivity;
 import com.btrading.main.products.ProductDetailActivity;
+import com.btrading.main.profile.ProfileActivity;
 import com.btrading.models.Product;
 import com.btrading.utils.StaticObjects;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
