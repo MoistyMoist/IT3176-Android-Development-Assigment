@@ -30,13 +30,14 @@ public class LeftListFragment extends ListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		SampleAdapter adapter = new SampleAdapter(getActivity());
-		//0-5
-		adapter.add(new SampleItem("Account", R.drawable.ic_left_menu_title)); //int 0 for title, custom set	
-		adapter.add(new SampleItem("Profile", android.R.drawable.ic_menu_myplaces));
-		adapter.add(new SampleItem("My Items", android.R.drawable.ic_menu_search));
-		adapter.add(new SampleItem("Others", R.drawable.ic_left_menu_title)); //int 0 for title, custom set
-		adapter.add(new SampleItem("Wish List", android.R.drawable.ic_menu_my_calendar));
-		adapter.add(new SampleItem("Settings", android.R.drawable.ic_menu_preferences));
+		adapter.add(new SampleItem("Home", android.R.drawable.ic_menu_myplaces,0));
+		//1-6
+		adapter.add(new SampleItem("Account", R.drawable.ic_left_menu_title,0)); //int 0 for title, custom set	
+		adapter.add(new SampleItem("Profile", android.R.drawable.ic_menu_myplaces,0));
+		adapter.add(new SampleItem("My Items", android.R.drawable.ic_menu_search,1));
+		adapter.add(new SampleItem("Others", R.drawable.ic_left_menu_title,0)); //int 0 for title, custom set
+		adapter.add(new SampleItem("Wish List", android.R.drawable.ic_menu_my_calendar,3));
+		adapter.add(new SampleItem("Settings", android.R.drawable.ic_menu_preferences,0));
 		
 		setListAdapter(adapter);
 	}
@@ -46,22 +47,27 @@ public class LeftListFragment extends ListFragment {
 		intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		switch (position) {
 			
-		case 1: //customer Profile
+		case 0: //customer Profile
+			intent.setClass(getActivity(), MainActivity.class);
+			startActivity(intent);
+			break;
+		
+		case 2: //customer Profile
 			intent.setClass(getActivity(), ProfileActivity.class);
 			startActivity(intent);
 			break;
 
-		case 2: //My items
+		case 3: //My items
 			intent.setClass(getActivity(), ProductActivity.class);
 			startActivity(intent);
 			break;
 
-		case 4: //wish
+		case 5: //wish
 			intent.setClass(getActivity(), WishlistActivity.class);
 			startActivity(intent);
 			break;
 
-		case 5: //Settings
+		case 6: //Settings
 			intent.setClass(getActivity(), SettingActivity.class);
 			startActivity(intent);
 			break;
@@ -73,9 +79,11 @@ public class LeftListFragment extends ListFragment {
 	private class SampleItem {
 		public String tag;
 		public int iconRes;
-		public SampleItem(String tag, int iconRes) {
+		public int count;
+		public SampleItem(String tag, int iconRes, int count) {
 			this.tag = tag; 
 			this.iconRes = iconRes;
+			this.count = count;
 		}
 	}
 
@@ -102,6 +110,13 @@ public class LeftListFragment extends ListFragment {
 				//convertView.setBackgroundColor(Color.TRANSPARENT); 
 				convertView.setBackgroundColor(Color.WHITE); 
 			}
+			
+			TextView count = (TextView) convertView.findViewById(R.id.row_count);
+			count.setText(Integer.toString(getItem(position).count));
+			if (getItem(position).count==0){
+				count.setVisibility(View.INVISIBLE);
+			}
+			
 
 			return convertView;
 		}

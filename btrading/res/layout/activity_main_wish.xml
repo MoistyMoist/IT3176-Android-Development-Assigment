@@ -8,8 +8,12 @@
         android:id="@+id/tv_wish_longpress"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:background="@color/wish_bg_gray"
         android:gravity="center_horizontal"
-        android:text="Long Press to delete" />
+        android:padding="10dp"
+        android:textColor="@color/wish_text_gray"
+        android:textSize="14sp"
+        android:text="Long Press to Delete" />
     
     <ListView
         android:id="@+id/lv_wish"

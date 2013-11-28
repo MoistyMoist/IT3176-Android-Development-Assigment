@@ -1,5 +1,7 @@
 <resources>
     
+    <color name="white">#ffffffff</color>
 	<color name="blue">#660000ff</color>
-    
+	<color name="wish_bg_gray">#ffdcdcdc</color>
+	<color name="wish_text_gray">#aa808080</color>
 </resources>
