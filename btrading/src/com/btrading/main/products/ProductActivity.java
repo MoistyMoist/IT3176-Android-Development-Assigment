@@ -1,6 +1,5 @@
 package com.btrading.main.products;
 
-import com.btrading.main.BaseActivity;
 import com.btrading.main.MainActivity;
 import com.example.btrading.R;
 import com.example.btrading.R.layout;
@@ -31,7 +30,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.SpinnerAdapter;
 
-public class ProductActivity  extends BaseActivity{
+public class ProductActivity  extends MainBaseActivity{
 
 	
 	

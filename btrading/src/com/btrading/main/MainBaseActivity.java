@@ -94,4 +94,5 @@ public class MainBaseActivity extends SlidingFragmentActivity {
 		getSupportMenuInflater().inflate(R.menu.main_base, menu);
 		return true;
 	}
+	
 }
