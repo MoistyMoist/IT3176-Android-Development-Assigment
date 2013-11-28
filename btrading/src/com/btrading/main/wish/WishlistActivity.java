@@ -2,6 +2,7 @@ package com.btrading.main.wish;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.ActionMode;
+import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.btrading.main.MainBaseActivity;
 import com.example.btrading.R;
@@ -9,22 +10,27 @@ import com.example.btrading.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class WishlistActivity extends MainBaseActivity {
 
-	ActionMode mMode;
+	ActionMode mActionMode;
 	ListView lv_wish;
 	ArrayAdapter<CharSequence> adapter;
 	String[] wish_items = {"ABC Duck","TV controller","Water Bottle"};
+	String item_selected;
 	
 	public WishlistActivity(){
 		super(R.string.title_activity_wishlist);
@@ -37,7 +43,7 @@ public class WishlistActivity extends MainBaseActivity {
 		lv_wish = (ListView) findViewById(R.id.lv_wish);
 		adapter = new ArrayAdapter<CharSequence>(this,android.R.layout.simple_spinner_dropdown_item, wish_items);
 		lv_wish.setAdapter(adapter);
-		/*
+
 		lv_wish.setOnItemClickListener(new OnItemClickListener(){
 
 			@Override
@@ -52,20 +58,77 @@ public class WishlistActivity extends MainBaseActivity {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
-				mMode = startActionMode(new AnActionModeOfEpicProportions());
-				Toast.makeText(getBaseContext(), "hihi", Toast.LENGTH_SHORT).show();
+				//mMode = startActionMode(mActionModeCallback);
+
+			        if (mActionMode != null) {
+			            return false;
+			        }
+
+			        // Start the CAB using the ActionMode.Callback defined above
+			        arg1.setSelected(true);
+			        item_selected = wish_items[arg2];
+			        mActionMode = startActionMode(mActionModeCallback);
+			        
+			        int doneButtonId = Resources.getSystem().getIdentifier("action_mode_close_button", "id", "android");
+			        View doneButton = findViewById(doneButtonId);
+			        doneButton.setOnClickListener(new View.OnClickListener() {
+
+			            @Override
+			            public void onClick(View v) {
+			                // do whatever you want 
+			                // in android source code it's calling mMode.finish();
+			            	mActionMode.finish();
+			            	Toast.makeText(getBaseContext(), "hihi", Toast.LENGTH_SHORT).show();
+			            }
+			        });
+			        
+
 				return true;
 			}
 			
-		}); */
-		
-        ((Button)findViewById(R.id.start)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mMode = startActionMode(new AnActionModeOfEpicProportions());
-            }
-        });
+		}); 
 	}
+	
+	private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
+
+		@Override
+		public boolean onCreateActionMode(ActionMode mode, com.actionbarsherlock.view.Menu menu) {
+			// TODO Auto-generated method stub
+			//getSupportMenuInflater().inflate(R.menu.wishlist, (com.actionbarsherlock.view.Menu) menu);
+            menu.add("Delete")
+            .setIcon(R.drawable.ic_no)
+            .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+			mode.setTitle("Confirm Delete?");
+			mode.setSubtitle(item_selected);
+			return true;
+		}
+	    // Called when the user selects a contextual menu item
+	    @Override
+	    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+	    	
+	        switch (item.getItemId()) {
+	            case R.drawable.ic_no:
+	            	mode.finish(); // Action picked, so close the CAB
+	                return true;
+	            default:
+	            	mode.finish(); // Action picked, so close the CAB
+	                return false;   
+	        }
+	    }
+
+	    // Called when the user exits the action mode
+	    @Override
+	    public void onDestroyActionMode(ActionMode mode) {
+	        mActionMode = null;
+	    }
+	    
+		@Override
+		public boolean onPrepareActionMode(ActionMode mode,
+				com.actionbarsherlock.view.Menu menu) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+	};
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -86,47 +149,5 @@ public class WishlistActivity extends MainBaseActivity {
 		return true;
 	}
 	
-    private final class AnActionModeOfEpicProportions implements ActionMode.Callback {
-        
-        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-            //Used to put dark icons on light action bar
-            //boolean isLight = SampleList.THEME == R.style.Theme_Sherlock_Light;
-
-            menu.add("Save")
-                .setIcon(R.drawable.ic_action_github)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-
-
-            return true;
-        }
-
-        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-            return false;
-        }
-
-        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-            Toast.makeText(WishlistActivity.this, "Got click: " + item, Toast.LENGTH_SHORT).show();
-            mode.finish();
-            return true;
-        }
-
-        @Override
-        public void onDestroyActionMode(ActionMode mode) {
-        }
-
-		@Override
-		public boolean onCreateActionMode(ActionMode mode,
-				com.actionbarsherlock.view.Menu menu) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public boolean onPrepareActionMode(ActionMode mode,
-				com.actionbarsherlock.view.Menu menu) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-    }
 	
 }
