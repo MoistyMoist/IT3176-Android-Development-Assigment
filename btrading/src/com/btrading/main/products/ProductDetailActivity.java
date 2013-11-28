@@ -7,6 +7,7 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
@@ -28,6 +29,11 @@ public class ProductDetailActivity extends MainBaseActivity {
             .setInterval(5000)         // 5 seconds
             .setFastestInterval(16)    // 16ms = 60fps
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    private UiSettings uisettings;
+    
+    
+    
+    
     
     
 	public ProductDetailActivity(){
@@ -41,6 +47,16 @@ public class ProductDetailActivity extends MainBaseActivity {
 		
 		ViewGroup viewGroup=(ViewGroup)findViewById(R.id.product_map);
 		viewGroup.addView(View.inflate(this, R.layout.basic_map, null));
+		setUpMapIfNeeded();
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 
 	@SuppressWarnings("unused")
@@ -52,15 +68,25 @@ public class ProductDetailActivity extends MainBaseActivity {
                     .getMap();
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
-                //setUpMap();
+                setUpMap();
                 LatLng singapore = new LatLng(1.37, 103.84);
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(singapore, 11));
-        
+               
+                uisettings.setMyLocationButtonEnabled(false);
+                uisettings.setAllGesturesEnabled(false);
+                uisettings.setCompassEnabled(false);
+                uisettings.setRotateGesturesEnabled(false);
+                uisettings.setScrollGesturesEnabled(false);
+                uisettings.setTiltGesturesEnabled(false);
+                uisettings.setZoomControlsEnabled(false);
+                uisettings.setZoomGesturesEnabled(false);
+                
             }
         }
     }
 	@SuppressWarnings("unused")
 	private void setUpMap() {
+		uisettings =mMap.getUiSettings();
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
     }
 
