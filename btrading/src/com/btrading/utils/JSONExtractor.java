@@ -94,6 +94,7 @@ public class JSONExtractor {
 			ArrayList<Product>products= new ArrayList<Product>();
 			if(StaticObjects.getRequestStatus()==0)
 			{
+				Log.i("product ",RawData.toString() );
 				for(int i=0;i<RawData.length();i++)
 				{
 					JSONObject c=RawData.getJSONObject(i);
@@ -108,21 +109,23 @@ public class JSONExtractor {
 					p.setX(c.getString(TAG_PRODUCT_XLOCATION));
 					p.setY(c.getString(TAG_PRODUCT_YLOCATION));
 					
-					User u= new User();
-					JSONObject c2=(JSONObject) c.get(TAG_USER);
-					
-					u.setUserID(c2.getInt(TAG_USER_ID));
-					u.setContact(c2.getString(TAG_USER_CONTACT));
-					u.setDob(c2.getString(TAG_USER_DOB));
-					u.setEmail(c2.getString(TAG_USER_EMAIL));
-					u.setImageURL(c2.getString(TAG_USER_IMAGEURL));
-					u.setNickname(c2.getString(TAG_USER_NICKNAME));
-					u.setPassword(c2.getString(TAG_USER_PASSWORD));
-					u.setSex(c2.getString(TAG_USER_SEX));
-					u.setStatus(c2.getString(TAG_USER_STATUS));
-					
-					p.setUser(u);
+//					User u= new User();
+//					JSONObject c2=(JSONObject) c.get(TAG_USER);
+//					
+//					u.setUserID(c2.getInt(TAG_USER_ID));
+//					u.setContact(c2.getString(TAG_USER_CONTACT));
+//					u.setDob(c2.getString(TAG_USER_DOB));
+//					u.setEmail(c2.getString(TAG_USER_EMAIL));
+//					u.setImageURL(c2.getString(TAG_USER_IMAGEURL));
+//					u.setNickname(c2.getString(TAG_USER_NICKNAME));
+//					u.setPassword(c2.getString(TAG_USER_PASSWORD));
+//					u.setSex(c2.getString(TAG_USER_SEX));
+//					u.setStatus(c2.getString(TAG_USER_STATUS));
+//					
+//					p.setUser(u);
 					products.add(p);
+					
+					//Log.i("product "+i,c.toString() );
 				}
 				StaticObjects.setAllProducts(products);
 			}
@@ -144,7 +147,61 @@ public class JSONExtractor {
 	//THIS METHOD EXTRACTS THE RESULT FOR RETRIEVING PRODUCT BY ID
 	public void ExtractProductByIDRequest(HttpResponse data) throws IllegalStateException, IOException, JSONException
 	{
-		
+		HttpEntity entity = data.getEntity();
+        
+        if (entity != null) {
+            InputStream instream = entity.getContent();
+            String result= convertStreamToString(instream);
+            
+            JSONObject json = null;
+            json = new JSONObject(result);
+	
+            //check status if all green to extract
+			StaticObjects.setRequestStatus((Integer) json.get(TAG_STATUS));
+			StaticObjects.setRequestMessage(json.getString(TAG_MESSAGE));
+			JSONArray RawData= json.getJSONArray(TAG_DATA);
+			//JSONArray errors=json.getJSONArray(TAG_ERRORS);
+			
+			if(StaticObjects.getRequestStatus()==0)
+			{
+				
+				JSONObject c=RawData.getJSONObject(0);
+				
+				Product p= new Product();
+				p.setProductID(c.getInt(TAG_PRODUCT_ID));
+				p.setName(c.getString(TAG_PRODUCT_NAME));
+				p.setDescription(c.getString(TAG_PRODUCT_DESCRIPTION));
+				p.setImageURL(c.getString(TAG_PRODUCT_IMAGEURL));
+				p.setQty(c.getString(TAG_PRODUCT_QTY));
+				p.setQuality(c.getString(TAG_PRODUCT_QUALITY));
+				p.setX(c.getString(TAG_PRODUCT_XLOCATION));
+				p.setY(c.getString(TAG_PRODUCT_YLOCATION));
+				
+				User u= new User();
+				JSONObject c2=(JSONObject) c.get(TAG_USER);
+				
+				u.setUserID(c2.getInt(TAG_USER_ID));
+				u.setContact(c2.getString(TAG_USER_CONTACT));
+				u.setDob(c2.getString(TAG_USER_DOB));
+				u.setEmail(c2.getString(TAG_USER_EMAIL));
+				u.setImageURL(c2.getString(TAG_USER_IMAGEURL));
+				u.setNickname(c2.getString(TAG_USER_NICKNAME));
+				u.setPassword(c2.getString(TAG_USER_PASSWORD));
+				u.setSex(c2.getString(TAG_USER_SEX));
+				u.setStatus(c2.getString(TAG_USER_STATUS));
+				
+				p.setUser(u);
+			
+				
+				StaticObjects.setSelectedProduct(p);
+			}
+			else
+			{
+				Log.i("ERROR", "status==1");
+				Log.i("Message",StaticObjects.getRequestMessage());
+			}
+            instream.close();
+        }
 	}
 	
 	//THIS METHOD EXTRACTS THE RESULT FOR RETRIEVING PRODUCT BY USER
@@ -200,20 +257,20 @@ public class JSONExtractor {
 					p.setX(c.getString(TAG_PRODUCT_XLOCATION));
 					p.setY(c.getString(TAG_PRODUCT_YLOCATION));
 					
-					User u= new User();
-					JSONObject c2=(JSONObject) c.get(TAG_USER);
-					
-					u.setUserID(c2.getInt(TAG_USER_ID));
-					u.setContact(c2.getString(TAG_USER_CONTACT));
-					u.setDob(c2.getString(TAG_USER_DOB));
-					u.setEmail(c2.getString(TAG_USER_EMAIL));
-					u.setImageURL(c2.getString(TAG_USER_IMAGEURL));
-					u.setNickname(c2.getString(TAG_USER_NICKNAME));
-					u.setPassword(c2.getString(TAG_USER_PASSWORD));
-					u.setSex(c2.getString(TAG_USER_SEX));
-					u.setStatus(c2.getString(TAG_USER_STATUS));
-					
-					p.setUser(u);
+//					User u= new User();
+//					JSONObject c2=(JSONObject) c.get(TAG_USER);
+//					
+//					u.setUserID(c2.getInt(TAG_USER_ID));
+//					u.setContact(c2.getString(TAG_USER_CONTACT));
+//					u.setDob(c2.getString(TAG_USER_DOB));
+//					u.setEmail(c2.getString(TAG_USER_EMAIL));
+//					u.setImageURL(c2.getString(TAG_USER_IMAGEURL));
+//					u.setNickname(c2.getString(TAG_USER_NICKNAME));
+//					u.setPassword(c2.getString(TAG_USER_PASSWORD));
+//					u.setSex(c2.getString(TAG_USER_SEX));
+//					u.setStatus(c2.getString(TAG_USER_STATUS));
+//					
+//					p.setUser(u);
 					products.add(p);
 				}
 				StaticObjects.setAllProducts(products);

@@ -1,5 +1,6 @@
 package com.btrading.main.products;
 
+import com.btrading.main.BaseActivity;
 import com.btrading.main.MainActivity;
 import com.example.btrading.R;
 import com.example.btrading.R.layout;
@@ -7,58 +8,62 @@ import com.example.btrading.R.menu;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient.ConnectionCallbacks;
 import com.google.android.gms.common.GooglePlayServicesClient.OnConnectionFailedListener;
+import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.btrading.main.MainBaseActivity;
 
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.SpinnerAdapter;
 
-public class ProductActivity  extends MainActivity 
-implements 
-ConnectionCallbacks,
-OnConnectionFailedListener,
-LocationListener{
+public class ProductActivity  extends BaseActivity{
+
+	
+	
+	
+	
+	public ProductActivity(int titleRes) {
+		super(titleRes);
+		// TODO Auto-generated constructor stub
+	}
+
 
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_product);
-	}
-
-
-	@Override
-	public void onLocationChanged(Location arg0) {
-		// TODO Auto-generated method stub
 		
+		setSlidingActionBarEnabled(true);		
+		SlidingMenu sm = getSlidingMenu();
+		sm.setMode(SlidingMenu.LEFT);
+		sm.setSecondaryShadowDrawable(R.drawable.shadowright);
+		sm.setShadowDrawable(R.drawable.shadow);
+		ViewGroup viewGroup=(ViewGroup)findViewById(R.id.product_map);
+		viewGroup.addView(View.inflate(this, R.layout.basic_map, null));
 	}
 
-	@Override
-	public void onConnectionFailed(ConnectionResult arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onConnected(Bundle arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onDisconnected() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		
 		return true;
 	}
+
+
 }

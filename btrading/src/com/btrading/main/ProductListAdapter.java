@@ -3,6 +3,7 @@ package com.btrading.main;
 import java.util.ArrayList;
 
 import com.btrading.models.Product;
+import com.btrading.utils.LoaderImageView;
 import com.example.btrading.R;
 
 import android.content.Context;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ProductListAdapter extends ArrayAdapter<Product>{
@@ -44,11 +46,12 @@ public class ProductListAdapter extends ArrayAdapter<Product>{
          // 3. Get the two text view from the rowView
          TextView productName = (TextView) rowView.findViewById(R.id.productName);
          TextView productDescription = (TextView) rowView.findViewById(R.id.productDescription);
-
+         LoaderImageView productImage=(LoaderImageView)rowView.findViewById(R.id.icon);
+         
          // 4. Set the text for textView 
          productName.setText(productList.get(position).getName());
          productDescription.setText(productList.get(position).getDescription());
-
+         productImage.setImageDrawable(productList.get(position).getImageURL());
          // 5. retrn rowView
          return rowView;
      }

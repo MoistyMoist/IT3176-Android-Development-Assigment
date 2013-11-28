@@ -4,6 +4,15 @@
     android:padding="6dip" 
     android:id="@+id/custom_product_list" >
     
+    <com.btrading.utils.LoaderImageView
+   		android:id="@+id/icon"
+        android:layout_width="90dp"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+
+   		image="http://developer.android.com/images/dialog_buttons.png"/>
+    <!--  
     <ImageView
         android:id="@+id/icon"
         android:layout_width="80dp"
@@ -12,7 +21,7 @@
         android:layout_alignParentTop="true"
         android:contentDescription="TODO"
         android:src="@drawable/ic_launcher" />
-
+-->
     <TextView
         android:id="@+id/productDescription"
         android:layout_width="fill_parent"
