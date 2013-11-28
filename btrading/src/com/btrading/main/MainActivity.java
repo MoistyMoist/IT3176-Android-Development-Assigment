@@ -22,6 +22,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +42,7 @@ public class MainActivity extends MainBaseActivity {
 	ProductListAdapter adapter;
 	ProgressDialog progress;
 	TextView tv;
+	EditText search;
 	StaticObjects staticObjects;
 	ListView listview;
 	Context context;
@@ -58,10 +60,12 @@ public class MainActivity extends MainBaseActivity {
 		sm.setSecondaryShadowDrawable(R.drawable.shadowright);
 		sm.setShadowDrawable(R.drawable.shadow);
 	
-		
+		search=(EditText) findViewById(R.id.search);
+		search.setFocusable(true);
 		listview = (ListView) findViewById(R.id.productList);
 		staticObjects = new StaticObjects();
 		context=getBaseContext();
+		
 		
 		listview.setOnItemClickListener(new OnItemClickListener(){
 
@@ -69,10 +73,13 @@ public class MainActivity extends MainBaseActivity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
+				StaticObjects.setSelectedProduct(StaticObjects.getAllProducts().get(arg2));
 				Intent intent= new Intent();
 				intent.setClass(getApplication(), ProductDetailActivity.class);
 				startActivity(intent);
 			}});
+		
+		
 		if(StaticObjects.getAllProducts()==null||StaticObjects.getAllProducts().size()==0)
 		{
 		    new Thread(new Runnable() {
@@ -96,7 +103,6 @@ public class MainActivity extends MainBaseActivity {
 				      @Override
 				      public void run()
 				      {
-				        //progress.dismiss();
 				        staticObjects= new StaticObjects();
 				        if(StaticObjects.getAllProducts().size()==0||StaticObjects.getAllProducts()==null)
 				        {
@@ -115,6 +121,7 @@ public class MainActivity extends MainBaseActivity {
 		}
 		else
 		{
+			Log.i("PRODUCT", "weird PRODUCT");
 			adapter = new ProductListAdapter(context, StaticObjects.getAllProducts());
 		    listview.setAdapter(adapter);
 		}
