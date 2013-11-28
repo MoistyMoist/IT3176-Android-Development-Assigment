@@ -4,9 +4,21 @@
     android:layout_height="match_parent"
     tools:context=".WishlistActivity" >
 
+    <TextView
+        android:id="@+id/tv_wish_longpress"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/wish_bg_gray"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:textColor="@color/wish_text_gray"
+        android:textSize="14sp"
+        android:text="Long Press to Delete" />
+    
     <ListView
         android:id="@+id/lv_wish"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_wish_longpress" />
 
 </RelativeLayout>

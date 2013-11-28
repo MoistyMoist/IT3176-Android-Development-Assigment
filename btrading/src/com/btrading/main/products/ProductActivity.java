@@ -1,7 +1,10 @@
 package com.btrading.main.products;
 
+<<<<<<< HEAD
 import com.actionbarsherlock.view.MenuItem;
 import com.btrading.main.BaseActivity;
+=======
+>>>>>>> branch 'master' of https://github.com/MoistyMoist/IT3176-Android-Development-Assigment.git
 import com.btrading.main.MainActivity;
 import com.example.btrading.R;
 import com.example.btrading.R.layout;
@@ -33,7 +36,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.SpinnerAdapter;
 
-public class ProductActivity  extends BaseActivity{
+public class ProductActivity  extends MainBaseActivity{
 
 	
 	
