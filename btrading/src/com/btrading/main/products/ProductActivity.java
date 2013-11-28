@@ -1,5 +1,6 @@
 package com.btrading.main.products;
 
+import com.actionbarsherlock.view.MenuItem;
 import com.btrading.main.BaseActivity;
 import com.btrading.main.MainActivity;
 import com.example.btrading.R;
@@ -24,6 +25,7 @@ import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,31 +39,32 @@ public class ProductActivity  extends BaseActivity{
 	
 	
 	
-	public ProductActivity(int titleRes) {
-		super(titleRes);
-		// TODO Auto-generated constructor stub
+	public ProductActivity(){
+		super(R.string.title_activity_product);
 	}
-
 
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_product);
-		
-		setSlidingActionBarEnabled(true);		
-		SlidingMenu sm = getSlidingMenu();
-		sm.setMode(SlidingMenu.LEFT);
-		sm.setSecondaryShadowDrawable(R.drawable.shadowright);
-		sm.setShadowDrawable(R.drawable.shadow);
 		ViewGroup viewGroup=(ViewGroup)findViewById(R.id.product_map);
-		viewGroup.addView(View.inflate(this, R.layout.basic_map, null));
 	}
 
-	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		if(item.getItemId()==R.id.menu_add_wishlist)
+		{
+			Intent intent= new Intent();
+			intent.setClass(getApplication(), AddProductActivity.class);
+			startActivity(intent);
+		}
+		return super.onOptionsItemSelected(item);
+	}
 	
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-		
+		getSupportMenuInflater().inflate(R.menu.wishlist, menu);
 		return true;
 	}
 

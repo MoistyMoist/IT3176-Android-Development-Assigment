@@ -109,10 +109,10 @@ public class JSONExtractor {
 					p.setX(c.getString(TAG_PRODUCT_XLOCATION));
 					p.setY(c.getString(TAG_PRODUCT_YLOCATION));
 					
-//					User u= new User();
+					User u= new User();
 //					JSONObject c2=(JSONObject) c.get(TAG_USER);
-//					
-//					u.setUserID(c2.getInt(TAG_USER_ID));
+					
+					u.setUserID(c.getInt(TAG_USER_ID));
 //					u.setContact(c2.getString(TAG_USER_CONTACT));
 //					u.setDob(c2.getString(TAG_USER_DOB));
 //					u.setEmail(c2.getString(TAG_USER_EMAIL));
@@ -122,7 +122,7 @@ public class JSONExtractor {
 //					u.setSex(c2.getString(TAG_USER_SEX));
 //					u.setStatus(c2.getString(TAG_USER_STATUS));
 //					
-//					p.setUser(u);
+					p.setUser(u);
 					products.add(p);
 					
 					//Log.i("product "+i,c.toString() );
@@ -257,10 +257,10 @@ public class JSONExtractor {
 					p.setX(c.getString(TAG_PRODUCT_XLOCATION));
 					p.setY(c.getString(TAG_PRODUCT_YLOCATION));
 					
-//					User u= new User();
+					User u= new User();
 //					JSONObject c2=(JSONObject) c.get(TAG_USER);
-//					
-//					u.setUserID(c2.getInt(TAG_USER_ID));
+					
+					u.setUserID(c.getInt(TAG_USER_ID));
 //					u.setContact(c2.getString(TAG_USER_CONTACT));
 //					u.setDob(c2.getString(TAG_USER_DOB));
 //					u.setEmail(c2.getString(TAG_USER_EMAIL));
@@ -270,7 +270,7 @@ public class JSONExtractor {
 //					u.setSex(c2.getString(TAG_USER_SEX));
 //					u.setStatus(c2.getString(TAG_USER_STATUS));
 //					
-//					p.setUser(u);
+					p.setUser(u);
 					products.add(p);
 				}
 				StaticObjects.setAllProducts(products);

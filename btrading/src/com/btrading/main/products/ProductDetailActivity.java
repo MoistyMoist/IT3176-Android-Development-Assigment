@@ -1,6 +1,8 @@
 package com.btrading.main.products;
 
 import com.btrading.main.MainBaseActivity;
+import com.btrading.utils.LoaderImageView;
+import com.btrading.utils.StaticObjects;
 import com.example.btrading.R;
 import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.location.LocationRequest;
@@ -18,6 +20,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ProductDetailActivity extends MainBaseActivity {
@@ -31,6 +34,8 @@ public class ProductDetailActivity extends MainBaseActivity {
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     private UiSettings uisettings;
     
+    TextView productName, productDescription,productQty, productQuality;
+    LoaderImageView imageView;
     
     
     
@@ -47,10 +52,27 @@ public class ProductDetailActivity extends MainBaseActivity {
 		
 		ViewGroup viewGroup=(ViewGroup)findViewById(R.id.product_map);
 		viewGroup.addView(View.inflate(this, R.layout.basic_map, null));
-		setUpMapIfNeeded();
 		
+		setUpMapIfNeeded(Double.parseDouble(StaticObjects.getSelectedProduct().getX()), Double.parseDouble(StaticObjects.getSelectedProduct().getY()));
 		
+		productName= (TextView)findViewById(R.id.productName);
+		productDescription=(TextView)findViewById(R.id.productDescription);
+		productQty=(TextView)findViewById(R.id.productQty);
+		productQuality=(TextView)findViewById(R.id.productQuality);
 		
+		imageView=(LoaderImageView)findViewById(R.id.productImage);
+		
+		productName.setText(StaticObjects.getSelectedProduct().getName());
+		productDescription.setText(StaticObjects.getSelectedProduct().getDescription());
+		productQty.setText(StaticObjects.getSelectedProduct().getQty());
+		productQuality.setText(StaticObjects.getSelectedProduct().getQuality());
+		
+		imageView.setImageDrawable(StaticObjects.getSelectedProduct().getImageURL());
+		
+//		if(StaticObjects.getCurrentUser().getUserID()==StaticObjects.getSelectedProduct().getUser().getUserID())
+//		{
+//			
+//		}
 		
 		
 		
@@ -60,7 +82,7 @@ public class ProductDetailActivity extends MainBaseActivity {
 	}
 
 	@SuppressWarnings("unused")
-	private void setUpMapIfNeeded() {
+	private void setUpMapIfNeeded(double x,double y) {
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
             // Try to obtain the map from the SupportMapFragment.
@@ -68,9 +90,11 @@ public class ProductDetailActivity extends MainBaseActivity {
                     .getMap();
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
-                setUpMap();
-                LatLng singapore = new LatLng(1.37, 103.84);
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(singapore, 11));
+                setUpMap(x,y);
+                
+                LatLng singapore = new LatLng(x,y);
+
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(singapore, 14));
                
                 uisettings.setMyLocationButtonEnabled(false);
                 uisettings.setAllGesturesEnabled(false);
@@ -85,9 +109,9 @@ public class ProductDetailActivity extends MainBaseActivity {
         }
     }
 	@SuppressWarnings("unused")
-	private void setUpMap() {
+	private void setUpMap(double x, double y) {
 		uisettings =mMap.getUiSettings();
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(x, y)).title(null));
     }
 
 }

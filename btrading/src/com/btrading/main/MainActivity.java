@@ -28,10 +28,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.btrading.httprequests.*;
 import com.btrading.main.products.ProductActivity;
 import com.btrading.main.products.ProductDetailActivity;
 import com.btrading.main.profile.ProfileActivity;
+import com.btrading.main.wish.AddWishlistActivity;
 import com.btrading.models.Product;
 import com.btrading.utils.StaticObjects;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
@@ -129,11 +131,23 @@ public class MainActivity extends MainBaseActivity {
 	}
 
 	
-	public void selectItem()
-	{
-		
+	
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getSupportMenuInflater().inflate(R.menu.main, menu);
+		return true;
 	}
-
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		if(item.getItemId()==R.id.refresh)
+		{
+			searchProduct(null);
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
+	
 	
 	public void searchProduct(View v)
 	{
