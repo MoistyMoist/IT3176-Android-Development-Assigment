@@ -74,6 +74,10 @@
             android:name="com.btrading.main.login.LoginActivity"
             android:label="@string/title_activity_login" >
         </activity>
+        <activity
+            android:name="com.btrading.main.products.UpdateProductActivity"
+            android:label="@string/title_activity_update_product" >
+        </activity>
     </application>
 
 </manifest>
