@@ -73,8 +73,11 @@ public class ProductDetailActivity extends MainBaseActivity {
 //		{
 //			
 //		}
-		
-		
+//		else
+//		{
+//			//send request to trade codes
+//		}
+//		
 		
 		
 		

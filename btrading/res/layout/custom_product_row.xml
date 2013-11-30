@@ -21,12 +21,24 @@
         android:layout_alignParentTop="true"
         android:layout_alignWithParentIfMissing="true"
         android:layout_toRightOf="@id/icon"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:gravity="center_vertical"
         android:textSize="25sp"
+        android:maxLines="1"
+        android:textStyle="bold"
+        android:textColor="#0033cc"
         android:text="Example application" />
    
+    <TextView 
+        android:id="@+id/tv"
+        android:layout_below="@+id/productName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Description : "
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@id/icon"/>
     
      <TextView
         android:id="@+id/productDescription"
@@ -36,8 +48,9 @@
         android:layout_alignParentRight="true"
         android:layout_marginLeft="20dp"
         android:layout_toRightOf="@id/icon"
-        android:layout_below="@+id/productName"
+        android:layout_below="@+id/tv"
         android:ellipsize="marquee"
+        android:maxLines="4"
         android:text="Description"
         android:textColor="#cccccc"
         android:textSize="16sp" />

@@ -21,6 +21,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -48,8 +49,8 @@ public class AddProductActivity extends MainBaseActivity{
 	Spinner productQuality;
 	ImageView image;
 	String[] quality={"Good","Average","Acceptiable"};
-	
-	
+	Button addImage;
+	static final int SELECT_PHOTO=100;
 	
 	public AddProductActivity(){
 		super(R.string.title_activity_add_product);
@@ -73,10 +74,29 @@ public class AddProductActivity extends MainBaseActivity{
 		productDescription=(EditText)findViewById(R.id.productDescription);
 		productQty=(EditText)findViewById(R.id.productQty);
 		image=(ImageView)findViewById(R.id.productImage);
+		addImage = (Button)findViewById(R.id.addImage);
+		
+		addImage.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View arg0) {
+				Intent photoPickerIntent = new Intent(Intent.ACTION_CAMERA_BUTTON);
+//				photoPickerIntent.setType(WALLPAPER_SERVICE);
+				startActivityForResult(photoPickerIntent,SELECT_PHOTO);
+				
+			}});
+		
+		
 		///get device location x & y
 	}
 
 	
+	@Override
+	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(arg0, arg1, arg2);
+	}
+
 	private void setUpMapIfNeeded() {
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
