@@ -284,4 +284,51 @@ public class JSONExtractor {
         }
 	}
 	
+	public void ExtractUserRequest(HttpResponse data) throws IllegalStateException, IOException, JSONException
+	{
+		HttpEntity entity = data.getEntity();
+        
+        if (entity != null) {
+            InputStream instream = entity.getContent();
+            String result= convertStreamToString(instream);
+            
+            JSONObject json = null;
+            json = new JSONObject(result);
+	
+            //check status if all green to extract
+			StaticObjects.setRequestStatus((Integer) json.get(TAG_STATUS));
+			StaticObjects.setRequestMessage(json.getString(TAG_MESSAGE));
+			JSONArray RawData= json.getJSONArray(TAG_DATA);
+			//JSONArray errors=json.getJSONArray(TAG_ERRORS);
+			
+			if(StaticObjects.getRequestStatus()==0)
+			{
+				
+				JSONObject c=RawData.getJSONObject(0);
+				
+				User u= new User();
+				//JSONObject c2=(JSONObject) c.get(TAG_USER);
+				
+				u.setUserID(c.getInt(TAG_USER_ID));
+				u.setContact(c.getString(TAG_USER_CONTACT));
+				u.setDob(c.getString(TAG_USER_DOB));
+				u.setEmail(c.getString(TAG_USER_EMAIL));
+				u.setImageURL(c.getString(TAG_USER_IMAGEURL));
+				u.setNickname(c.getString(TAG_USER_NICKNAME));
+				u.setPassword(c.getString(TAG_USER_PASSWORD));
+				u.setSex(c.getString(TAG_USER_SEX));
+				u.setStatus(c.getString(TAG_USER_STATUS));
+			
+				
+				StaticObjects.setCurrentUser(u);
+			}
+			else
+			{
+				Log.i("ERROR", "status==1");
+				Log.i("Message",StaticObjects.getRequestMessage());
+			}
+            instream.close();
+        }
+	}
+	
 }
