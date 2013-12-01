@@ -10,14 +10,17 @@
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			android:gravity="center"
-			android:orientation="horizontal"
+			android:orientation="vertical"
 			android:paddingBottom="@dimen/activity_vertical_margin"
 	    	android:paddingTop="@dimen/activity_vertical_margin"
 	    	android:paddingLeft="@dimen/activity_vertical_margin"
 			android:paddingRight="@dimen/activity_horizontal_margin" >
-        
+        	<TextView
+        	    android:layout_width="fill_parent"
+        	    android:layout_height="wrap_content"
+        	    android:text="press and hold to remove item/n select to update your product"/>
 		   	<ListView
-			    android:id="@+id/productList"
+			    android:id="@+id/userProductList"
 			    android:layout_width="fill_parent"
 			    android:layout_height="wrap_content"
 			    android:background="#ffffff" /> 

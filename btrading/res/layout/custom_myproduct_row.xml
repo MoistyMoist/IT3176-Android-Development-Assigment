@@ -2,8 +2,7 @@
     android:layout_width="fill_parent"
     android:layout_height="70dp"
     android:padding="6dip" 
-    android:id="@+id/custom_product_list"
-    android:background="@drawable/shape" >
+    android:id="@+id/custom_product_list" >
     
     <com.btrading.utils.LoaderImageView
    		android:id="@+id/icon"
@@ -20,19 +19,12 @@
 	     android:layout_alignParentTop="true"
 	     android:layout_alignWithParentIfMissing="true"
 	     android:layout_marginLeft="20dp"
-	     android:layout_marginTop="20dp"
 	     android:layout_toRightOf="@id/icon"
-		 android:layout_toLeftOf="@+id/remove"
 	     android:gravity="center_vertical"
 	     android:maxLines="1"
+	     android:textSize="25sp"
+	     android:textColor="#0033cc"
+	     android:textStyle="bold"
 	     android:text="Example application" />
-	 
-	 <Button
-	     android:id="@+id/remove"
-	     android:layout_width="wrap_content"
-	     android:layout_height="fill_parent"
-	     android:layout_alignParentRight="true"
-	     android:layout_alignParentTop="true"
-	     android:background="@drawable/ic_1_navigation_cancel" />
-	
+
 </RelativeLayout>

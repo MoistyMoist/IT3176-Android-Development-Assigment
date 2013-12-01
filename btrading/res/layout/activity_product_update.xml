@@ -20,16 +20,6 @@
         android:layout_marginLeft="5dp"
         android:layout_height="120dp"
         android:background="@drawable/shape"/>
-     
-     <Button
-	    android:id="@+id/removeButton"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_above="@+id/scrollView"
-	    android:layout_alignBottom="@+id/productImage"
-	    android:layout_marginTop="10dp"
-	    android:layout_toRightOf="@+id/requestButton"
-	    android:text="Remove" />
 
 	<Button
 	    android:id="@+id/requestButton"
@@ -37,6 +27,7 @@
 	    android:layout_height="wrap_content"
 	    android:layout_above="@+id/scrollView"
 	    android:layout_alignBottom="@+id/productImage"
+	    android:layout_alignRight="@+id/scrollView"
 	    android:layout_marginTop="10dp"
 	    android:layout_toRightOf="@+id/productImage"
 	    android:text="Update" />

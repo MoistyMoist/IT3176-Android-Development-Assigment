@@ -4,7 +4,5 @@
         android:id="@+id/add_product"
         android:icon="@drawable/ic_1_navigation_accept"
         android:showAsAction="always"
-        android:titleCondensed="Done"
-        android:title="Done"/>
-
+        android:titleCondensed="Done"/>
 </menu>
