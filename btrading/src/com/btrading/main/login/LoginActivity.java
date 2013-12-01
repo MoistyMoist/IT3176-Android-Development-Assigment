@@ -40,12 +40,12 @@ public class LoginActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				if (checkUser()){
+				//if (checkUser()){
 					Intent intent = new Intent();
 					intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 					intent.setClass(getBaseContext(), MainActivity.class);
 					startActivity(intent);
-				}
+				//}
 			}
 			
 			
