@@ -16,14 +16,17 @@
 	    	android:paddingLeft="@dimen/activity_vertical_margin"
 			android:paddingRight="@dimen/activity_horizontal_margin" >
         	<TextView
+        	    android:id="@+id/hint"
         	    android:layout_width="fill_parent"
         	    android:layout_height="wrap_content"
-        	    android:text="press and hold to remove item/n select to update your product"/>
+        	    android:text="Hint : \nPress and hold to remove item\nSelect to update your product"
+        	    android:layout_marginBottom="@dimen/activity_vertical_margin"/>
 		   	<ListView
 			    android:id="@+id/userProductList"
 			    android:layout_width="fill_parent"
 			    android:layout_height="wrap_content"
 			    android:background="#ffffff" /> 
+			
 		    
 	   </LinearLayout>
 

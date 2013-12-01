@@ -24,6 +24,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -39,6 +40,8 @@ public class ProductActivity  extends MainBaseActivity{
 	ActionMode mActionMode;
 	ProgressDialog progress;
 	Product productToDelete;
+	TextView hint;
+	
 	
 	public ProductActivity(){
 		super(R.string.title_activity_product);
@@ -50,6 +53,7 @@ public class ProductActivity  extends MainBaseActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_product);
 
+		hint= (TextView)findViewById(R.id.hint);
 		list = (ListView) findViewById(R.id.userProductList);
 		staticObjects = new StaticObjects();
 		context=getBaseContext();
@@ -132,10 +136,12 @@ public class ProductActivity  extends MainBaseActivity{
 				        staticObjects= new StaticObjects();
 				        if(StaticObjects.getUserProducts().size()==0||StaticObjects.getUserProducts()==null)
 				        {
-				        	Log.i("PRODUCT", "NO PRODUCT");
+				        	hint.setText("You do not have any products");
+				        	
 				        }
 				        else
 				        {
+				        	hint.setText("Hint : \nPress and hold to remove item\nSelect to update your product");
 				        	adapter = new UserProductListAdapter(context, StaticObjects.getUserProducts());
 						    list.setAdapter(adapter);
 				        }
@@ -231,10 +237,11 @@ public class ProductActivity  extends MainBaseActivity{
 			        Toast.makeText(getBaseContext(), "Product deleted", Toast.LENGTH_SHORT).show();
 			        if(StaticObjects.getUserProducts().size()==0||StaticObjects.getUserProducts()==null)
 			        {
-			        	Log.i("PRODUCT", "NO PRODUCT");
+			        	hint.setText("You do not have any products");
 			        }
 			        else
 			        {
+			        	hint.setText("Hint : \nPress and hold to remove item\nSelect to update your product");
 			        	adapter = new UserProductListAdapter(context, StaticObjects.getUserProducts());
 					    list.setAdapter(adapter);
 			        }
@@ -300,10 +307,11 @@ public class ProductActivity  extends MainBaseActivity{
 			        staticObjects= new StaticObjects();
 			        if(StaticObjects.getUserProducts().size()==0||StaticObjects.getUserProducts()==null)
 			        {
-			        	Log.i("PRODUCT", "NO PRODUCT");
+			        	hint.setText("You do not have any products");
 			        }
 			        else
 			        {
+			        	hint.setText("Hint : \nPress and hold to remove item\nSelect to update your product");
 			        	adapter = new UserProductListAdapter(context, StaticObjects.getUserProducts());
 					    list.setAdapter(adapter);
 			        }
