@@ -5,7 +5,7 @@ import com.btrading.models.*;
 
 public class StaticObjects {
 	
-	final static String token="token";
+	static String token="token";
 	
 	//ALL THE PRODUCTS WITH USER DATA
 	static ArrayList<Product> AllProducts;
@@ -17,7 +17,8 @@ public class StaticObjects {
 	static int RequestStatus;
 	//THE REQUEST MESSAGE
 	static String RequestMessage;
-	
+	//THE CURRENT USER PRODUCTS
+	static ArrayList<Product> userProducts;
 
 
 	
@@ -26,6 +27,9 @@ public class StaticObjects {
 	
 	
 	
+	public static void setToken(String token) {
+		StaticObjects.token = token;
+	}
 	public static User getCurrentUser() {
 		return currentUser;
 	}
@@ -55,6 +59,12 @@ public class StaticObjects {
 	}
 	public static void setAllProducts(ArrayList<Product> allProducts) {
 		AllProducts = allProducts;
+	}
+	public static ArrayList<Product> getUserProducts() {
+		return userProducts;
+	}
+	public static void setUserProducts(ArrayList<Product> userProducts) {
+		StaticObjects.userProducts = userProducts;
 	}
 	public String getToken()
 	{
