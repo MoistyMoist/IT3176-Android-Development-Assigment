@@ -32,7 +32,7 @@ public class RetrieveProductByIDRequest implements Runnable {
 		HttpClient httpclient = new DefaultHttpClient();
 
 		//PREPARE REQUEST OBJECT
-		HttpGet httpget = new HttpGet("http://bartertrading.azurewebsites.net/api/RetrieveProductByID/"+this.productToRetrieve.getProductID()+"?token="+staticObjects.getToken());
+		HttpGet httpget = new HttpGet("http://bartertrading.cloudapp.net/api/RetrieveProductByID/"+this.productToRetrieve.getProductID()+"?token="+staticObjects.getToken());
 		
         Log.i("RETRIEVE PRODUCT BY ID REQUEST :",httpget.getURI().toString());
         //EXCUTE REQUEST

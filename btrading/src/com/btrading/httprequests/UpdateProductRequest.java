@@ -32,7 +32,7 @@ public class UpdateProductRequest implements Runnable {
 		HttpClient httpclient = new DefaultHttpClient();
 
 		//PREPARE REQUEST OBJECT
-		HttpGet httpget = new HttpGet("http://bartertrading.azurewebsites.net/api/UpdateProduct?token="+staticObjects.getToken()+"&INproductID="+this.productToUpdate.getProductID()+"&INname="+this.productToUpdate.getName()+"&INdescription="+this.productToUpdate.getDescription()+"&INqty="+this.productToUpdate.getQty()+"&INstatus="+this.productToUpdate.getStatus()+"&INx="+this.productToUpdate.getX()+"&INy="+this.productToUpdate.getY()+"&INquality="+this.productToUpdate.getQuality()+"&INimageURL="+this.productToUpdate.getImageURL());
+		HttpGet httpget = new HttpGet("http://bartertrading.cloudapp.net/api/UpdateProduct?token="+staticObjects.getToken()+"&INproductID="+this.productToUpdate.getProductID()+"&INname="+this.productToUpdate.getName()+"&INdescription="+this.productToUpdate.getDescription()+"&INqty="+this.productToUpdate.getQty()+"&INstatus="+this.productToUpdate.getStatus()+"&INx="+this.productToUpdate.getX()+"&INy="+this.productToUpdate.getY()+"&INquality="+this.productToUpdate.getQuality()+"&INimageURL="+this.productToUpdate.getImageURL());
 		
         Log.i("UPDATE PRODUCT REQUEST :",httpget.getURI().toString());
         //EXCUTE REQUEST

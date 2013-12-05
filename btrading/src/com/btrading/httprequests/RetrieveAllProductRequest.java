@@ -29,7 +29,7 @@ public class RetrieveAllProductRequest implements Runnable {
 		HttpClient httpclient = new DefaultHttpClient();
 
 		//PREPARE REQUEST OBJECT
-		HttpGet httpget = new HttpGet("http://bartertrading.azurewebsites.net/api/RetrieveAllProduct?token="+staticObjects.getToken());
+		HttpGet httpget = new HttpGet("http://bartertrading.cloudapp.net/api/RetrieveAllProduct?token="+staticObjects.getToken());
 		
         Log.i("RETRIEVE ALL PRODUCT REQUEST :",httpget.getURI().toString());
         //EXCUTE REQUEST

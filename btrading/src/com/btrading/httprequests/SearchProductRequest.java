@@ -31,7 +31,7 @@ public class SearchProductRequest implements Runnable {
 		HttpClient httpclient = new DefaultHttpClient();
 
 		//PREPARE REQUEST OBJECT
-		HttpGet httpget = new HttpGet("http://bartertrading.azurewebsites.net/api/SearchProduct?token="+staticObjects.getToken()+"&INkey="+this.key);
+		HttpGet httpget = new HttpGet("http://bartertrading.cloudapp.net/api/SearchProduct?token="+staticObjects.getToken()+"&INkey="+this.key);
 		
         Log.i("SEARCH PRODUCT REQUEST :",httpget.getURI().toString());
         //EXCUTE REQUEST

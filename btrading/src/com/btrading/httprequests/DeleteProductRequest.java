@@ -32,7 +32,7 @@ public class DeleteProductRequest implements Runnable {
 		HttpClient httpclient = new DefaultHttpClient();
 
 		//PREPARE REQUEST OBJECT
-		HttpGet httpget = new HttpGet("http://bartertrading.azurewebsites.net/api/DeleteProduct?token="+staticObjects.getToken()+"&INproductID="+this.productToRemove.getProductID());
+		HttpGet httpget = new HttpGet("http://bartertrading.cloudapp.net/api/DeleteProduct?token="+staticObjects.getToken()+"&INproductID="+this.productToRemove.getProductID());
 		
         Log.i("REMOVE PRODUCT REQUEST :",httpget.getURI().toString());
         //EXCUTE REQUEST
