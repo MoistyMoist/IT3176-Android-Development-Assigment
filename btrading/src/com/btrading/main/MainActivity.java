@@ -14,6 +14,7 @@ import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -84,7 +85,11 @@ public class MainActivity extends MainBaseActivity {
 		
 		if(StaticObjects.getAllProducts()==null||StaticObjects.getAllProducts().size()==0)
 		{
-		    new Thread(new Runnable() {
+			
+			 RetrieveAllProductRequest retrieveAllProductRequest = new RetrieveAllProductRequest();
+			 new BackgroundTask().execute(retrieveAllProductRequest,null);
+			 
+		    /*new Thread(new Runnable() {
 				  @Override
 				  public void run()
 				  {
@@ -119,7 +124,7 @@ public class MainActivity extends MainBaseActivity {
 				      }
 				    });
 				  }
-				}).start();
+				}).start();*/
 		}
 		else
 		{
@@ -154,7 +159,10 @@ public class MainActivity extends MainBaseActivity {
 		progress = ProgressDialog.show(this, "Searching",
 			    "please wait...", true);
 		tv=(TextView)findViewById(R.id.search);
-
+		SearchProductRequest searchRequest = new SearchProductRequest(tv.getText().toString());
+		
+		new BackgroundTask().execute(searchRequest,null);
+		/*
 		new Thread(new Runnable() {
 			  @Override
 			  public void run()
@@ -184,5 +192,39 @@ public class MainActivity extends MainBaseActivity {
 			    });
 			  }
 			}).start();
+			*/
 	}
+	
+	
+	private class BackgroundTask extends AsyncTask<Runnable, Integer, Long> {
+	     
+		@Override
+		protected void onPostExecute(Long result) {
+			
+			super.onPostExecute(result);
+			progress.dismiss();
+	        staticObjects= new StaticObjects();
+	        adapter = new ProductListAdapter(context, StaticObjects.getAllProducts());
+		    listview.setAdapter(adapter);
+			
+		}
+
+		@Override
+		protected void onPreExecute() {
+			Toast.makeText(context, "Refreshing..", Toast.LENGTH_SHORT).show();
+			super.onPreExecute();
+		}
+
+		@Override
+		protected Long doInBackground(Runnable... task) {
+			
+			for(int i=0; i<task.length;i++)
+			{
+				task[i].run();
+				
+				if (isCancelled()) break;
+			}
+			return null;
+		}
+	 }
 }
