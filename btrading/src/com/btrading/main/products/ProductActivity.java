@@ -11,10 +11,12 @@ import com.example.btrading.R;
 import com.btrading.httprequests.DeleteProductRequest;
 import com.btrading.httprequests.RetrieveUserProductRequest;
 import com.btrading.main.MainBaseActivity;
+import com.btrading.main.ProductListAdapter;
 import com.btrading.models.Product;
 import com.btrading.models.User;
 import com.btrading.utils.StaticObjects;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -46,8 +48,6 @@ public class ProductActivity  extends MainBaseActivity{
 	public ProductActivity(){
 		super(R.string.title_activity_product);
 	}
-
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -108,48 +108,10 @@ public class ProductActivity  extends MainBaseActivity{
 
 		if(StaticObjects.getUserProducts()==null||StaticObjects.getUserProducts().size()==0)
 		{
-		    new Thread(new Runnable() {
-				  @Override
-				  public void run()
-				  {
-					  	ExecutorService executor = Executors.newFixedThreadPool(1);
-//				        RetrieveUserProductRequest retrieveUserProductRequest = new RetrieveUserProductRequest(StaticObjects.getCurrentUser());
-					  	
-					  	User user= new User();
-					  	user.setUserID(1);
-					  	RetrieveUserProductRequest retrieveUserProductRequest = new RetrieveUserProductRequest(user);
-					  	
-				        executor.execute(retrieveUserProductRequest);
-						executor.shutdown();
-				        try {
-				        	executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-				       	  	Log.i(" RESPONSE :","ENDED REQUEST");
-				       	  	
-				        } catch (InterruptedException e) {
-				           
-				        }
-
-				    runOnUiThread(new Runnable() {
-				      @Override
-				      public void run()
-				      {
-				        staticObjects= new StaticObjects();
-				        if(StaticObjects.getUserProducts().size()==0||StaticObjects.getUserProducts()==null)
-				        {
-				        	hint.setText("You do not have any products");
-				        	
-				        }
-				        else
-				        {
-				        	hint.setText("Hint : \nPress and hold to remove item\nSelect to update your product");
-				        	adapter = new UserProductListAdapter(context, StaticObjects.getUserProducts());
-						    list.setAdapter(adapter);
-				        }
-				        
-				      }
-				    });
-				  }
-				}).start();
+			User user= new User();
+		  	user.setUserID(1);
+			RetrieveUserProductRequest retrieveUserProductRequest = new RetrieveUserProductRequest(user);
+			new BackgroundTask().execute(retrieveUserProductRequest,null);
 		}
 		else
 		{
@@ -206,50 +168,13 @@ public class ProductActivity  extends MainBaseActivity{
 			return false;
 		}
 	};
-	
 	private void deleteProduct()
 	{
-		progress = ProgressDialog.show(this, "Deleting",
-			    "please wait...", true);
-		new Thread(new Runnable() {
-			  @Override
-			  public void run()
-			  {
-				  	ExecutorService executor = Executors.newFixedThreadPool(1);
-				  	DeleteProductRequest deleteProductRequest = new DeleteProductRequest(productToDelete);
-				  	
-			        executor.execute(deleteProductRequest);
-					executor.shutdown();
-			        try {
-			        	executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-			       	  	Log.i(" RESPONSE :","ENDED REQUEST");
-			       	  	
-			        } catch (InterruptedException e) {
-			           
-			        }
-
-			    runOnUiThread(new Runnable() {
-			      @Override
-			      public void run()
-			      {
-			    	progress.dismiss();
-			        staticObjects= new StaticObjects();
-			        Toast.makeText(getBaseContext(), "Product deleted", Toast.LENGTH_SHORT).show();
-			        if(StaticObjects.getUserProducts().size()==0||StaticObjects.getUserProducts()==null)
-			        {
-			        	hint.setText("You do not have any products");
-			        }
-			        else
-			        {
-			        	hint.setText("Hint : \nPress and hold to remove item\nSelect to update your product");
-			        	adapter = new UserProductListAdapter(context, StaticObjects.getUserProducts());
-					    list.setAdapter(adapter);
-			        }
-			        
-			      }
-			    });
-			  }
-			}).start();
+		progress = ProgressDialog.show(this, "Deleting","please wait...", true);
+		DeleteProductRequest deleteProductRequest = new DeleteProductRequest(productToDelete);
+		new BackgroundTask().execute(deleteProductRequest,null);
+		
+		
 		
 	}
 	
@@ -276,50 +201,55 @@ public class ProductActivity  extends MainBaseActivity{
 	
 	public void refresh()
 	{
-		progress = ProgressDialog.show(this, "Searching",
-			    "please wait...", true);
-		new Thread(new Runnable() {
-			  @Override
-			  public void run()
-			  {
-				  	ExecutorService executor = Executors.newFixedThreadPool(1);
-//			        RetrieveUserProductRequest retrieveUserProductRequest = new RetrieveUserProductRequest(StaticObjects.getCurrentUser());
-				  	
-				  	User user= new User();
-				  	user.setUserID(1);
-				  	RetrieveUserProductRequest retrieveUserProductRequest = new RetrieveUserProductRequest(user);
-				  	
-			        executor.execute(retrieveUserProductRequest);
-					executor.shutdown();
-			        try {
-			        	executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-			       	  	Log.i(" RESPONSE :","ENDED REQUEST");
-			       	  	
-			        } catch (InterruptedException e) {
-			           
-			        }
-
-			    runOnUiThread(new Runnable() {
-			      @Override
-			      public void run()
-			      {
-			    	  progress.dismiss();
-			        staticObjects= new StaticObjects();
-			        if(StaticObjects.getUserProducts().size()==0||StaticObjects.getUserProducts()==null)
-			        {
-			        	hint.setText("You do not have any products");
-			        }
-			        else
-			        {
-			        	hint.setText("Hint : \nPress and hold to remove item\nSelect to update your product");
-			        	adapter = new UserProductListAdapter(context, StaticObjects.getUserProducts());
-					    list.setAdapter(adapter);
-			        }
-			        
-			      }
-			    });
-			  }
-			}).start();
+		progress = ProgressDialog.show(this, "Searching","please wait...", true);
+		
+		User user= new User();
+	  	user.setUserID(1);
+		RetrieveUserProductRequest retrieveUserProductRequest = new RetrieveUserProductRequest(user);
+		new BackgroundTask().execute(retrieveUserProductRequest,null);
 	}
 
+	
+	
+	private class BackgroundTask extends AsyncTask<Runnable, Integer, Long> {
+	     
+		@Override
+		protected void onPostExecute(Long result) {
+			
+			super.onPostExecute(result);
+			if(progress!=null)
+				progress.dismiss();
+			staticObjects= new StaticObjects();
+	        if(StaticObjects.getUserProducts().size()==0||StaticObjects.getUserProducts()==null)
+	        {
+	        	hint.setText("You do not have any products");
+	        	
+	        }
+	        else
+	        {
+	        	hint.setText("Hint : \nPress and hold to remove item\nSelect to update your product");
+	        	adapter = new UserProductListAdapter(context, StaticObjects.getUserProducts());
+			    list.setAdapter(adapter);
+	        }
+			
+		}
+
+		@Override
+		protected void onPreExecute() {
+			Toast.makeText(context, "Refreshing..", Toast.LENGTH_SHORT).show();
+			super.onPreExecute();
+		}
+
+		@Override
+		protected Long doInBackground(Runnable... task) {
+			
+			for(int i=0; i<task.length;i++)
+			{
+				if(task[i]!=null)
+					task[i].run();
+				if (isCancelled()) break;
+			}
+			return null;
+		}
+	 }
 }

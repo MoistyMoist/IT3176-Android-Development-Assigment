@@ -355,6 +355,7 @@ public class JSONExtractor {
 			ArrayList<Product>products= new ArrayList<Product>();
 			if(StaticObjects.getRequestStatus()==0)
 			{
+				Log.i("product ",RawData.toString() );
 				for(int i=0;i<RawData.length();i++)
 				{
 					JSONObject c=RawData.getJSONObject(i);
@@ -452,13 +453,13 @@ public class JSONExtractor {
             InputStream instream = entity.getContent();
             String result= convertStreamToString(instream);
             
-            JSONObject json = null;
-            json = new JSONObject(result);
-            Log.i("UPLOAD IMAGE RESPONSE", result);
+            //JSONObject json = null;
+            //json = new JSONObject(result);
+            Log.i("UPLOAD IMAGE RESPONSE", result.toString());
             //check status if all green to extract
-			StaticObjects.setRequestStatus((Integer) json.get(TAG_STATUS));
-			StaticObjects.setRequestMessage(json.getString(TAG_MESSAGE));
-			JSONArray RawData= json.getJSONArray(TAG_DATA);
+//			StaticObjects.setRequestStatus((Integer) json.get(TAG_STATUS));
+//			StaticObjects.setRequestMessage(json.getString(TAG_MESSAGE));
+//			JSONArray RawData= json.getJSONArray(TAG_DATA);
 			//JSONArray errors=json.getJSONArray(TAG_ERRORS);
 			
 //			ArrayList<Product>products= new ArrayList<Product>();

@@ -50,10 +50,11 @@ public class MainActivity extends MainBaseActivity {
 	ListView listview;
 	Context context;
 	
+	
+	
 	public MainActivity() {
 		super(R.string.app_name);
 	}
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -85,46 +86,9 @@ public class MainActivity extends MainBaseActivity {
 		
 		if(StaticObjects.getAllProducts()==null||StaticObjects.getAllProducts().size()==0)
 		{
-			
 			 RetrieveAllProductRequest retrieveAllProductRequest = new RetrieveAllProductRequest();
-			 new BackgroundTask().execute(retrieveAllProductRequest,null);
-			 
-		    /*new Thread(new Runnable() {
-				  @Override
-				  public void run()
-				  {
-					  	ExecutorService executor = Executors.newFixedThreadPool(1);
-				        RetrieveAllProductRequest retrieveAllProductRequest = new RetrieveAllProductRequest();
-				          
-				        executor.execute(retrieveAllProductRequest);
-						executor.shutdown();
-				        try {
-				        	executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-				       	  	Log.i(" RESPONSE :","ENDED REQUEST");
-				       	  	
-				        } catch (InterruptedException e) {
-				           
-				        }
-
-				    runOnUiThread(new Runnable() {
-				      @Override
-				      public void run()
-				      {
-				        staticObjects= new StaticObjects();
-				        if(StaticObjects.getAllProducts().size()==0||StaticObjects.getAllProducts()==null)
-				        {
-				        	Log.i("PRODUCT", "NO PRODUCT");
-				        }
-				        else
-				        {
-				        	adapter = new ProductListAdapter(context, StaticObjects.getAllProducts());
-						    listview.setAdapter(adapter);
-				        }
-				        
-				      }
-				    });
-				  }
-				}).start();*/
+			 UploadImageRequest upload= new UploadImageRequest();
+			 new BackgroundTask().execute( upload,null);
 		}
 		else
 		{
@@ -132,13 +96,8 @@ public class MainActivity extends MainBaseActivity {
 			adapter = new ProductListAdapter(context, StaticObjects.getAllProducts());
 		    listview.setAdapter(adapter);
 		}
-      
 	}
-
-	
-	
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getSupportMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
@@ -151,61 +110,25 @@ public class MainActivity extends MainBaseActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	
-	
 	public void searchProduct(View v)
 	{
-		progress = ProgressDialog.show(this, "Searching",
-			    "please wait...", true);
+		progress = ProgressDialog.show(this, "Searching","please wait...", true);
 		tv=(TextView)findViewById(R.id.search);
 		SearchProductRequest searchRequest = new SearchProductRequest(tv.getText().toString());
-		
 		new BackgroundTask().execute(searchRequest,null);
-		/*
-		new Thread(new Runnable() {
-			  @Override
-			  public void run()
-			  {
-				  ExecutorService executor = Executors.newFixedThreadPool(1);
-					SearchProductRequest searchRequest = new SearchProductRequest(tv.getText().toString());
-					
-					executor.execute(searchRequest);
-					executor.shutdown();
-			        try {
-			        	executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-			       	  	Log.i(" RESPONSE :","ENDED REQUEST");
-			       	  	
-			        } catch (InterruptedException e) {
-			           
-			        }
-
-			    runOnUiThread(new Runnable() {
-			      @Override
-			      public void run()
-			      {
-			        progress.dismiss();
-			        staticObjects= new StaticObjects();
-			        adapter = new ProductListAdapter(context, StaticObjects.getAllProducts());
-				    listview.setAdapter(adapter);
-			      }
-			    });
-			  }
-			}).start();
-			*/
 	}
-	
-	
+
 	private class BackgroundTask extends AsyncTask<Runnable, Integer, Long> {
 	     
 		@Override
 		protected void onPostExecute(Long result) {
 			
 			super.onPostExecute(result);
-			progress.dismiss();
-	        staticObjects= new StaticObjects();
-	        adapter = new ProductListAdapter(context, StaticObjects.getAllProducts());
-		    listview.setAdapter(adapter);
+			if(progress!=null)
+				progress.dismiss();
+//	        staticObjects= new StaticObjects();
+//	        adapter = new ProductListAdapter(context, StaticObjects.getAllProducts());
+//		    listview.setAdapter(adapter);
 			
 		}
 
@@ -220,8 +143,8 @@ public class MainActivity extends MainBaseActivity {
 			
 			for(int i=0; i<task.length;i++)
 			{
-				task[i].run();
-				
+				if(task[i]!=null)
+					task[i].run();
 				if (isCancelled()) break;
 			}
 			return null;
