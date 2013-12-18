@@ -5,6 +5,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import com.btrading.httprequests.RetrieveAllProductRequest;
+import com.btrading.httprequests.RetrieveUserRequest;
 import com.btrading.main.MainActivity;
 import com.btrading.main.ProductListAdapter;
 import com.btrading.utils.StaticObjects;
@@ -61,6 +62,7 @@ public class LoginActivity extends Activity {
 		if (b_login.getText().equals("") || b_login.getText()==null){
 			//to be removed once application completed
 			validUser = true;
+			return validUser;
 		}
 		
 		if(StaticObjects.getCurrentUser()==null)
@@ -70,9 +72,9 @@ public class LoginActivity extends Activity {
 				  public void run()
 				  {
 					  	ExecutorService executor = Executors.newFixedThreadPool(1);
-				        RetrieveAllProductRequest retrieveAllProductRequest = new RetrieveAllProductRequest();
+				        RetrieveUserRequest retrieveUserRequest = new RetrieveUserRequest();
 				          
-				        executor.execute(retrieveAllProductRequest);
+				        executor.execute(retrieveUserRequest);
 						executor.shutdown();
 				        try {
 				        	executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
