@@ -1,21 +1,14 @@
 package com.btrading.main.products;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.MenuItem;
-
 import com.example.btrading.R;
 import com.btrading.httprequests.DeleteProductRequest;
 import com.btrading.httprequests.RetrieveUserProductRequest;
 import com.btrading.main.MainBaseActivity;
-import com.btrading.main.ProductListAdapter;
 import com.btrading.models.Product;
 import com.btrading.models.User;
 import com.btrading.utils.StaticObjects;
-
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.ProgressDialog;
@@ -65,7 +58,6 @@ public class ProductActivity  extends MainBaseActivity{
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				// TODO Auto-generated method stub
 				StaticObjects.setSelectedProduct(StaticObjects.getUserProducts().get(arg2));
 				Intent intent= new Intent();
 				intent.setClass(getApplication(), UpdateProductActivity.class);
@@ -77,13 +69,10 @@ public class ProductActivity  extends MainBaseActivity{
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
-				//mMode = startActionMode(mActionModeCallback);
 
 			        if (mActionMode != null) {
 			            return false;
 			        }
-
-			        // Start the CAB using the ActionMode.Callback defined above
 			        arg1.setSelected(true);
 			        productToDelete = StaticObjects.getUserProducts().get(arg2);
 			        mActionMode = startActionMode(mActionModeCallback);
@@ -94,8 +83,6 @@ public class ProductActivity  extends MainBaseActivity{
 
 			            @Override
 			            public void onClick(View v) {
-			                // do whatever you want 
-			                // in android source code it's calling mMode.finish();
 			            	deleteProduct();
 			            	mActionMode.finish();
 			            	
@@ -132,30 +119,26 @@ public class ProductActivity  extends MainBaseActivity{
 
 		@Override
 		public boolean onCreateActionMode(ActionMode mode, com.actionbarsherlock.view.Menu menu) {
-			// TODO Auto-generated method stub
-			//getSupportMenuInflater().inflate(R.menu.wishlist, (com.actionbarsherlock.view.Menu) menu);
             menu.add("Delete")
             .setIcon(R.drawable.ic_no)
             .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 			mode.setTitle("Confirm Delete?");
-			//mode.setSubtitle(item_selected);
 			return true;
 		}
-	    // Called when the user selects a contextual menu item
+
 	    @Override
 	    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 	    	
 	        switch (item.getItemId()) {
 	            case R.drawable.ic_no:
-	            	mode.finish(); // Action picked, so close the CAB
+	            	mode.finish(); 
 	                return true;
 	            default:
-	            	mode.finish(); // Action picked, so close the CAB
+	            	mode.finish(); 
 	                return false;   
 	        }
 	    }
 
-	    // Called when the user exits the action mode
 	    @Override
 	    public void onDestroyActionMode(ActionMode mode) {
 	        mActionMode = null;
@@ -164,7 +147,6 @@ public class ProductActivity  extends MainBaseActivity{
 		@Override
 		public boolean onPrepareActionMode(ActionMode mode,
 				com.actionbarsherlock.view.Menu menu) {
-			// TODO Auto-generated method stub
 			return false;
 		}
 	};
@@ -180,7 +162,6 @@ public class ProductActivity  extends MainBaseActivity{
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		if(item.getItemId()==R.id.add_product)
 		{
 			Intent intent= new Intent();

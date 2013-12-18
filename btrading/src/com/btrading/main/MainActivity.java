@@ -1,16 +1,6 @@
 package com.btrading.main;
 
 import com.example.btrading.R;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-
-import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -20,22 +10,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.btrading.httprequests.*;
-import com.btrading.main.products.ProductActivity;
 import com.btrading.main.products.ProductDetailActivity;
-import com.btrading.main.profile.ProfileActivity;
-import com.btrading.main.wish.AddWishlistActivity;
-import com.btrading.models.Product;
 import com.btrading.utils.StaticObjects;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
@@ -86,9 +67,10 @@ public class MainActivity extends MainBaseActivity {
 		
 		if(StaticObjects.getAllProducts()==null||StaticObjects.getAllProducts().size()==0)
 		{
+			progress = ProgressDialog.show(this, "Retrieving market","please wait...", true);
 			 RetrieveAllProductRequest retrieveAllProductRequest = new RetrieveAllProductRequest();
-			 UploadImageRequest upload= new UploadImageRequest();
-			 new BackgroundTask().execute( upload,null);
+			 //UploadImageRequest upload= new UploadImageRequest();
+			 new BackgroundTask().execute( retrieveAllProductRequest,null);
 		}
 		else
 		{
