@@ -452,15 +452,14 @@ public class JSONExtractor {
         if (entity != null) {
             InputStream instream = entity.getContent();
             String result= convertStreamToString(instream);
-            Log.i("JSON", result.length()+"");
-            Log.i("JSON", result);
             String string = result;
             String[] parts = string.split("</Data>");
             String part1 = parts[0]; // 004
-            Log.i("JSON", part1.length()+"");
+           // Log.i("JSON", part1.length()+"");
             String url=part1.replace("<ImageModel xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.datacontract.org/2004/07/BarterTradingWebServices.Model\"><Data>", "");
             
-            Log.i("JSON", url.charAt(url.length()-1)+"");
+            Log.i("JSON", url);
+            StaticObjects.getSelectedProduct().setImageURL(url);
             instream.close();
         }
 	}
