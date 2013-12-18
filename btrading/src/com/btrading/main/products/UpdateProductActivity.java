@@ -1,5 +1,7 @@
 package com.btrading.main.products;
 
+import java.io.ByteArrayOutputStream;
+
 import com.actionbarsherlock.view.MenuItem;
 import com.btrading.main.MainBaseActivity;
 import com.btrading.main.ProductListAdapter;
@@ -19,8 +21,10 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -29,6 +33,12 @@ import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
+
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -56,6 +66,7 @@ public class UpdateProductActivity extends MainBaseActivity {
     private UiSettings uisettings;
     Spinner  productQuality;
     LoaderImageView imageView;
+    ImageView imageView2;
 	EditText productName;
 	EditText productDescription;
 	EditText productQty;
@@ -63,6 +74,9 @@ public class UpdateProductActivity extends MainBaseActivity {
 	ProgressDialog progress;
 	int imageUpdated=0;
 	StaticObjects staticObjects;
+	int RESULT_LOAD_IMAGE;
+	private Bitmap bitmap;
+	
 	public UpdateProductActivity(){
 		super(R.string.title_activity_update_product);
 	}
@@ -90,7 +104,7 @@ public class UpdateProductActivity extends MainBaseActivity {
 		productQuality.setAdapter(adapter);
 		
 		imageView=(LoaderImageView)findViewById(R.id.productImage);
-		
+		imageView2=(ImageView)findViewById(R.id.productImage2);
 		productName.setText(StaticObjects.getSelectedProduct().getName());
 		productDescription.setText(StaticObjects.getSelectedProduct().getDescription());
 		productQty.setText(StaticObjects.getSelectedProduct().getQty());
@@ -151,9 +165,9 @@ public class UpdateProductActivity extends MainBaseActivity {
 			if(imageUpdated==1)
 			{
 				progress = ProgressDialog.show(this, "Uploading image","please wait...", true);
-				UploadImageRequest upload= new UploadImageRequest();
-				UpdateProductRequest update= new UpdateProductRequest(StaticObjects.getSelectedProduct());
-				new BackgroundTask().execute(upload,update);
+				//UploadImageRequest upload= new UploadImageRequest();
+				//UpdateProductRequest update= new UpdateProductRequest(StaticObjects.getSelectedProduct());
+				//new BackgroundTask().execute(upload,update);
 			}
 			else
 			{
@@ -205,6 +219,11 @@ public class UpdateProductActivity extends MainBaseActivity {
 		}
 	 }
 
+	public void loadimage()
+	{
+		Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+		startActivityForResult(i, RESULT_LOAD_IMAGE);
+	}
 	@SuppressLint("ValidFragment")
 	private class ImageDialogFragment extends DialogFragment
 	{
@@ -223,14 +242,81 @@ public class UpdateProductActivity extends MainBaseActivity {
 					if(arg1==0)
 					{
 						Log.i("item select","1");
+						
 					}
 					if(arg1==1)
 					{
-						Log.i("item select","2");
+						loadimage();
 					}
 				}});
 
 	    return builder.create();
 		}
+		
 	}
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK
+        	    && null != data) {
+        	   Uri selectedImage = data.getData();
+        	   String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+        	   Cursor cursor = getContentResolver().query(selectedImage,
+        	     filePathColumn, null, null, null);
+        	   cursor.moveToFirst();
+
+        	   int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+        	   String picturePath = cursor.getString(columnIndex);
+        	   cursor.close();
+
+        	   decodeFile(picturePath);
+
+        	  }
+     
+     
+    }
+	 public void decodeFile(String filePath) {
+		  // Decode image size
+		  BitmapFactory.Options o = new BitmapFactory.Options();
+		  o.inJustDecodeBounds = true;
+		  BitmapFactory.decodeFile(filePath, o);
+
+		  // The new size we want to scale to
+		  final int REQUIRED_SIZE = 100;
+
+		  // Find the correct scale value. It should be the power of 2.
+		  int width_tmp = o.outWidth, height_tmp = o.outHeight;
+		  int scale = 1;
+		  while (true) {
+		   if (width_tmp < REQUIRED_SIZE && height_tmp < REQUIRED_SIZE)
+		    break;
+		   width_tmp /= 2;
+		   height_tmp /= 2;
+		   scale *= 2;
+		  }
+
+		  // Decode with inSampleSize
+		  BitmapFactory.Options o2 = new BitmapFactory.Options();
+		  o2.inSampleSize = scale;
+		  bitmap = BitmapFactory.decodeFile(filePath, o2);
+
+		  imageView2.setVisibility(1);
+        imageView.setVisibility(2);
+        imageView2.setImageBitmap(bitmap);
+        imageUpdated=1;
+        
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        bitmap.compress(CompressFormat.PNG, 1, bos);
+        byte[] data = bos.toByteArray();
+        String file = Base64.encodeToString(data, Base64.NO_WRAP)+"haP";
+        Log.i("image data",data.length+"");
+        Log.i("image data",file.length()+"");
+        Log.i("image data",file.charAt(file.length()-1)+"");
+        Log.i("image data",file);
+      UploadImageRequest upload= new UploadImageRequest(file);
+		//UpdateProductRequest update= new UpdateProductRequest(StaticObjects.getSelectedProduct());
+		new BackgroundTask().execute(upload,null);
+		 }
+	    
 }
