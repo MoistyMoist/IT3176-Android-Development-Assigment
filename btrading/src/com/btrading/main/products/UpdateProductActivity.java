@@ -37,6 +37,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
+import android.hardware.Camera;
 
 import android.util.Base64;
 import android.util.Log;
@@ -76,6 +77,8 @@ public class UpdateProductActivity extends MainBaseActivity {
 	StaticObjects staticObjects;
 	int RESULT_LOAD_IMAGE;
 	private Bitmap bitmap;
+	String base64;
+	
 	
 	public UpdateProductActivity(){
 		super(R.string.title_activity_update_product);
@@ -165,9 +168,10 @@ public class UpdateProductActivity extends MainBaseActivity {
 			if(imageUpdated==1)
 			{
 				progress = ProgressDialog.show(this, "Uploading image","please wait...", true);
-				//UploadImageRequest upload= new UploadImageRequest();
-				//UpdateProductRequest update= new UpdateProductRequest(StaticObjects.getSelectedProduct());
-				//new BackgroundTask().execute(upload,update);
+				UploadImageRequest upload= new UploadImageRequest(base64);
+				UpdateProductRequest update= new UpdateProductRequest(StaticObjects.getSelectedProduct());
+				new BackgroundTask().execute(upload,update);
+				imageUpdated=0;
 			}
 			else
 			{
@@ -175,9 +179,6 @@ public class UpdateProductActivity extends MainBaseActivity {
 				UpdateProductRequest update= new UpdateProductRequest(StaticObjects.getSelectedProduct());
 				new BackgroundTask().execute(update,null);
 			}
-				
-			
-			
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -186,8 +187,6 @@ public class UpdateProductActivity extends MainBaseActivity {
 		getSupportMenuInflater().inflate(R.menu.update_product, menu);
 		return true;
 	}
-	
-	
 	
 	private class BackgroundTask extends AsyncTask<Runnable, Integer, Long> {
 	     
@@ -224,6 +223,14 @@ public class UpdateProductActivity extends MainBaseActivity {
 		Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 		startActivityForResult(i, RESULT_LOAD_IMAGE);
 	}
+	
+	public void loadcameral()
+	{
+		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+	    startActivityForResult(intent, RESULT_LOAD_IMAGE);
+	    startActivity(intent);
+	}
+	
 	@SuppressLint("ValidFragment")
 	private class ImageDialogFragment extends DialogFragment
 	{
@@ -241,8 +248,7 @@ public class UpdateProductActivity extends MainBaseActivity {
 					// TODO Auto-generated method stub
 					if(arg1==0)
 					{
-						Log.i("item select","1");
-						
+						loadcameral();
 					}
 					if(arg1==1)
 					{
@@ -254,6 +260,7 @@ public class UpdateProductActivity extends MainBaseActivity {
 		}
 		
 	}
+	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -276,47 +283,46 @@ public class UpdateProductActivity extends MainBaseActivity {
      
      
     }
-	 public void decodeFile(String filePath) {
-		  // Decode image size
-		  BitmapFactory.Options o = new BitmapFactory.Options();
-		  o.inJustDecodeBounds = true;
-		  BitmapFactory.decodeFile(filePath, o);
+	
+	public void decodeFile(String filePath) {
+		 // Decode image size
+		 BitmapFactory.Options o = new BitmapFactory.Options();
+		 o.inJustDecodeBounds = true;
+		 BitmapFactory.decodeFile(filePath, o);
 
-		  // The new size we want to scale to
-		  final int REQUIRED_SIZE = 100;
+		 // The new size we want to scale to
+		 final int REQUIRED_SIZE = 100;
 
-		  // Find the correct scale value. It should be the power of 2.
-		  int width_tmp = o.outWidth, height_tmp = o.outHeight;
-		  int scale = 1;
-		  while (true) {
-		   if (width_tmp < REQUIRED_SIZE && height_tmp < REQUIRED_SIZE)
-		    break;
+		 // Find the correct scale value. It should be the power of 2.
+		 int width_tmp = o.outWidth, height_tmp = o.outHeight;
+		 int scale = 1;
+		 while (true) {
+		 if (width_tmp < REQUIRED_SIZE && height_tmp < REQUIRED_SIZE)
+		   break;
 		   width_tmp /= 2;
 		   height_tmp /= 2;
 		   scale *= 2;
-		  }
-
-		  // Decode with inSampleSize
-		  BitmapFactory.Options o2 = new BitmapFactory.Options();
-		  o2.inSampleSize = scale;
-		  bitmap = BitmapFactory.decodeFile(filePath, o2);
-
-		  imageView2.setVisibility(1);
-        imageView.setVisibility(2);
-        imageView2.setImageBitmap(bitmap);
-        imageUpdated=1;
-        
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        bitmap.compress(CompressFormat.PNG, 1, bos);
-        byte[] data = bos.toByteArray();
-        String file = Base64.encodeToString(data, Base64.NO_WRAP)+"haP";
-        Log.i("image data",data.length+"");
-        Log.i("image data",file.length()+"");
-        Log.i("image data",file.charAt(file.length()-1)+"");
-        Log.i("image data",file);
-      UploadImageRequest upload= new UploadImageRequest(file);
-		//UpdateProductRequest update= new UpdateProductRequest(StaticObjects.getSelectedProduct());
-		new BackgroundTask().execute(upload,null);
 		 }
+
+		 // Decode with inSampleSize
+		 BitmapFactory.Options o2 = new BitmapFactory.Options();
+		 o2.inSampleSize = scale;
+		 bitmap = BitmapFactory.decodeFile(filePath, o2);
+
+		 imageView2.setVisibility(1);
+         imageView.setVisibility(2);
+         imageView2.setImageBitmap(bitmap);
+         imageUpdated=1;
+        
+         ByteArrayOutputStream bos = new ByteArrayOutputStream();
+         bitmap.compress(CompressFormat.PNG, 1, bos);
+         byte[] data = bos.toByteArray();
+         base64 = Base64.encodeToString(data, Base64.NO_WRAP);
+         Log.i("image data",data.length+"");
+         Log.i("image data",base64.length()+"");
+         Log.i("image data",base64.charAt(base64.length()-1)+"");
+         Log.i("image data",base64);
+       
+	}
 	    
 }
