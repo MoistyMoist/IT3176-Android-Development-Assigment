@@ -12,23 +12,21 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-
-import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 public class ProductDetailActivity extends MainBaseActivity {
 
 	private GoogleMap mMap;
 	Button buttonMap;
-    private LocationClient mLocationClient;
-    private static final LocationRequest REQUEST = LocationRequest.create()
+    @SuppressWarnings("unused")
+	private LocationClient mLocationClient;
+    @SuppressWarnings("unused")
+	private static final LocationRequest REQUEST = LocationRequest.create()
             .setInterval(5000)         // 5 seconds
             .setFastestInterval(16)    // 16ms = 60fps
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -70,7 +68,6 @@ public class ProductDetailActivity extends MainBaseActivity {
 		imageView.setImageDrawable(StaticObjects.getSelectedProduct().getImageURL());	
 	}
 
-	@SuppressWarnings("unused")
 	private void setUpMapIfNeeded(double x,double y) {
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
@@ -97,7 +94,6 @@ public class ProductDetailActivity extends MainBaseActivity {
             }
         }
     }
-	@SuppressWarnings("unused")
 	private void setUpMap(double x, double y) {
 		uisettings =mMap.getUiSettings();
         mMap.addMarker(new MarkerOptions().position(new LatLng(x, y)).title(null));

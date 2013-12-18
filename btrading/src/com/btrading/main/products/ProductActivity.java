@@ -37,7 +37,6 @@ public class ProductActivity  extends MainBaseActivity{
 	Product productToDelete;
 	TextView hint;
 	
-	
 	public ProductActivity(){
 		super(R.string.title_activity_product);
 	}
@@ -92,9 +91,10 @@ public class ProductActivity  extends MainBaseActivity{
 				return true;
 			}
 		}); 
-
+		
 		if(StaticObjects.getUserProducts()==null||StaticObjects.getUserProducts().size()==0)
 		{
+			progress = ProgressDialog.show(this, "Retrieving items","please wait...", true);
 			User user= new User();
 		  	user.setUserID(1);
 			RetrieveUserProductRequest retrieveUserProductRequest = new RetrieveUserProductRequest(user);

@@ -1,17 +1,12 @@
 package com.btrading.main.products;
 
 import java.io.ByteArrayOutputStream;
-
 import com.actionbarsherlock.view.MenuItem;
 import com.btrading.main.MainBaseActivity;
-import com.btrading.main.ProductListAdapter;
-import com.btrading.models.Product;
 import com.btrading.utils.LoaderImageView;
 import com.btrading.utils.StaticObjects;
 import com.btrading.httprequests.*;
 import com.example.btrading.R;
-import com.example.btrading.R.layout;
-import com.example.btrading.R.menu;
 import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -26,7 +21,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -37,30 +31,26 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
-import android.hardware.Camera;
-
 import android.util.Base64;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class UpdateProductActivity extends MainBaseActivity {
 
 	private GoogleMap mMap;
 	Button buttonMap;
-    private LocationClient mLocationClient;
-    private static final LocationRequest REQUEST = LocationRequest.create()
+    @SuppressWarnings("unused")
+	private LocationClient mLocationClient;
+    @SuppressWarnings("unused")
+	private static final LocationRequest REQUEST = LocationRequest.create()
             .setInterval(5000)         // 5 seconds
             .setFastestInterval(16)    // 16ms = 60fps
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -78,17 +68,13 @@ public class UpdateProductActivity extends MainBaseActivity {
 	int RESULT_LOAD_IMAGE;
 	private Bitmap bitmap;
 	String base64;
-	
+	ArrayAdapter<CharSequence> adapter;
+	String[] quality={"Good","Average","Acceptiable"};
 	
 	public UpdateProductActivity(){
 		super(R.string.title_activity_update_product);
 	}
 
-	
-	
-	ArrayAdapter<CharSequence> adapter;
-	String[] quality={"Good","Average","Acceptiable"};
-	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_product_update);
@@ -106,23 +92,31 @@ public class UpdateProductActivity extends MainBaseActivity {
 		adapter= new ArrayAdapter<CharSequence>(this, android.R.layout.simple_list_item_1, quality);
 		productQuality.setAdapter(adapter);
 		
+		
+		
 		imageView=(LoaderImageView)findViewById(R.id.productImage);
 		imageView2=(ImageView)findViewById(R.id.productImage2);
-		productName.setText(StaticObjects.getSelectedProduct().getName());
-		productDescription.setText(StaticObjects.getSelectedProduct().getDescription());
-		productQty.setText(StaticObjects.getSelectedProduct().getQty());
-		
+		productName.setText(StaticObjects.getSelectedProduct().getName().replace("%20", ""));
+		productDescription.setText(StaticObjects.getSelectedProduct().getDescription().replace("%20", ""));
+		productQty.setText(StaticObjects.getSelectedProduct().getQty().replace("%20", ""));
 		imageView.setImageDrawable(StaticObjects.getSelectedProduct().getImageURL());	
 	
+		for(int i =0;i<quality.length;i++)
+		{
+			if(StaticObjects.getSelectedProduct().getQuality().equals(quality[i]))
+			{
+				productQuality.setSelection(i);
+				break;
+			}
+		}
+		
+		
 		uploadImageBtn.setOnClickListener(new OnClickListener(){
-
 			@Override
 			public void onClick(View arg0) {
 				ImageDialogFragment option= new ImageDialogFragment();
 				option.show(getFragmentManager(), null);
-				
 			}});
-		
 	}
 	
 	private void setUpMapIfNeeded(double x,double y) {
@@ -160,11 +154,11 @@ public class UpdateProductActivity extends MainBaseActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if(item.getItemId()==R.id.update_product)
 		{
-			
-			StaticObjects.getSelectedProduct().setDescription(this.productDescription.getText().toString());
-			StaticObjects.getSelectedProduct().setName(this.productName.getText().toString());
-			StaticObjects.getSelectedProduct().setQty(this.productQty.getText().toString());
-			StaticObjects.getSelectedProduct().setQuality(quality[this.productQuality.getSelectedItemPosition()]);
+			StaticObjects.getSelectedProduct().setDescription(this.productDescription.getText().toString().replace(" ", "%20"));
+			StaticObjects.getSelectedProduct().setName(this.productName.getText().toString().replace(" ", "%20"));
+			StaticObjects.getSelectedProduct().setQty(this.productQty.getText().toString().replace(" ", "%20"));
+			StaticObjects.getSelectedProduct().setQuality(quality[this.productQuality.getSelectedItemPosition()].replace(" ", "%20"));
+			StaticObjects.getSelectedProduct().setImageURL(StaticObjects.getSelectedProduct().getImageURL().replace(" ", "%2520"));
 			if(imageUpdated==1)
 			{
 				progress = ProgressDialog.show(this, "Uploading image","please wait...", true);
@@ -177,7 +171,7 @@ public class UpdateProductActivity extends MainBaseActivity {
 			{
 				progress = ProgressDialog.show(this, "Updating","please wait...", true);
 				UpdateProductRequest update= new UpdateProductRequest(StaticObjects.getSelectedProduct());
-				new BackgroundTask().execute(update,null);
+				new BackgroundTask().execute(update,update);
 			}
 		}
 		return super.onOptionsItemSelected(item);
@@ -291,7 +285,7 @@ public class UpdateProductActivity extends MainBaseActivity {
 		 BitmapFactory.decodeFile(filePath, o);
 
 		 // The new size we want to scale to
-		 final int REQUIRED_SIZE = 100;
+		 final int REQUIRED_SIZE = 2000;
 
 		 // Find the correct scale value. It should be the power of 2.
 		 int width_tmp = o.outWidth, height_tmp = o.outHeight;
@@ -315,7 +309,7 @@ public class UpdateProductActivity extends MainBaseActivity {
          imageUpdated=1;
         
          ByteArrayOutputStream bos = new ByteArrayOutputStream();
-         bitmap.compress(CompressFormat.PNG, 1, bos);
+         bitmap.compress(CompressFormat.JPEG, 1, bos);
          byte[] data = bos.toByteArray();
          base64 = Base64.encodeToString(data, Base64.NO_WRAP);
          Log.i("image data",data.length+"");

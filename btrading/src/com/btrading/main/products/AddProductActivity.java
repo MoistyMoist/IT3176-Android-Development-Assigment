@@ -50,8 +50,7 @@ public class AddProductActivity extends MainBaseActivity{
 	ImageView image;
 	String[] quality={"Good","Average","Acceptiable"};
 	Button addImage;
-	static final int SELECT_PHOTO=100;
-	
+
 	public AddProductActivity(){
 		super(R.string.title_activity_add_product);
 	}
@@ -65,29 +64,18 @@ public class AddProductActivity extends MainBaseActivity{
 		viewGroup.addView(View.inflate(this, R.layout.basic_map, null));
 		setUpMapIfNeeded();
 		
-		productQuality=(Spinner)findViewById(R.id.productQuality);
-		adapter= new ArrayAdapter<CharSequence>(this, android.R.layout.simple_list_item_1, quality);
-		productQuality.setAdapter(adapter);
+//		productQuality=(Spinner)findViewById(R.id.productQuality);
+//		adapter= new ArrayAdapter<CharSequence>(this, android.R.layout.simple_list_item_1, quality);
+//		productQuality.setAdapter(adapter);
 		
 		
-		productName=(EditText)findViewById(R.id.productName);
-		productDescription=(EditText)findViewById(R.id.productDescription);
-		productQty=(EditText)findViewById(R.id.productQty);
-		image=(ImageView)findViewById(R.id.productImage);
-		addImage = (Button)findViewById(R.id.addImage);
-		
-		addImage.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View arg0) {
-				Intent photoPickerIntent = new Intent(Intent.ACTION_CAMERA_BUTTON);
-//				photoPickerIntent.setType(WALLPAPER_SERVICE);
-				startActivityForResult(photoPickerIntent,SELECT_PHOTO);
-				
-			}});
+//		productName=(EditText)findViewById(R.id.productName);
+//		productDescription=(EditText)findViewById(R.id.productDescription);
+//		productQty=(EditText)findViewById(R.id.productQty);
+//		image=(ImageView)findViewById(R.id.productImage);
+//		addImage = (Button)findViewById(R.id.addImage);
 		
 		
-		///get device location x & y
 	}
 
 	
@@ -107,27 +95,29 @@ public class AddProductActivity extends MainBaseActivity{
             if (mMap != null) {
                 setUpMap();
                 
-                LatLng singapore = new LatLng(103,14);
+                LatLng singapore = new LatLng(1.36,103.8);
 
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(singapore, 5));
-               
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(singapore, 14));
  
+                uisettings.setMyLocationButtonEnabled(false);
+                uisettings.setAllGesturesEnabled(false);
+                uisettings.setCompassEnabled(false);
+                uisettings.setRotateGesturesEnabled(false);
+                uisettings.setScrollGesturesEnabled(false);
+                uisettings.setTiltGesturesEnabled(false);
                 uisettings.setZoomControlsEnabled(false);
+                uisettings.setZoomGesturesEnabled(false);
  
                 
             }
         }
     }
-	@SuppressWarnings("unused")
+
 	private void setUpMap() {
 		uisettings =mMap.getUiSettings();
         //mMap.addMarker(new MarkerOptions().position(new LatLng(x, y)).title(null));
     }
 	
-	public void SelectImage()
-	{
-		
-	}
 	
 	
 	

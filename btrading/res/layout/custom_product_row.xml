@@ -4,7 +4,7 @@
     android:padding="6dip" 
     android:id="@+id/custom_product_list" >
     
-    <com.btrading.utils.LoaderImageView
+    <com.loopj.android.image.SmartImageView
    		android:id="@+id/icon"
         android:layout_width="90dp"
         android:layout_height="fill_parent"

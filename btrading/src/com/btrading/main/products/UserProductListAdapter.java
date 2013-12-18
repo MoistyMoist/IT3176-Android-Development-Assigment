@@ -10,8 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.btrading.models.Product;
-import com.btrading.utils.LoaderImageView;
 import com.example.btrading.R;
+import com.loopj.android.image.SmartImageView;
 
 public class UserProductListAdapter extends ArrayAdapter<Product>{
 	
@@ -43,11 +43,11 @@ public class UserProductListAdapter extends ArrayAdapter<Product>{
 
          // 3. Get the two text view from the rowView
          TextView productName = (TextView) rowView.findViewById(R.id.productName);
-         LoaderImageView productImage=(LoaderImageView)rowView.findViewById(R.id.icon);
+         SmartImageView productImage=(SmartImageView)rowView.findViewById(R.id.icon);
          
          // 4. Set the text for textView 
-         productName.setText(productList.get(position).getName());
-         productImage.setImageDrawable(productList.get(position).getImageURL());
+         productName.setText(productList.get(position).getName().replace("%20", ""));
+         productImage.setImageUrl(productList.get(position).getImageURL());
          // 5. retrn rowView
          return rowView;
      }
