@@ -85,7 +85,6 @@ public class MainActivity extends MainBaseActivity {
 	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		if(item.getItemId()==R.id.refresh)
 		{
 			searchProduct(null);
@@ -108,9 +107,9 @@ public class MainActivity extends MainBaseActivity {
 			super.onPostExecute(result);
 			if(progress!=null)
 				progress.dismiss();
-//	        staticObjects= new StaticObjects();
-//	        adapter = new ProductListAdapter(context, StaticObjects.getAllProducts());
-//		    listview.setAdapter(adapter);
+	        staticObjects= new StaticObjects();
+	        adapter = new ProductListAdapter(context, StaticObjects.getAllProducts());
+		    listview.setAdapter(adapter);
 			
 		}
 

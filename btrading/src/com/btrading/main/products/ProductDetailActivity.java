@@ -67,21 +67,7 @@ public class ProductDetailActivity extends MainBaseActivity {
 		productQty.setText(StaticObjects.getSelectedProduct().getQty());
 		productQuality.setText(StaticObjects.getSelectedProduct().getQuality());
 		
-		imageView.setImageDrawable(StaticObjects.getSelectedProduct().getImageURL());
-		
-//		if(StaticObjects.getCurrentUser().getUserID()==StaticObjects.getSelectedProduct().getUser().getUserID())
-//		{
-//			
-//		}
-//		else
-//		{
-//			//send request to trade codes
-//		}
-//		
-		
-		
-		
-		
+		imageView.setImageDrawable(StaticObjects.getSelectedProduct().getImageURL());	
 	}
 
 	@SuppressWarnings("unused")
