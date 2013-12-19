@@ -19,7 +19,8 @@ public class StaticObjects {
 	static String RequestMessage;
 	//THE CURRENT USER PRODUCTS
 	static ArrayList<Product> userProducts;
-
+	//PRODUCT TO CREATE
+	static Product productToCreate;
 
 	
 	
@@ -69,5 +70,11 @@ public class StaticObjects {
 	public String getToken()
 	{
 		return StaticObjects.token;
+	}
+	public static Product getProductToCreate() {
+		return productToCreate;
+	}
+	public static void setProductToCreate(Product productToCreate) {
+		StaticObjects.productToCreate = productToCreate;
 	}
 }

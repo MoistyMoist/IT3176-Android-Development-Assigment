@@ -43,7 +43,7 @@ public class CreateProductRequest implements Runnable{
             Log.i("CREATE PRODUCT RESPONSE :",response.getStatusLine().toString());
             //PASS THE RESPONSE TO THE EXTRACTOR
             JSONExtractor paser= new JSONExtractor();
-            paser.ExtractAllProductRequest(response);
+            paser.ExtractCreateProductRequest(response);
 
         } catch (ClientProtocolException e) {
             e.printStackTrace();

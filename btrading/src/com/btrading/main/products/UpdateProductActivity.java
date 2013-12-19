@@ -274,8 +274,6 @@ public class UpdateProductActivity extends MainBaseActivity {
         	   decodeFile(picturePath);
 
         	  }
-     
-     
     }
 	
 	public void decodeFile(String filePath) {

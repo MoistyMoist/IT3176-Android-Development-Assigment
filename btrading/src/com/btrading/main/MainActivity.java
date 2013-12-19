@@ -31,8 +31,7 @@ public class MainActivity extends MainBaseActivity {
 	ListView listview;
 	Context context;
 	
-	
-	
+
 	public MainActivity() {
 		super(R.string.app_name);
 	}

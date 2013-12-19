@@ -28,6 +28,15 @@ import android.widget.AdapterView.OnItemLongClickListener;
 public class ProductActivity  extends MainBaseActivity{
 
 	
+	
+
+
+
+
+
+
+
+
 	UserProductListAdapter adapter;
 	ListView list;
 	StaticObjects staticObjects;
@@ -108,7 +117,42 @@ public class ProductActivity  extends MainBaseActivity{
 		}
 	}
 
-	
+	@Override
+	protected void onResume() {
+		if(StaticObjects.getUserProducts()==null||StaticObjects.getUserProducts().size()==0)
+		{
+			progress = ProgressDialog.show(this, "Retrieving items","please wait...", true);
+			User user= new User();
+		  	user.setUserID(1);
+			RetrieveUserProductRequest retrieveUserProductRequest = new RetrieveUserProductRequest(user);
+			new BackgroundTask().execute(retrieveUserProductRequest,null);
+		}
+		else
+		{
+			Log.i("PRODUCT", "weird PRODUCT");
+			adapter = new UserProductListAdapter(context, StaticObjects.getUserProducts());
+		    list.setAdapter(adapter);
+		}
+		super.onResume();
+	}
+	@Override
+	protected void onRestart() {
+		if(StaticObjects.getUserProducts()==null||StaticObjects.getUserProducts().size()==0)
+		{
+			progress = ProgressDialog.show(this, "Retrieving items","please wait...", true);
+			User user= new User();
+		  	user.setUserID(1);
+			RetrieveUserProductRequest retrieveUserProductRequest = new RetrieveUserProductRequest(user);
+			new BackgroundTask().execute(retrieveUserProductRequest,null);
+		}
+		else
+		{
+			Log.i("PRODUCT", "weird PRODUCT");
+			adapter = new UserProductListAdapter(context, StaticObjects.getUserProducts());
+		    list.setAdapter(adapter);
+		}
+		super.onRestart();
+	}
 	
 	
 	
