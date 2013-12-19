@@ -44,5 +44,6 @@
 
     <string name="title_activity_product_detail">MainActivity</string>
     <string name="title_activity_update_product">UpdateProductActivity</string>
+    <string name="title_activity_register">Registration </string>
 
 </resources>

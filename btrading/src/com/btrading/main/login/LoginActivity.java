@@ -26,7 +26,8 @@ import android.widget.Button;
 public class LoginActivity extends Activity {
 
 	StaticObjects staticObjects;
-	Button b_login;
+	Button b_login, b_register;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,8 @@ public class LoginActivity extends Activity {
 		setContentView(R.layout.activity_main_login);
 		
 		b_login = (Button) findViewById(R.id.b_login);
+		b_register = (Button) findViewById(R.id.b_register);
+	 
 		b_login.setOnClickListener(new OnClickListener(){
 
 			@Override
@@ -54,6 +57,18 @@ public class LoginActivity extends Activity {
 		
 		
 		staticObjects = new StaticObjects();
+		
+		b_register.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+				intent.setClass(getBaseContext(), RegisterActivity.class);
+				startActivity(intent);
+				
+			}});
 	}
 	
 	public boolean checkUser(){

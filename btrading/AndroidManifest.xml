@@ -17,8 +17,9 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
- 	<uses-feature android:name="android.hardware.camera" />
- 	<uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
         android:allowBackup="true"
@@ -72,7 +73,7 @@
             android:name="com.btrading.main.login.LoginActivity"
             android:label="@string/app_name"
             android:noHistory="true" >
-			<intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -81,6 +82,10 @@
         <activity
             android:name="com.btrading.main.products.UpdateProductActivity"
             android:label="@string/title_activity_update_product" >
+        </activity>
+        <activity
+            android:name="com.btrading.main.login.RegisterActivity"
+            android:label="@string/title_activity_register" >
         </activity>
     </application>
 
