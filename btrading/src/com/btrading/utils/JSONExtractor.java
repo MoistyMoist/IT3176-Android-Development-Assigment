@@ -489,6 +489,8 @@ public class JSONExtractor {
 			JSONArray RawData= json.getJSONArray(TAG_DATA);
 			//JSONArray errors=json.getJSONArray(TAG_ERRORS);
 			
+			Log.i("raw", RawData.toString());
+			
 			if(StaticObjects.getRequestStatus()==0)
 			{
 				

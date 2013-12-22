@@ -1,5 +1,6 @@
 package com.btrading.main.login;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -8,26 +9,34 @@ import com.btrading.httprequests.RetrieveAllProductRequest;
 import com.btrading.httprequests.RetrieveUserRequest;
 import com.btrading.main.MainActivity;
 import com.btrading.main.ProductListAdapter;
+import com.btrading.models.User;
 import com.btrading.utils.StaticObjects;
 import com.example.btrading.R;
 import com.example.btrading.R.layout;
 import com.example.btrading.R.menu;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class LoginActivity extends Activity {
 
 	StaticObjects staticObjects;
 	Button b_login, b_register;
-	
+	EditText et_username, et_pass;
+	boolean validUser = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,23 +47,18 @@ public class LoginActivity extends Activity {
 		
 		b_login = (Button) findViewById(R.id.b_login);
 		b_register = (Button) findViewById(R.id.b_register);
-	 
+		et_username = (EditText) findViewById(R.id.et_username);
+		et_pass = (EditText) findViewById(R.id.et_pass);
+		
 		b_login.setOnClickListener(new OnClickListener(){
-
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				//if (checkUser()){
-					Intent intent = new Intent();
-					intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-					intent.setClass(getBaseContext(), MainActivity.class);
-					startActivity(intent);
-				//}
+				b_login.setEnabled(false);
+				checkUser();
+				new CheckLogin().execute("email");
 			}
-			
-			
 		});
-		
 		
 		staticObjects = new StaticObjects();
 		
@@ -67,18 +71,16 @@ public class LoginActivity extends Activity {
 				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 				intent.setClass(getBaseContext(), RegisterActivity.class);
 				startActivity(intent);
-				
 			}});
 	}
 	
-	public boolean checkUser(){
-		boolean validUser = false;
+	public void checkUser(){
 		
-		if (b_login.getText().equals("") || b_login.getText()==null){
-			//to be removed once application completed
+		if (et_username.getText().toString().equals("") || et_username.getText().toString().isEmpty()){
 			validUser = true;
-			return validUser;
 		}
+		
+		else {
 		
 		if(StaticObjects.getCurrentUser()==null)
 		{
@@ -87,7 +89,7 @@ public class LoginActivity extends Activity {
 				  public void run()
 				  {
 					  	ExecutorService executor = Executors.newFixedThreadPool(1);
-				        RetrieveUserRequest retrieveUserRequest = new RetrieveUserRequest();
+				        RetrieveUserRequest retrieveUserRequest = new RetrieveUserRequest(et_username.getText().toString());
 				          
 				        executor.execute(retrieveUserRequest);
 						executor.shutdown();
@@ -95,39 +97,38 @@ public class LoginActivity extends Activity {
 				        	executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
 				       	  	Log.i(" RESPONSE :","ENDED REQUEST");
 				       	  	
-				        } catch (InterruptedException e) {
-				           
-				        }
+				        } catch (InterruptedException e) {}
 
-				    runOnUiThread(new Runnable() {
-				      @Override
-				      public void run()
-				      {
-				        staticObjects= new StaticObjects();
-				        if(StaticObjects.getAllProducts().size()==0||StaticObjects.getAllProducts()==null)
-				        {
-				        	Log.i("PRODUCT", "NO PRODUCT");
-				        }
-				        else
-				        {
-				        	//adapter = new ProductListAdapter(context, StaticObjects.getAllProducts());
-						   // listview.setAdapter(adapter);
-				        }
-				        
-				      }
-				    });
+	                	  runOnUiThread(new Runnable() {
+	                          @Override
+	                          public void run()
+	                          {
+	                        	  staticObjects= new StaticObjects();
+	                        	  if(StaticObjects.getCurrentUser()==null)
+	                        	  {
+	                                    Log.i("USER", "NO USER");
+	                        	  }
+	                        	  else
+	                        	  {
+	                        		  	User user = StaticObjects.getCurrentUser();
+	                        		  	if(et_pass.getText().toString().equals(user.getPassword())){
+	                        		  		validUser=true;        
+	                        		  	}
+	                        	  }
+	                          }
+	                        });
 				  }
 				}).start();
 		}
 		else
 		{
-			Log.i("PRODUCT", "weird PRODUCT");
+			Log.i("USER", "weird USER");
 			//adapter = new ProductListAdapter(context, StaticObjects.getAllProducts());
 		   // listview.setAdapter(adapter);
 		}
-		
-		return validUser;
+		} 
 	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -135,5 +136,44 @@ public class LoginActivity extends Activity {
 		getMenuInflater().inflate(R.menu.login, menu);
 		return true;
 	}
+	
+	private class CheckLogin extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+                for(int i=0;i<2;i++) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+                return "Okay";
+        }        
+
+		@Override
+        protected void onPostExecute(String result) {   
+			//Toast.makeText(getApplicationContext(), "validUser"+validUser, Toast.LENGTH_SHORT).show();
+			b_login.setEnabled(true);
+            if (validUser){
+				Intent intent = new Intent();
+				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+				intent.setClass(getBaseContext(), MainActivity.class);
+				startActivity(intent);
+            }
+            else {
+            	Toast.makeText(getApplicationContext(), "Please try again", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        protected void onPreExecute() {
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+        }
+    }
 
 }

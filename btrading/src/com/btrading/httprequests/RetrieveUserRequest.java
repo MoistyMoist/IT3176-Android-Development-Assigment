@@ -17,10 +17,12 @@ import com.btrading.utils.StaticObjects;
 public class RetrieveUserRequest implements Runnable {
 	
 	private StaticObjects staticObjects;
+	private String email;
 	
-	public RetrieveUserRequest()
+	public RetrieveUserRequest(String email)
 	{
 		this.staticObjects = new StaticObjects();
+		this.email = email;
 	}
 	
 	@Override
@@ -29,7 +31,7 @@ public class RetrieveUserRequest implements Runnable {
 		HttpClient httpclient = new DefaultHttpClient();
 
 		//PREPARE REQUEST OBJECT
-		HttpGet httpget = new HttpGet("http://bartertrading.cloudapp.net/api/RetrieveAllProduct?token="+staticObjects.getToken());
+		HttpGet httpget = new HttpGet("http://bartertrading.cloudapp.net/api/RetrieveUser?token="+staticObjects.getToken()+"&email="+email);
 		
         Log.i("RETRIEVE USER REQUEST :",httpget.getURI().toString());
         //EXCUTE REQUEST
@@ -40,7 +42,7 @@ public class RetrieveUserRequest implements Runnable {
             Log.i("RETRIEVE USER RESPONSE :",response.getStatusLine().toString());
             //PASS THE RESPONSE TO THE EXTRACTOR
             JSONExtractor paser= new JSONExtractor();
-            paser.ExtractAllProductRequest(response);
+            paser.ExtractUserRequest(response);
 
         } catch (ClientProtocolException e) {
             e.printStackTrace();
