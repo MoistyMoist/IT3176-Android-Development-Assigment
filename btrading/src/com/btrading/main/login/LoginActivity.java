@@ -123,8 +123,6 @@ public class LoginActivity extends Activity {
 		else
 		{
 			Log.i("USER", "weird USER");
-			//adapter = new ProductListAdapter(context, StaticObjects.getAllProducts());
-		   // listview.setAdapter(adapter);
 		}
 		} 
 	}
