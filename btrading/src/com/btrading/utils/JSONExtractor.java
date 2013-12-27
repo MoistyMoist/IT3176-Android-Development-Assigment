@@ -548,4 +548,56 @@ public class JSONExtractor {
             instream.close();
         }
 	}
+	
+	//THIS METHOD EXTRACTS THE RESULT FOR CREATING A NEW USER
+	public void ExtractCreateRequest(HttpResponse data) throws IllegalStateException, IOException, JSONException
+	{
+		HttpEntity entity = data.getEntity();
+        
+        if (entity != null) {
+            InputStream instream = entity.getContent();
+            String result= convertStreamToString(instream);
+            
+            JSONObject json = null;
+            json = new JSONObject(result);
+	
+            //check status if all green to extract
+			StaticObjects.setRequestStatus((Integer) json.get(TAG_STATUS));
+			StaticObjects.setRequestMessage(json.getString(TAG_MESSAGE));
+			JSONArray RawData= json.getJSONArray(TAG_DATA);
+			//JSONArray errors=json.getJSONArray(TAG_ERRORS);
+			
+			ArrayList<User>user= new ArrayList<User>();
+			if(StaticObjects.getRequestStatus()==0)
+			{
+				Log.i("user ",RawData.toString() );
+				for(int i=0;i<RawData.length();i++)
+				{
+					JSONObject c=RawData.getJSONObject(i);
+					
+					User user1= new User();
+					user1.setEmail(c.getString(TAG_USER_EMAIL));
+					user1.setPassword(c.getString(TAG_USER_PASSWORD));
+					user1.setNickname(c.getString(TAG_USER_NICKNAME));
+					user1.setContact(c.getString(TAG_USER_CONTACT));
+					user1.setDob(c.getString(TAG_USER_DOB));
+					
+					
+					User u= new User();
+					u.setUserID(c.getInt(TAG_USER_ID));
+
+					
+					user.add(user1);
+				}
+				//What to do in this???
+			//	StaticObjects.getAllUser().add(User.get(0));
+			}
+			else
+			{
+				Log.i("ERROR", "status==1");
+				Log.i("Message",StaticObjects.getRequestMessage());
+			}
+            instream.close();
+        }
+	}
 }

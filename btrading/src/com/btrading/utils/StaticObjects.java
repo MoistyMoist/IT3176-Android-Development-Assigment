@@ -21,6 +21,9 @@ public class StaticObjects {
 	static ArrayList<Product> userProducts;
 	//PRODUCT TO CREATE
 	static Product productToCreate;
+	//CREATE NEW USER
+	static User createUser; 
+	static ArrayList<User> user;
 
 	
 	
@@ -76,5 +79,12 @@ public class StaticObjects {
 	}
 	public static void setProductToCreate(Product productToCreate) {
 		StaticObjects.productToCreate = productToCreate;
+	}
+	public static void setNewUser(User createUser) {
+		StaticObjects.createUser = createUser;
+	}
+	public static ArrayList<User> getAllUser() {
+		// TODO Auto-generated method stub
+		return user;
 	}
 }
