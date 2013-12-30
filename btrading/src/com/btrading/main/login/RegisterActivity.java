@@ -1,5 +1,11 @@
 package com.btrading.main.login;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+import com.btrading.httprequests.CreateUserRequest;
+import com.btrading.httprequests.RetrieveUserRequest;
 import com.btrading.models.User;
 import com.btrading.utils.StaticObjects;
 import com.example.btrading.R;
@@ -8,6 +14,7 @@ import com.example.btrading.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,6 +28,8 @@ public class RegisterActivity extends Activity {
 	EditText etEmail, etPassword2, etNickName, etContact, etDOB;  
 	RadioGroup rgSex;
 	Button register, cancel;
+	Boolean validUser = true;
+	StaticObjects staticObjects;
 	
 	
 	@Override
@@ -44,6 +53,7 @@ public class RegisterActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				checkUser();
 				createUser.setEmail(etEmail.getText().toString().replace(" ", "%20"));
 				createUser.setPassword(etPassword2.getText().toString().replace(" ", "%20"));
 				createUser.setNickname(etNickName.getText().toString().replace(" ", "%20"));
@@ -55,7 +65,7 @@ public class RegisterActivity extends Activity {
 				//createUser.setNickName(quality[productQuality.getSelectedItemPosition()].replace(" ", "%20"));
 				//createUser.setQty(productQty.getText().toString().replace(" ", "%20"));
 				//createUser.setImageURL("");
-				StaticObjects.setNewUser(createUser);
+				
 				
 			}}); 
 		
@@ -67,5 +77,62 @@ public class RegisterActivity extends Activity {
 		getMenuInflater().inflate(R.menu.register, menu);
 		return true;
 	}
+	
+	public void checkUser()
+	{
+		
+		//go in with empty fields
+		if (etEmail.getText().toString().equals("") || etPassword2.getText().toString().isEmpty()){
+			validUser = true;
+		}
+		else {
+			
+			if(StaticObjects.getCurrentUser()==null)
+			{
+			    new Thread(new Runnable() {
+					  @Override
+					  public void run()
+					  {
+						  	ExecutorService executor = Executors.newFixedThreadPool(1);
+					        CreateUserRequest createUserRequest = new CreateUserRequest();
+					          
+					        executor.execute(createUserRequest);
+							executor.shutdown();
+					        try {
+					        	executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+					       	  	Log.i(" RESPONSE :","ENDED REQUEST");
+					       	  	
+					        } catch (InterruptedException e) {}
+
+		                	  runOnUiThread(new Runnable() {
+		                          @Override
+		                          public void run()
+		                          {
+		                        	  staticObjects= new StaticObjects();
+		                        	  if(StaticObjects.getCurrentUser()==null)
+		                        	  {
+		                                    Log.i("USER", "NO USER");
+		                        	  }
+		                        	  else
+		                        	  {
+//		                        		  	User user = StaticObjects.getCurrentUser();
+//		                        		  	if(et_pass.getText().toString().equals(user.getPassword())){
+//		                        		  		validUser=true;        
+		                        		//  	}
+		                        	  }
+		                          }
+		                        });
+					  }
+					}).start();
+			}
+			else
+			{
+				Log.i("USER", "weird USER");
+			}
+			} 
+		}
+		
+		
+	
 
 }

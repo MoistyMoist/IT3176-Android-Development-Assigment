@@ -550,7 +550,7 @@ public class JSONExtractor {
 	}
 	
 	//THIS METHOD EXTRACTS THE RESULT FOR CREATING A NEW USER
-	public void ExtractCreateRequest(HttpResponse data) throws IllegalStateException, IOException, JSONException
+	public void ExtractCreateUserRequest(HttpResponse data) throws IllegalStateException, IOException, JSONException
 	{
 		HttpEntity entity = data.getEntity();
         
