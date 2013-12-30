@@ -21,7 +21,8 @@ public class StaticObjects {
 	static ArrayList<Product> userProducts;
 	//PRODUCT TO CREATE
 	static Product productToCreate;
-	
+	//THE CURRENT USER WISHLIST
+	static ArrayList<Wish> userWishlist;
 
 	
 	
@@ -29,6 +30,12 @@ public class StaticObjects {
 	
 	
 	
+	public static ArrayList<Wish> getUserWishlist() {
+		return userWishlist;
+	}
+	public static void setUserWishlist(ArrayList<Wish> userWishlist) {
+		StaticObjects.userWishlist = userWishlist;
+	}
 	public static void setToken(String token) {
 		StaticObjects.token = token;
 	}

@@ -7,9 +7,11 @@ import java.util.concurrent.TimeUnit;
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.btrading.httprequests.RetrieveAllProductRequest;
 import com.btrading.httprequests.RetrieveUserRequest;
 import com.btrading.httprequests.RetrieveWishRequest;
 import com.btrading.main.MainBaseActivity;
+import com.btrading.main.ProductListAdapter;
 import com.btrading.main.LeftListFragment.SampleAdapter;
 import com.btrading.models.User;
 import com.btrading.utils.StaticObjects;
@@ -17,6 +19,7 @@ import com.example.btrading.R;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -39,10 +42,12 @@ public class WishlistActivity extends MainBaseActivity {
 
 	ActionMode mActionMode;
 	ListView lv_wish;
-	ArrayAdapter<CharSequence> adapter;
+	ArrayAdapter<WishItem> adapter;
 	String[] wish_items = {"ABC Duck","TV controller","Water Bottle"};
 	String item_selected;
 	StaticObjects staticObjects;
+	ProgressDialog progress;
+	Context context = this;
 	
 	public WishlistActivity(){
 		super(R.string.title_activity_wishlist);
@@ -235,45 +240,58 @@ public class WishlistActivity extends MainBaseActivity {
 	
 public void getWishlist(){
 		
-		if(StaticObjects.getCurrentUser()==null)
-		{
-		    new Thread(new Runnable() {
-				  @Override
-				  public void run()
-				  {
-					  	ExecutorService executor = Executors.newFixedThreadPool(1);
-				        RetrieveWishRequest retrieveWishRequest = new RetrieveWishRequest();
-				          
-				        executor.execute(retrieveWishRequest);
-						executor.shutdown();
-				        try {
-				        	executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-				       	  	Log.i(" RESPONSE :","ENDED REQUEST");
-				       	  	
-				        } catch (InterruptedException e) {}
+	if(StaticObjects.getAllProducts()==null||StaticObjects.getAllProducts().size()==0)
+	{
+		progress = ProgressDialog.show(this, "Getting your wishes","please wait...", true);
+		RetrieveWishRequest retrieveWishRequest = new RetrieveWishRequest();
+		 //UploadImageRequest upload= new UploadImageRequest();
+		 new BackgroundTask().execute( retrieveWishRequest,null);
+	}
+	else
+	{
+		Log.i("WISH", "weird WISH");
+		adapter = new SampleAdapter(context);
+		for (int i=0; i<StaticObjects.getUserWishlist().size(); i++){
+			adapter.add(new WishItem(StaticObjects.getUserWishlist().get(i).getName(), StaticObjects.getUserWishlist().get(i).getStatus()));
+		}
+	    lv_wish.setAdapter(adapter);
+	}
+}
 
-	                	  runOnUiThread(new Runnable() {
-	                          @Override
-	                          public void run()
-	                          {
-	                        	  staticObjects= new StaticObjects();
-	                        	  if(StaticObjects.getCurrentUser()==null)
-	                        	  {
-	                                    Log.i("USER", "NO USER");
-	                        	  }
-	                        	  else
-	                        	  {
-	                        		  	//check wish if neccessary
-	                        	  }
-	                          }
-	                        });
-				  }
-				}).start();
+private class BackgroundTask extends AsyncTask<Runnable, Integer, Long> {
+    
+	@Override
+	protected void onPostExecute(Long result) {
+		
+		super.onPostExecute(result);
+		if(progress!=null)
+			progress.dismiss();
+        staticObjects= new StaticObjects();
+		adapter = new SampleAdapter(context);
+		for (int i=0; i<StaticObjects.getUserWishlist().size(); i++){
+			adapter.add(new WishItem(StaticObjects.getUserWishlist().get(i).getName(), StaticObjects.getUserWishlist().get(i).getStatus()));
 		}
-		else
+	    lv_wish.setAdapter(adapter);
+		
+	}
+
+	@Override
+	protected void onPreExecute() {
+		Toast.makeText(context, "Refreshing..", Toast.LENGTH_SHORT).show();
+		super.onPreExecute();
+	}
+
+	@Override
+	protected Long doInBackground(Runnable... task) {
+		
+		for(int i=0; i<task.length;i++)
 		{
-			Log.i("USER", "weird USER");
+			if(task[i]!=null)
+				task[i].run();
+			if (isCancelled()) break;
 		}
-		} 
-	
+		return null;
+	}
+ }
+
 }
