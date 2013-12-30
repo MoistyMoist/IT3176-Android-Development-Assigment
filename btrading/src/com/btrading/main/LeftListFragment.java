@@ -1,5 +1,6 @@
 package com.btrading.main;
 
+import com.btrading.main.login.LoginActivity;
 import com.btrading.main.products.ProductActivity;
 import com.btrading.main.profile.ProfileActivity;
 import com.btrading.main.wish.WishlistActivity;
@@ -71,6 +72,13 @@ public class LeftListFragment extends ListFragment {
 		case 6: //Settings
 			intent.setClass(getActivity(), SettingActivity.class);
 			startActivity(intent);
+			break;
+		case 7: //Logout
+			Intent logIntent = new Intent();
+			logIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			logIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+			logIntent.setClass(getActivity(), LoginActivity.class);
+			startActivity(logIntent);
 			break;
 			
 		}

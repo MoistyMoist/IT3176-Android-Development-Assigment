@@ -24,12 +24,13 @@
         android:layout_below="@+id/iv_login_logo"
         android:hint="Username"/>
     
-	<EditText 
-        android:id="@+id/et_pass"
-		android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/et_username"
-        android:hint="Password"/>
+	<EditText
+	    android:id="@+id/et_pass"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/et_username"
+	    android:hint="Password"
+	    android:inputType="textPassword" />
 	
 	<Button 
         android:id="@+id/b_login"
