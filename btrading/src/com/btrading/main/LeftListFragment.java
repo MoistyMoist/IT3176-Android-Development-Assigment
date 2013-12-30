@@ -112,7 +112,7 @@ public class LeftListFragment extends ListFragment {
 			title.setText(getItem(position).tag);
 			
 			if (getItem(position).iconRes == R.drawable.ic_left_menu_title) {
-				convertView.setBackgroundColor(Color.GRAY);  
+				convertView.setBackgroundColor(Color.BLACK);  
 				title.setTextColor(Color.WHITE);
 			}
 			else{
@@ -121,6 +121,7 @@ public class LeftListFragment extends ListFragment {
 			}
 			
 			TextView count = (TextView) convertView.findViewById(R.id.row_count);
+			count.setBackgroundColor(Color.GRAY);
 			count.setText(Integer.toString(getItem(position).count));
 			if (getItem(position).count==0){
 				count.setVisibility(View.INVISIBLE);

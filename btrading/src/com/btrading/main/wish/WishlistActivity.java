@@ -1,10 +1,18 @@
 package com.btrading.main.wish;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.btrading.httprequests.RetrieveUserRequest;
+import com.btrading.httprequests.RetrieveWishRequest;
 import com.btrading.main.MainBaseActivity;
 import com.btrading.main.LeftListFragment.SampleAdapter;
+import com.btrading.models.User;
+import com.btrading.utils.StaticObjects;
 import com.example.btrading.R;
 
 import android.os.AsyncTask;
@@ -13,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -33,6 +42,7 @@ public class WishlistActivity extends MainBaseActivity {
 	ArrayAdapter<CharSequence> adapter;
 	String[] wish_items = {"ABC Duck","TV controller","Water Bottle"};
 	String item_selected;
+	StaticObjects staticObjects;
 	
 	public WishlistActivity(){
 		super(R.string.title_activity_wishlist);
@@ -223,5 +233,47 @@ public class WishlistActivity extends MainBaseActivity {
 		return true;
 	}
 	
+public void getWishlist(){
+		
+		if(StaticObjects.getCurrentUser()==null)
+		{
+		    new Thread(new Runnable() {
+				  @Override
+				  public void run()
+				  {
+					  	ExecutorService executor = Executors.newFixedThreadPool(1);
+				        RetrieveWishRequest retrieveWishRequest = new RetrieveWishRequest();
+				          
+				        executor.execute(retrieveWishRequest);
+						executor.shutdown();
+				        try {
+				        	executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+				       	  	Log.i(" RESPONSE :","ENDED REQUEST");
+				       	  	
+				        } catch (InterruptedException e) {}
+
+	                	  runOnUiThread(new Runnable() {
+	                          @Override
+	                          public void run()
+	                          {
+	                        	  staticObjects= new StaticObjects();
+	                        	  if(StaticObjects.getCurrentUser()==null)
+	                        	  {
+	                                    Log.i("USER", "NO USER");
+	                        	  }
+	                        	  else
+	                        	  {
+	                        		  	//check wish if neccessary
+	                        	  }
+	                          }
+	                        });
+				  }
+				}).start();
+		}
+		else
+		{
+			Log.i("USER", "weird USER");
+		}
+		} 
 	
 }
