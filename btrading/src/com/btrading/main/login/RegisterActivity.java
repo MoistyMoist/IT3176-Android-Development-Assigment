@@ -54,12 +54,7 @@ public class RegisterActivity extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				checkUser();
-				createUser.setEmail(etEmail.getText().toString().replace(" ", "%20"));
-				createUser.setPassword(etPassword2.getText().toString().replace(" ", "%20"));
-				createUser.setNickname(etNickName.getText().toString().replace(" ", "%20"));
-				createUser.setContact(etContact.getText().toString().replace(" ", "%20"));
-				createUser.setDob(etDOB.getText().toString().replace(" ", "%20"));
-			
+				
 				
 				
 				//createUser.setNickName(quality[productQuality.getSelectedItemPosition()].replace(" ", "%20"));
@@ -82,11 +77,11 @@ public class RegisterActivity extends Activity {
 	{
 		
 		//go in with empty fields
-		if (etEmail.getText().toString().equals("") || etPassword2.getText().toString().isEmpty()){
-			validUser = true;
-		}
-		else {
-			
+//		if (etEmail.getText().toString().equals("") || etPassword2.getText().toString().isEmpty()){
+//			validUser = true;
+//		}
+//		else {
+//			
 			if(StaticObjects.getCurrentUser()==null)
 			{
 			    new Thread(new Runnable() {
@@ -94,7 +89,8 @@ public class RegisterActivity extends Activity {
 					  public void run()
 					  {
 						  	ExecutorService executor = Executors.newFixedThreadPool(1);
-					        CreateUserRequest createUserRequest = new CreateUserRequest();
+						  	
+					        CreateUserRequest createUserRequest = new CreateUserRequest(etEmail.getText().toString(),etPassword2.getText().toString(),etNickName.getText().toString(),etContact.getText().toString(),etDOB.getText().toString());
 					          
 					        executor.execute(createUserRequest);
 							executor.shutdown();
@@ -130,7 +126,7 @@ public class RegisterActivity extends Activity {
 				Log.i("USER", "weird USER");
 			}
 			} 
-		}
+		//}
 		
 		
 	

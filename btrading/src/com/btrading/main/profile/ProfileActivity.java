@@ -34,6 +34,7 @@ public class ProfileActivity extends Activity {
 		etContact = (EditText) findViewById(R.id.etContact);
 		
 		
+		etUsername.setText(StaticObjects.getCurrentUser().getUserID());
 		etEmail.setText(StaticObjects.getCurrentUser().getEmail());
 		etSex.setText(StaticObjects.getCurrentUser().getSex());
 		etDob.setText(StaticObjects.getCurrentUser().getDob());

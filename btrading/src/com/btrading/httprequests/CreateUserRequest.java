@@ -11,17 +11,25 @@ import org.json.JSONException;
 
 import android.util.Log;
 
+import com.btrading.models.User;
 import com.btrading.utils.JSONExtractor;
 import com.btrading.utils.StaticObjects;
 
 public class CreateUserRequest implements Runnable {
 	
 	private StaticObjects staticObjects;
-	private String email;
+	private User userToCreate;
+	private String email, password, nickName, contact, dob ;
 	
-	public CreateUserRequest()
+	
+	public CreateUserRequest(String email, String password, String nickName, String contact, String dob )
 	{
 		this.staticObjects = new StaticObjects();
+		this.email = email;
+		this.password = password;
+		this.nickName = nickName;
+		this.contact = contact;
+		this.dob = dob;
 		
 	}
 	
@@ -32,15 +40,15 @@ public class CreateUserRequest implements Runnable {
 
 		//PREPARE REQUEST OBJECT
 		//url take from webservice
-		HttpGet httpget = new HttpGet("http://bartertrading.cloudapp.net/api/RetrieveUser?token="+staticObjects.getToken()+"&email="+email);
+		HttpGet httpget = new HttpGet("http://bartertrading.cloudapp.net/api/CreateUser?token="+staticObjects.getToken()+"&email="+email+"&password"+password+"&nickname"+"&contact"+contact+"&dob"+dob);
 		
-        Log.i("RETRIEVE USER REQUEST :",httpget.getURI().toString());
+        Log.i("CREATE USER REQUEST :",httpget.getURI().toString());
         //EXCUTE REQUEST
         HttpResponse response;
         try {
             response = httpclient.execute(httpget);
             //PRINT OUT THE RESPONSE
-            Log.i("RETRIEVE USER RESPONSE :",response.getStatusLine().toString());
+            Log.i("Create USER RESPONSE :",response.getStatusLine().toString());
             //PASS THE RESPONSE TO THE EXTRACTOR
             JSONExtractor paser= new JSONExtractor();
             paser.ExtractCreateUserRequest(response);
