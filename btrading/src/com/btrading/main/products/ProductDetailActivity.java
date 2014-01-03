@@ -27,6 +27,8 @@ import android.widget.TextView;
 
 public class ProductDetailActivity extends MainBaseActivity {
 
+	int productTakeID;
+	int userTakeID;
 	Button sendTradeRequest;
 	private GoogleMap mMap;
 	Button buttonMap;
@@ -55,8 +57,9 @@ public class ProductDetailActivity extends MainBaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_product_detail);
 		
+		productTakeID = StaticObjects.getSelectedProduct().getProductID();
+		userTakeID = StaticObjects.getSelectedProduct().getUser().getUserID();
 		sendTradeRequest = (Button)findViewById(R.id.requestButton);
-		
 		sendTradeRequest.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
@@ -64,6 +67,8 @@ public class ProductDetailActivity extends MainBaseActivity {
 				Intent intent = new Intent();
 				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 				intent.setClass(getBaseContext(), TradingActivity.class);
+				intent.putExtra("productTakeID", productTakeID);
+				intent.putExtra("userTakeID", userTakeID);				
 				startActivity(intent);
 			}
 		});

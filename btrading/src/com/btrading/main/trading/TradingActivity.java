@@ -15,30 +15,100 @@ import com.example.btrading.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class TradingActivity extends Activity {
 
 	ListView lv_products;
 	StaticObjects staticObjects;
 	ArrayAdapter<CharSequence> adapter;
-	String[] productabc;
+	String[] productOfferName;
+	int[] productOfferID;
+	int singularProductOfferID;
+	int productTakeID;
+	int userTakeID;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_product_list);
-		
+				
 		lv_products = (ListView)findViewById(R.id.listviewtradingofferingproducts);
 		
-		RetrieveObjects();
+		lv_products.setOnItemClickListener(new OnItemClickListener(){
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Open product item
+				singularProductOfferID = productOfferID[arg2];
+				sendObjects();
+			}
+			
+		});
+		
+		retrieveObjects();
 	}
 	
+	public void sendObjects(){
+		if(StaticObjects.getUserProducts()==null)
+		{
+		    new Thread(new Runnable() {
+				  @Override
+				  public void run()
+				  {
+					  	ExecutorService executor = Executors.newFixedThreadPool(1);
+						SendTradeRequest sendTradeRequest = new SendTradeRequest(singularProductOfferID,productTakeID,staticObjects.getCurrentUser().getUserID(),userTakeID,"Pending");
+				          
+				        executor.execute(sendTradeRequest);
+						executor.shutdown();
+				        try {
+				        	executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+				       	  	Log.i(" RESPONSE :","ENDED REQUEST");
+				       	  	
+				        } catch (InterruptedException e) {}
+
+	                	  runOnUiThread(new Runnable() {
+	                          @Override
+	                          public void run()
+	                          {
+	                        	  staticObjects= new StaticObjects();
+	                        	  if(StaticObjects.getUserProducts()==null)
+	                        	  {
+	                                    Log.i("USER", "NO USER");
+	                        	  }
+	                        	  else
+	                        	  {
+	                        		  getAllProducts();
+	                        	  }
+	                          }
+	                        });
+				  }
+				}).start();
+		}
+		else
+		{
+			Log.i("USER", "weird USER");
+		}
+	}
 	
-	public void RetrieveObjects(){
+	protected void onNewIntent(Intent intent) {
+		// TODO Auto-generated method stub
+		super.onNewIntent(intent);
+		userTakeID = intent.getIntExtra("userTakeID", 0);
+		productTakeID = intent.getIntExtra("productTakeID", 0);
+	}
+	
+	public void retrieveObjects(){
 		if(StaticObjects.getUserProducts()==null)
 		{
 		    new Thread(new Runnable() {
@@ -82,13 +152,14 @@ public class TradingActivity extends Activity {
 
 	
 	public void getAllProducts(){
-		  productabc = new String[StaticObjects.getUserProducts().size()];
+		  productOfferName = new String[StaticObjects.getUserProducts().size()];
+		  productOfferID = new int[StaticObjects.getUserProducts().size()];
 		  for(int i= 0; i<StaticObjects.getUserProducts().size(); i++){
-			  productabc[i] = StaticObjects.getUserProducts().get(i).getName();
-			  
+			  productOfferName[i] = StaticObjects.getUserProducts().get(i).getName();
+			  productOfferID[i] = StaticObjects.getUserProducts().get(i).getProductID();
 		  }
 		  
-		  adapter = new ArrayAdapter<CharSequence>(this,android.R.layout.simple_spinner_dropdown_item, productabc);
+		  adapter = new ArrayAdapter<CharSequence>(this,android.R.layout.simple_spinner_dropdown_item, productOfferName);
 		  lv_products.setAdapter(adapter);
 	}
 	@Override
