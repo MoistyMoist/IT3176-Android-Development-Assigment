@@ -60,8 +60,6 @@ public class TradingActivity extends Activity {
 	}
 	
 	public void sendObjects(){
-		if(StaticObjects.getUserProducts()!=null)
-		{
 		    new Thread(new Runnable() {
 				  @Override
 				  public void run()
@@ -94,18 +92,14 @@ public class TradingActivity extends Activity {
 	                        });
 				  }
 				}).start();
-		}
-		else
-		{
-			Log.i("USER", "weird USER");
-		}
 	}
 	
 	protected void onNewIntent(Intent intent) {
 		// TODO Auto-generated method stub
 		super.onNewIntent(intent);
-		userTakeID = intent.getIntExtra("userTakeID", 0);
-		productTakeID = intent.getIntExtra("productTakeID", 0);
+		Bundle extras = getIntent().getExtras();
+		productTakeID = extras.getInt("productTakeID");
+		userTakeID = extras.getInt("userTakeID");
 	}
 	
 	public void retrieveObjects(){

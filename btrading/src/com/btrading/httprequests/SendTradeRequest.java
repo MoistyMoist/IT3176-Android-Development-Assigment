@@ -39,7 +39,7 @@ public class SendTradeRequest implements Runnable {
 		HttpClient httpclient = new DefaultHttpClient();
 
 		//PREPARE REQUEST OBJECT
-		HttpGet httpget = new HttpGet("http://bartertrading.cloudapp.net/api/RetrieveUser?token="+staticObjects.getToken()+"&INpOfferID="+productOfferID+"&INpTakeID="+productTakeID+"&INuOfferID="+userOfferID+"&INuTakeID="+userTakeID+"&INstatus="+status);
+		HttpGet httpget = new HttpGet("http://bartertrading.cloudapp.net/api/SendTradeRequest?token="+staticObjects.getToken()+"&INpOfferID="+productOfferID+"&INpTakeID="+productTakeID+"&INuOfferID="+userOfferID+"&INuTakeID="+userTakeID+"&INstatus="+status);
 		
         Log.i("RETRIEVE USER REQUEST :",httpget.getURI().toString());
         //EXCUTE REQUEST

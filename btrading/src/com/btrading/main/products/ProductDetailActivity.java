@@ -23,6 +23,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class ProductDetailActivity extends MainBaseActivity {
@@ -59,16 +60,18 @@ public class ProductDetailActivity extends MainBaseActivity {
 		
 		productTakeID = StaticObjects.getSelectedProduct().getProductID();
 		userTakeID = StaticObjects.getSelectedProduct().getUser().getUserID();
+		Toast.makeText(getBaseContext(), productTakeID+","+userTakeID, Toast.LENGTH_SHORT).show();
 		sendTradeRequest = (Button)findViewById(R.id.requestButton);
 		sendTradeRequest.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
+				Bundle databundle = new Bundle();
+				databundle.putInt("productTakeID", productTakeID);
+				databundle.putInt("userTakeID", userTakeID);
 				Intent intent = new Intent();
 				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-				intent.setClass(getBaseContext(), TradingActivity.class);
-				intent.putExtra("productTakeID", productTakeID);
-				intent.putExtra("userTakeID", userTakeID);				
+				intent.setClass(getBaseContext(), TradingActivity.class);			
 				startActivity(intent);
 			}
 		});
