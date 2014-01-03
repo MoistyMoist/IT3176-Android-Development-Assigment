@@ -15,12 +15,18 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class ProfileActivity extends Activity {
 	
 	StaticObjects staticObjects;
 	EditText etUsername,etEmail,etSex,etDob,etContact;
+	TextView nickName;
+	Button editProfile;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +38,25 @@ public class ProfileActivity extends Activity {
 		etSex = (EditText) findViewById(R.id.etSex);
 		etDob = (EditText) findViewById(R.id.etDob);
 		etContact = (EditText) findViewById(R.id.etContact);
+		nickName=(TextView) findViewById(R.id.tvNickName);
+		editProfile=(Button) findViewById(R.id.btnEditProfile);
 		
 		
-		etUsername.setText(StaticObjects.getCurrentUser().getUserID());
+		etUsername.setText(Integer.toString(StaticObjects.getCurrentUser().getUserID()));
 		etEmail.setText(StaticObjects.getCurrentUser().getEmail());
 		etSex.setText(StaticObjects.getCurrentUser().getSex());
 		etDob.setText(StaticObjects.getCurrentUser().getDob());
 		etContact.setText(StaticObjects.getCurrentUser().getContact());
+		nickName.setText(StaticObjects.getCurrentUser().getNickname());
+		
+		editProfile.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				
+				etUsername.setEnabled(true);				
+			}});
 		
 		
 		
