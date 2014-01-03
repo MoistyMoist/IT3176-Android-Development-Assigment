@@ -1,6 +1,8 @@
 package com.btrading.main.products;
 
 import com.btrading.main.MainBaseActivity;
+import com.btrading.main.login.RegisterActivity;
+import com.btrading.main.trading.TradingActivity;
 import com.btrading.utils.LoaderImageView;
 import com.btrading.utils.StaticObjects;
 import com.example.btrading.R;
@@ -12,15 +14,19 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
 
 public class ProductDetailActivity extends MainBaseActivity {
 
+	Button sendTradeRequest;
 	private GoogleMap mMap;
 	Button buttonMap;
     @SuppressWarnings("unused")
@@ -47,6 +53,17 @@ public class ProductDetailActivity extends MainBaseActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_product_detail);
+		
+		sendTradeRequest.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+				intent.setClass(getBaseContext(), TradingActivity.class);
+				startActivity(intent);
+			}
+		});
 		
 		ViewGroup viewGroup=(ViewGroup)findViewById(R.id.product_map);
 		viewGroup.addView(View.inflate(this, R.layout.basic_map, null));

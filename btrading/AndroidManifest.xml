@@ -87,6 +87,10 @@
             android:name="com.btrading.main.login.RegisterActivity"
             android:label="@string/title_activity_register" >
         </activity>
+        <activity
+            android:name="com.btrading.main.trading.ProductList"
+            android:label="@string/title_activity_product_list" >
+        </activity>
     </application>
 
 </manifest>
