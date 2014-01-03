@@ -631,43 +631,20 @@ public class JSONExtractor {
 			{
 				Log.i("user ",RawData.toString() );
 				ArrayList<User>user= new ArrayList<User>();
+								
+				JSONObject c=RawData.getJSONObject(0);
 				
-				{
-				for(int i=0;i<RawData.length();i++)
-				{
-					JSONObject c=RawData.getJSONObject(i);
-					
-					User user1= new User();
-					user1.setEmail(c.getString(TAG_USER_EMAIL));
-					user1.setPassword(c.getString(TAG_USER_PASSWORD));
-					user1.setNickname(c.getString(TAG_USER_NICKNAME));
-					user1.setContact(c.getString(TAG_USER_CONTACT));
-					user1.setDob(c.getString(TAG_USER_DOB));
-					
-					
-					User u= new User();
-					u.setUserID(c.getInt(TAG_USER_ID));
-
-					
-					user.add(user1);
-					
-					
-				}
+				User user1= new User();
+				user1.setEmail(c.getString(TAG_USER_EMAIL));
+				user1.setPassword(c.getString(TAG_USER_PASSWORD));
+				user1.setNickname(c.getString(TAG_USER_NICKNAME));
+				user1.setContact(c.getString(TAG_USER_CONTACT));
+				user1.setDob(c.getString(TAG_USER_DOB));
+				user1.setUserID(c.getInt(TAG_USER_ID));
+				user.add(user1);
 				
-				
-				//What the fuck is happening here???
-				
-//				for(int i=0;i<StaticObjects.getUser().size();i++)
-//				{
-//					Log.i("for loop",StaticObjects.getUser().get(i).getUserID());
-//					if(StaticObjects.getUser().get(i).getUserID()==StaticObjects.getUser().getUserID())
-//					{
-//						StaticObjects.getUser().remove(i);
-//						StaticObjects.getUser().add(user.get(0));
-//						break;
-//					}
-//				}
-			}
+				StaticObjects.setCurrentUser(user1);
+			
 			}
 			else
 			{
@@ -677,6 +654,7 @@ public class JSONExtractor {
             instream.close();
         }
 	}
+
 	
 
 
