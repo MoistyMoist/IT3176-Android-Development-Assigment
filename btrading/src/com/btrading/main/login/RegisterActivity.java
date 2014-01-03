@@ -30,6 +30,8 @@ public class RegisterActivity extends Activity {
 	Button register, cancel;
 	Boolean validUser = true;
 	StaticObjects staticObjects;
+	String message = "No message";
+	
 	
 	
 	@Override
@@ -53,6 +55,8 @@ public class RegisterActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				
+				validateUser();
 				checkUser();
 				
 				
@@ -61,6 +65,18 @@ public class RegisterActivity extends Activity {
 				//createUser.setQty(productQty.getText().toString().replace(" ", "%20"));
 				//createUser.setImageURL("");
 				
+				
+			}
+
+			private void validateUser() {
+				// TODO Auto-generated method stub
+				boolean validateUser = false;
+				
+				if (etEmail.getText().toString().equals("") || etPassword2.getText().toString().isEmpty());
+				{
+					message="Missing inputs, Please fill up all fields!";
+				}
+				validateUser = true;
 				
 			}}); 
 		

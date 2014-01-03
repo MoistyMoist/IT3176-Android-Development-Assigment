@@ -29,7 +29,7 @@
                android:text="edit profile"
                android:textSize="10sp" />
 
-           <ImageView
+           <com.loopj.android.image.SmartImageView
                android:id="@+id/imageView1"
                android:layout_width="160dp"
                android:layout_height="120dp"
@@ -130,11 +130,21 @@
         android:layout_height="wrap_content">
      
          <Button
-             android:id="@+id/btnViewTransactions"
+             android:id="@+id/btnUpdate"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_centerHorizontal="true"
-             android:text="view past transaction"
+             android:visibility="gone"
+             android:text="Update"
+             android:textSize="20sp" />
+         
+          <Button
+             android:id="@+id/btnClear"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_toRightOf="@+id/btnUpdate"
+             android:visibility="gone"
+             android:text="Update"
              android:textSize="20sp" />
 "
         
