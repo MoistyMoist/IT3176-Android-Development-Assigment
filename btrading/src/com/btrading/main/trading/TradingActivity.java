@@ -8,6 +8,7 @@ import com.btrading.httprequests.AcceptTradeRequest;
 import com.btrading.httprequests.RetrieveUserProductRequest;
 import com.btrading.httprequests.RetrieveUserRequest;
 import com.btrading.httprequests.SendTradeRequest;
+import com.btrading.main.MainActivity;
 import com.btrading.utils.StaticObjects;
 import com.example.btrading.R;
 import com.example.btrading.R.layout;
@@ -24,6 +25,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class TradingActivity extends Activity {
@@ -36,12 +38,18 @@ public class TradingActivity extends Activity {
 	int singularProductOfferID;
 	int productTakeID;
 	int userTakeID;
+	Intent intent;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_product_list);
-				
+		
+		productTakeID = getIntent().getIntExtra("ptake",0);
+		userTakeID = getIntent().getIntExtra("utake",0);
+		Toast.makeText(getBaseContext(), productTakeID+","+userTakeID, Toast.LENGTH_SHORT).show();
+		intent = new Intent(this, MainActivity.class);
+		
 		lv_products = (ListView)findViewById(R.id.listviewtradingofferingproducts);
 		
 		lv_products.setOnItemClickListener(new OnItemClickListener(){
@@ -55,10 +63,19 @@ public class TradingActivity extends Activity {
 			}
 			
 		});
+
 		
 		retrieveObjects();
 	}
 	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+
+		
+	}
+
 	public void sendObjects(){
 		    new Thread(new Runnable() {
 				  @Override
@@ -80,26 +97,19 @@ public class TradingActivity extends Activity {
 	                          public void run()
 	                          {
 	                        	  staticObjects= new StaticObjects();
-	                        	  if(StaticObjects.getUserProducts()==null)
-	                        	  {
-	                                    Log.i("USER", "NO USER");
-	                        	  }
-	                        	  else
-	                        	  {
-	                        		  getAllProducts();
-	                        	  }
+	                  			  Toast.makeText(getBaseContext(), "Successfully sent request", Toast.LENGTH_SHORT).show();
+	                  			  startActivity(intent);
 	                          }
 	                        });
 				  }
 				}).start();
 	}
 	
+	@Override
 	protected void onNewIntent(Intent intent) {
 		// TODO Auto-generated method stub
 		super.onNewIntent(intent);
-		Bundle extras = getIntent().getExtras();
-		productTakeID = extras.getInt("productTakeID");
-		userTakeID = extras.getInt("userTakeID");
+		
 	}
 	
 	public void retrieveObjects(){
@@ -140,7 +150,7 @@ public class TradingActivity extends Activity {
 		}
 		else
 		{
-			Log.i("USER", "weird USER");
+			getAllProducts();
 		}
 		}
 

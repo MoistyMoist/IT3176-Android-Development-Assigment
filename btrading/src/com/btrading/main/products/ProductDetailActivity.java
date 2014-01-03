@@ -66,12 +66,11 @@ public class ProductDetailActivity extends MainBaseActivity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				Bundle databundle = new Bundle();
-				databundle.putInt("productTakeID", productTakeID);
-				databundle.putInt("userTakeID", userTakeID);
 				Intent intent = new Intent();
 				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-				intent.setClass(getBaseContext(), TradingActivity.class);			
+				intent.setClass(getBaseContext(), TradingActivity.class);		
+				intent.putExtra("ptake", productTakeID);
+				intent.putExtra("utake", userTakeID);
 				startActivity(intent);
 			}
 		});
