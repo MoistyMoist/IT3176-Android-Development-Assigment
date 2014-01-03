@@ -1,154 +1,155 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#d3d3d3"
-    android:orientation="vertical"
-    tools:context=".ProfileActivity" >
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="176dp"
-        android:background="#7483c9"
-         android:padding="10px" >
-
-        <TextView
-            android:id="@+id/tvUserName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView1"
-            android:layout_centerHorizontal="true"
-            android:text="Tan Ah Kow" />
-        
-           <Button
-               android:id="@+id/btnEditProfile"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_alignParentBottom="true"
-               android:layout_alignParentRight="true"
-               android:text="edit profile"
-               android:textSize="10sp" />
-
-           <com.loopj.android.image.SmartImageView
-               android:id="@+id/imageView1"
-               android:layout_width="160dp"
-               android:layout_height="120dp"
-               android:layout_centerVertical="true"
-               android:layout_marginRight="14dp"
-               android:layout_toLeftOf="@+id/btnEditProfile"
-               android:src="@drawable/shape" />
-        
-    </RelativeLayout>
+    android:layout_height="match_parent" >
 
     <LinearLayout
-        android:layout_width="302dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.31"
-        android:background="#e9e9e9"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#d3d3d3"
         android:orientation="vertical"
-        android:padding="10px" >
+        tools:context=".ProfileActivity" >
 
-        <TextView
-            
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nickname" />
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="176dp"
+            android:background="#7483c9"
+            android:padding="10px" >
 
-        <EditText
-            android:id="@+id/nickName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@null"
-            android:enabled="false"
-            android:text="Tan 123"
-            android:paddingBottom="10dp" />
+            <TextView
+                android:id="@+id/tvUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView1"
+                android:layout_centerHorizontal="true"
+                android:text="Tan Ah Kow" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Email Address :" />
+            <Button
+                android:id="@+id/btnEditProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:text="edit profile"
+                android:textSize="10sp" />
 
-        <EditText
-            android:id="@+id/etEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@null"
-            android:enabled="false"
-            android:inputType="text|textEmailAddress"
-            android:paddingBottom="10dp"
-            android:text="Tan@email.com" />
+            <com.loopj.android.image.SmartImageView
+                android:id="@+id/imageView1"
+                android:layout_width="160dp"
+                android:layout_height="120dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="14dp"
+                android:layout_toLeftOf="@+id/btnEditProfile"
+                android:src="@drawable/shape" />
+        </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="302dp"
             android:layout_height="wrap_content"
-            android:text="Gender :" />
+            android:layout_weight="0.31"
+            android:background="#e9e9e9"
+            android:orientation="vertical"
+            android:padding="10px" >
 
-        <EditText
-            android:id="@+id/etSex"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@null"
-            android:enabled="false"
-            android:text="Male" 
-             android:paddingBottom="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nickname" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Date of Birth" />
+            <EditText
+                android:id="@+id/nickName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@null"
+                android:enabled="false"
+                android:paddingBottom="10dp"
+                android:text="Tan 123" />
 
-        <EditText
-            android:id="@+id/etDob"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@null"
-            android:enabled="false"
-            android:text="27/11/2013"
-             android:paddingBottom="10dp"  />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email Address :" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Contact :" />
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@null"
+                android:enabled="false"
+                android:inputType="text|textEmailAddress"
+                android:paddingBottom="10dp"
+                android:text="Tan@email.com" />
 
-        <EditText
-            android:id="@+id/etContact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@null"
-            android:enabled="false"
-            android:text="68920503"
-             android:paddingBottom="10dp"  />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gender :" />
+
+            <EditText
+                android:id="@+id/etSex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@null"
+                android:enabled="false"
+                android:paddingBottom="10dp"
+                android:text="Male" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date of Birth" />
+
+            <EditText
+                android:id="@+id/etDob"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@null"
+                android:enabled="false"
+                android:paddingBottom="10dp"
+                android:text="27/11/2013" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contact :" />
+
+            <EditText
+                android:id="@+id/etContact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@null"
+                android:enabled="false"
+                android:paddingBottom="10dp"
+                android:text="68920503" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/btnUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Update"
+                android:textSize="20sp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btnClear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/btnUpdate"
+                android:text="Clear all"
+                android:textSize="20sp"
+                android:visibility="gone" />
+        </RelativeLayout>
     </LinearLayout>
-    <RelativeLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-     
-         <Button
-             android:id="@+id/btnUpdate"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_centerHorizontal="true"
-             android:visibility="gone"
-             android:text="Update"
-             android:textSize="20sp" />
-         
-          <Button
-             android:id="@+id/btnClear"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_toRightOf="@+id/btnUpdate"
-             android:visibility="gone"
-             android:text="Clear all"
-             android:textSize="20sp" />
-"
-        
-    </RelativeLayout>
 
-</LinearLayout>
+</ScrollView>
