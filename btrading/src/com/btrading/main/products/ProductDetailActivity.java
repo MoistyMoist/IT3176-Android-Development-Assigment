@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 
@@ -53,6 +54,8 @@ public class ProductDetailActivity extends MainBaseActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_product_detail);
+		
+		sendTradeRequest = (Button)findViewById(R.id.requestButton);
 		
 		sendTradeRequest.setOnClickListener(new OnClickListener(){
 			@Override
