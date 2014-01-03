@@ -19,7 +19,7 @@ public class CreateUserRequest implements Runnable {
 	
 	private StaticObjects staticObjects;
 	private User userToCreate;
-	private String email, password, nickName, contact, dob ;
+	private String email, password, nickName, contact, dob, sex, imageUrl, status ;
 	
 	
 	public CreateUserRequest(String email, String password, String nickName, String contact, String dob )
@@ -40,8 +40,10 @@ public class CreateUserRequest implements Runnable {
 
 		//PREPARE REQUEST OBJECT
 		//url take from webservice
-		HttpGet httpget = new HttpGet("http://bartertrading.cloudapp.net/api/CreateUser?token="+staticObjects.getToken()+"&email="+email+"&password"+password+"&nickname"+"&contact"+contact+"&dob"+dob);
-		
+		//HttpGet httpget = new HttpGet("http://bartertrading.cloudapp.net/api/CreateUser?token="+staticObjects.getToken()+"&email="+email+"&nickname"+"&contact"+contact+"&dob"+dob+"&sex"+sex+"&imageUrl"+imageUrl+"&status"+status);
+		HttpGet httpget = new HttpGet("http://bartertrading.cloudapp.net/api/CreateUser?token="+staticObjects.getToken()+"&INemail=email&INnickname=nick&INcontact=contact&INdob=dob&INsex=sex&INimageUrl=imageUrl&INstatus=status");
+
+		//"&password"+password+
         Log.i("CREATE USER REQUEST :",httpget.getURI().toString());
         //EXCUTE REQUEST
         HttpResponse response;

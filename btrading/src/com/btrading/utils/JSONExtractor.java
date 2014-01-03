@@ -564,16 +564,20 @@ public class JSONExtractor {
             JSONObject json = null;
             json = new JSONObject(result);
 	
+            Log.i("ABCD - Created USer",json.toString() );
+            
             //check status if all green to extract
 			StaticObjects.setRequestStatus((Integer) json.get(TAG_STATUS));
 			StaticObjects.setRequestMessage(json.getString(TAG_MESSAGE));
 			JSONArray RawData= json.getJSONArray(TAG_DATA);
 			//JSONArray errors=json.getJSONArray(TAG_ERRORS);
 			
+			Log.i("ABCD - Created USer",RawData.toString() );
+			
 			ArrayList<User>user= new ArrayList<User>();
 			if(StaticObjects.getRequestStatus()==0)
 			{
-				Log.i("user ",RawData.toString() );
+				
 				for(int i=0;i<RawData.length();i++)
 				{
 					JSONObject c=RawData.getJSONObject(i);

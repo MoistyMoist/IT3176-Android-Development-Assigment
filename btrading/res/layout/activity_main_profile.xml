@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="@null"
-            android:editable="false"
+            android:enabled="false"
             android:text="Tan 123"
             android:paddingBottom="10dp" />
 
@@ -75,9 +75,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="@null"
-            android:editable="false"
-            android:text="Tan@email.com"
-             android:paddingBottom="10dp"  />
+            android:enabled="false"
+            android:inputType="text|textEmailAddress"
+            android:paddingBottom="10dp"
+            android:text="Tan@email.com" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -90,7 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="@null"
-            android:editable="false"
+            android:enabled="false"
             android:text="Male" 
              android:paddingBottom="10dp" />
 
@@ -105,7 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="@null"
-            android:editable="false"
+            android:enabled="false"
             android:text="27/11/2013"
              android:paddingBottom="10dp"  />
 
@@ -120,7 +121,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="@null"
-            android:editable="false"
+            android:enabled="false"
             android:text="68920503"
              android:paddingBottom="10dp"  />
     </LinearLayout>

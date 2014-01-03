@@ -13,6 +13,7 @@ import com.example.btrading.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -55,7 +56,13 @@ public class ProfileActivity extends Activity {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				
-				etUsername.setEnabled(true);				
+				etUsername.setEnabled(true);
+				etEmail.setEnabled(true);
+				etSex.setEnabled(true);
+				etDob.setEnabled(true);
+				etContact.setEnabled(true);
+				nickName.setEnabled(true);
+				
 			}});
 		
 		
