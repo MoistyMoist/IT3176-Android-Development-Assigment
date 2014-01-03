@@ -60,7 +60,7 @@ public class TradingActivity extends Activity {
 	}
 	
 	public void sendObjects(){
-		if(StaticObjects.getUserProducts()==null)
+		if(StaticObjects.getUserProducts()!=null)
 		{
 		    new Thread(new Runnable() {
 				  @Override
