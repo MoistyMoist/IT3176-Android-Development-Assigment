@@ -5,6 +5,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import com.btrading.httprequests.AcceptTradeRequest;
+import com.btrading.httprequests.RetrieveUserProductRequest;
 import com.btrading.httprequests.RetrieveUserRequest;
 import com.btrading.httprequests.SendTradeRequest;
 import com.btrading.utils.StaticObjects;
@@ -38,16 +39,16 @@ public class TradingActivity extends Activity {
 	
 	
 	public void RetrieveObjects(){
-		if(StaticObjects.getCurrentUser()==null)
+		if(StaticObjects.getUserProducts()==null)
 		{
 		    new Thread(new Runnable() {
 				  @Override
 				  public void run()
 				  {
 					  	ExecutorService executor = Executors.newFixedThreadPool(1);
-				        AcceptTradeRequest acceptTradeRequest = new AcceptTradeRequest(staticObjects.getCurrentUser().getUserID());
+						RetrieveUserProductRequest retrieveUserProductRequest = new RetrieveUserProductRequest(staticObjects.getCurrentUser());
 				          
-				        executor.execute(acceptTradeRequest);
+				        executor.execute(retrieveUserProductRequest);
 						executor.shutdown();
 				        try {
 				        	executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
