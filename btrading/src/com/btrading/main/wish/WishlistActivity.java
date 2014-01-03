@@ -59,11 +59,12 @@ public class WishlistActivity extends MainBaseActivity {
 		
 		lv_wish = (ListView) findViewById(R.id.lv_wish);
 		
-		SampleAdapter adapter = new SampleAdapter(this);
-		for (int i=0; i<wish_items.length; i++){
-			adapter.add(new WishItem(wish_items[i], "Unavailable"));
-		}
-		lv_wish.setAdapter(adapter);
+		//SampleAdapter adapter = new SampleAdapter(this);
+		//for (int i=0; i<wish_items.length; i++){
+		//	adapter.add(new WishItem(wish_items[i], "Unavailable"));
+		//}
+		//lv_wish.setAdapter(adapter);
+		getWishlist();
 		
 		//adapter = new ArrayAdapter<CharSequence>(this,android.R.layout.simple_spinner_dropdown_item, wish_items);
 		//lv_wish.setAdapter(adapter);
@@ -240,7 +241,7 @@ public class WishlistActivity extends MainBaseActivity {
 	
 public void getWishlist(){
 		
-	if(StaticObjects.getAllProducts()==null||StaticObjects.getAllProducts().size()==0)
+	if(StaticObjects.getUserWishlist()==null||StaticObjects.getUserWishlist().size()==0)
 	{
 		progress = ProgressDialog.show(this, "Getting your wishes","please wait...", true);
 		RetrieveWishRequest retrieveWishRequest = new RetrieveWishRequest();
@@ -268,8 +269,13 @@ private class BackgroundTask extends AsyncTask<Runnable, Integer, Long> {
 			progress.dismiss();
         staticObjects= new StaticObjects();
 		adapter = new SampleAdapter(context);
-		for (int i=0; i<StaticObjects.getUserWishlist().size(); i++){
-			adapter.add(new WishItem(StaticObjects.getUserWishlist().get(i).getName(), StaticObjects.getUserWishlist().get(i).getStatus()));
+		if(StaticObjects.getUserWishlist()==null||StaticObjects.getUserWishlist().size()==0){}
+		else{
+				for (int i = 0; i < StaticObjects.getUserWishlist().size(); i++) {
+					adapter.add(new WishItem(StaticObjects.getUserWishlist()
+							.get(i).getName(), StaticObjects.getUserWishlist()
+							.get(i).getStatus()));
+				}
 		}
 	    lv_wish.setAdapter(adapter);
 		

@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 import com.btrading.models.Product;
 import com.btrading.models.User;
+import com.btrading.models.Wish;
 
 import android.util.Log;
 
@@ -46,7 +47,9 @@ public class JSONExtractor {
 	private static final String TAG_USER_IMAGEURL="imageURL";
 	private static final String TAG_USER_STATUS="status";
 	//JSON WISHLIST NODE NAMES
-	
+	private static final String TAG_WISH_ID="wishID";
+	private static final String	TAG_WISH_NAME="name";
+	private static final String TAG_WISH_STATUS="status";
 	//THIS METHOD CONVERTS THE HTTP RESPONSE TO JSON.
 	//DO NOT EDIT OR REMOVE THIS METHOD
 	private static String convertStreamToString(InputStream is) 
@@ -625,12 +628,19 @@ public class JSONExtractor {
 			
 			if(StaticObjects.getRequestStatus()==0)
 			{
+				ArrayList<Wish> wishList = new ArrayList<Wish>();
+				for(int i=0;i<RawData.length();i++){
 				
-				JSONObject c=RawData.getJSONObject(0);
+				JSONObject c=RawData.getJSONObject(i);
 				
+				Wish w = new Wish();
+				w.setName(c.getString(TAG_WISH_NAME));
+				w.setStatus(c.getString(TAG_WISH_STATUS));
+				w.setWishID(c.getInt(TAG_WISH_ID));
+				
+				/*
 				User u= new User();
 				//JSONObject c2=(JSONObject) c.get(TAG_USER);
-				
 				u.setUserID(c.getInt(TAG_USER_ID));
 				u.setContact(c.getString(TAG_USER_CONTACT));
 				u.setDob(c.getString(TAG_USER_DOB));
@@ -640,9 +650,12 @@ public class JSONExtractor {
 				u.setPassword(c.getString(TAG_USER_PASSWORD));
 				u.setSex(c.getString(TAG_USER_SEX));
 				u.setStatus(c.getString(TAG_USER_STATUS));
-			
+				*/
 				
-				StaticObjects.setCurrentUser(u);
+				wishList.add(w);
+				}
+				
+				StaticObjects.setUserWishlist(wishList);
 			}
 			else
 			{
