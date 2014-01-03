@@ -13,7 +13,7 @@
          android:padding="10px" >
 
         <TextView
-            android:id="@+id/tvNickName"
+            android:id="@+id/tvUserName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/imageView1"
@@ -50,12 +50,13 @@
         android:padding="10px" >
 
         <TextView
+            
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Username" />
+            android:text="Nickname" />
 
         <EditText
-            android:id="@+id/etUsername"
+            android:id="@+id/nickName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -144,7 +145,7 @@
              android:layout_height="wrap_content"
              android:layout_toRightOf="@+id/btnUpdate"
              android:visibility="gone"
-             android:text="Update"
+             android:text="Clear all"
              android:textSize="20sp" />
 "
         

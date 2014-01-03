@@ -23,6 +23,8 @@ public class StaticObjects {
 	static Product productToCreate;
 	//THE CURRENT USER WISHLIST
 	static ArrayList<Wish> userWishlist;
+	
+	static ArrayList<User> user;
 
 	
 	
@@ -84,6 +86,9 @@ public class StaticObjects {
 	}
 	public static void setProductToCreate(Product productToCreate) {
 		StaticObjects.productToCreate = productToCreate;
+	}
+	public static ArrayList<User> getUser() {
+		return user;
 	}
 	
 }

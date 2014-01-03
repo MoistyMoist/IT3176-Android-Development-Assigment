@@ -608,6 +608,76 @@ public class JSONExtractor {
         }
 	}
 
+	
+	public void ExtractUpdateUserRequest(HttpResponse data) throws IllegalStateException, IOException, JSONException
+	{
+		HttpEntity entity = data.getEntity();
+        
+        if (entity != null) {
+            InputStream instream = entity.getContent();
+            String result= convertStreamToString(instream);
+            
+            JSONObject json = null;
+            json = new JSONObject(result);
+	
+            //check status if all green to extract
+			StaticObjects.setRequestStatus((Integer) json.get(TAG_STATUS));
+			StaticObjects.setRequestMessage(json.getString(TAG_MESSAGE));
+			JSONArray RawData= json.getJSONArray(TAG_DATA);
+			//JSONArray errors=json.getJSONArray(TAG_ERRORS);
+			
+	
+			if(StaticObjects.getRequestStatus()==0)
+			{
+				Log.i("user ",RawData.toString() );
+				ArrayList<User>user= new ArrayList<User>();
+				
+				{
+				for(int i=0;i<RawData.length();i++)
+				{
+					JSONObject c=RawData.getJSONObject(i);
+					
+					User user1= new User();
+					user1.setEmail(c.getString(TAG_USER_EMAIL));
+					user1.setPassword(c.getString(TAG_USER_PASSWORD));
+					user1.setNickname(c.getString(TAG_USER_NICKNAME));
+					user1.setContact(c.getString(TAG_USER_CONTACT));
+					user1.setDob(c.getString(TAG_USER_DOB));
+					
+					
+					User u= new User();
+					u.setUserID(c.getInt(TAG_USER_ID));
+
+					
+					user.add(user1);
+					
+					
+				}
+				
+				
+				//What the fuck is happening here???
+				
+//				for(int i=0;i<StaticObjects.getUser().size();i++)
+//				{
+//					Log.i("for loop",StaticObjects.getUser().get(i).getUserID());
+//					if(StaticObjects.getUser().get(i).getUserID()==StaticObjects.getUser().getUserID())
+//					{
+//						StaticObjects.getUser().remove(i);
+//						StaticObjects.getUser().add(user.get(0));
+//						break;
+//					}
+//				}
+			}
+			}
+			else
+			{
+				Log.i("ERROR", "status==1");
+				Log.i("Message",StaticObjects.getRequestMessage());
+			}
+            instream.close();
+        }
+	}
+	
 
 
 	public void ExtractWishRequest(HttpResponse data) throws IllegalStateException, IOException, JSONException
