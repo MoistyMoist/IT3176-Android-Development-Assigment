@@ -44,7 +44,7 @@ public class ProfileActivity extends Activity {
 		etContact = (EditText) findViewById(R.id.etContact);
 		nickName=(EditText) findViewById(R.id.nickName);
 		editProfile=(Button) findViewById(R.id.btnEditProfile);
-		btnUpdate=(Button) findViewById(R.id.btnUpdate);
+		btnUpdate=(Button) findViewById(R.id.btnProfileUpdate);
 		btnClear=(Button) findViewById(R.id.btnClear);
 		imageView1 = (SmartImageView) findViewById(R.id.imageView1);
 		
