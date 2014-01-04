@@ -106,7 +106,7 @@ public class RegisterActivity extends Activity {
 					  {
 						  	ExecutorService executor = Executors.newFixedThreadPool(1);
 						  	
-					        CreateUserRequest createUserRequest = new CreateUserRequest(etEmail.getText().toString(),etPassword2.getText().toString(),etNickName.getText().toString(),etContact.getText().toString(),etDOB.getText().toString());
+					        CreateUserRequest createUserRequest = new CreateUserRequest(etEmail.getText().toString(),etPassword2.getText().toString(),etNickName.getText().toString(),etContact.getText().toString(),etDOB.getText().toString(),"test", "test","test" );
 					          
 					        executor.execute(createUserRequest);
 							executor.shutdown();
