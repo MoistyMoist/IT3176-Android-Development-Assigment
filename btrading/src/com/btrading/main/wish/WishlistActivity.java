@@ -4,6 +4,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
@@ -236,29 +237,32 @@ public class WishlistActivity extends MainBaseActivity {
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case R.id.menu_add_wishlist:
-			/*
-			new AlertDialog.Builder(getActivity())
+			
+			new AlertDialog.Builder(context)
             //.setIcon(R.drawable.alert_dialog_icon)
             .setTitle("ss")
-            .setPositiveButton(R.string.alert_dialog_ok,
+            .setMessage("alerting")
+            .create();
+            /*
+            .setPositiveButton("Ok",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         ((FragmentAlertDialog)getActivity()).doPositiveClick();
                     }
                 }
             )
-            .setNegativeButton(R.string.alert_dialog_cancel,
+            .setNegativeButton("Cancel",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        ((FragmentAlertDialog)getActivity()).doNegativeClick();
+                        ((FragmentAlertDialog)context).doNegativeClick();
                     }
                 }
-            )
-            .create(); */
+            ) */
 			
+			/*
 			Intent intent = new Intent();
 			intent.setClass(getBaseContext(), AddWishlistActivity.class);
-			startActivity(intent);
+			startActivity(intent); */
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
