@@ -37,7 +37,7 @@ public class LoginActivity extends Activity {
 	Button b_login, b_register;
 	EditText et_username, et_pass;
 	boolean validUser = false;
-	String message = "No message";
+	String message = "Timeout.";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
