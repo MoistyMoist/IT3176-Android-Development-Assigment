@@ -193,7 +193,7 @@ public class ProfileActivity extends Activity {
 				  {
 					  	ExecutorService executor = Executors.newFixedThreadPool(1);
 					  	
-					  	UpdateUserRequest updateUserRequest = new UpdateUserRequest(userId, updateUserName, updateEmail,updatePassword, updateSex, updateDob, updateContact, updateNickName);
+					  	UpdateUserRequest updateUserRequest = new UpdateUserRequest(userId,updateEmail,updatePassword, updateSex,updateNickName , updateContact,updateDob);
 				          
 				        executor.execute(updateUserRequest);
 						executor.shutdown();

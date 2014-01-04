@@ -16,11 +16,14 @@ import com.btrading.main.LeftListFragment.SampleAdapter;
 import com.btrading.models.User;
 import com.btrading.utils.StaticObjects;
 import com.example.btrading.R;
+import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -233,6 +236,26 @@ public class WishlistActivity extends MainBaseActivity {
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case R.id.menu_add_wishlist:
+			/*
+			new AlertDialog.Builder(getActivity())
+            //.setIcon(R.drawable.alert_dialog_icon)
+            .setTitle("ss")
+            .setPositiveButton(R.string.alert_dialog_ok,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        ((FragmentAlertDialog)getActivity()).doPositiveClick();
+                    }
+                }
+            )
+            .setNegativeButton(R.string.alert_dialog_cancel,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        ((FragmentAlertDialog)getActivity()).doNegativeClick();
+                    }
+                }
+            )
+            .create(); */
+			
 			Intent intent = new Intent();
 			intent.setClass(getBaseContext(), AddWishlistActivity.class);
 			startActivity(intent);
@@ -241,12 +264,13 @@ public class WishlistActivity extends MainBaseActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
+
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getSupportMenuInflater().inflate(R.menu.wishlist, menu);
 		return true;
 	}
-	
+
 public void getWishlist(){
 		
 	if(StaticObjects.getUserWishlist()==null||StaticObjects.getUserWishlist().size()==0)

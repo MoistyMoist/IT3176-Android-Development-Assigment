@@ -22,11 +22,12 @@ public class UpdateUserRequest implements Runnable {
 	private StaticObjects staticObjects;
 	private String email, password, nickName, contact, dob, sex, imageUrl, status ;
 	private int userID;
-	public UpdateUserRequest(int userID,String email, String password, String nickName, String contact, String dob, String imageUrl, String status )
+	public UpdateUserRequest(int userID,String email, String password,String sex, String nickName, String contact, String dob )
 	{
 		this.userID = userID;
 		this.staticObjects = new StaticObjects();
 		this.email = email;
+		this.sex = "testSex";
 		this.password = password;
 		this.nickName = nickName;
 		this.contact = contact;
