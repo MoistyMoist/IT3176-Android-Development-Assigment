@@ -163,9 +163,9 @@ public class ProfileActivity extends Activity {
 				
 				userId = StaticObjects.getCurrentUser().getUserID();
 
-				updateUserName = tvUserName.getText().toString();
+				//updateUserName = tvUserName.getText().toString();
 				updateEmail = etEmail.getText().toString();
-				updatePassword = etPassword.getText().toString();
+				//updatePassword = etPassword.getText().toString();
 				// updateSex = etSex.getText().toString();
 				updateSex = "testUpdate";
 				updateImageUrl = "testImage";
@@ -174,11 +174,8 @@ public class ProfileActivity extends Activity {
 				updateContact = etContact.getText().toString();
 				updateNickName = nickName.getText().toString();
 
-				StaticObjects.getCurrentUser().setEmail(
-						etEmail.getText().toString().replace(" ", "%20"));
 				
-				
-				
+			updateUser();	
 
 			}
 		});
@@ -188,8 +185,8 @@ public class ProfileActivity extends Activity {
 	
 	public void updateUser()
 	{
-		if(StaticObjects.getCurrentUser()==null)
-		{
+	
+		
 		    new Thread(new Runnable() {
 				  @Override
 				  public void run()
@@ -227,11 +224,8 @@ public class ProfileActivity extends Activity {
 				  }
 				}).start();
 		}
-		else
-		{
-			Log.i("USER", "weird USER");
-		}
-		} 
+		
+		 
 	
 	
 	@Override
