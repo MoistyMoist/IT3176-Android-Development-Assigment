@@ -48,6 +48,7 @@ public class WishlistActivity extends MainBaseActivity {
 	StaticObjects staticObjects;
 	ProgressDialog progress;
 	Context context = this;
+	String available = "Unavailable";
 	
 	public WishlistActivity(){
 		super(R.string.title_activity_wishlist);
@@ -106,6 +107,8 @@ public class WishlistActivity extends MainBaseActivity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Open product item
+				TextView tv_wish = (TextView) arg1.findViewById(R.id.row_wish_title);
+				checkWishlist(tv_wish.getText().toString());
 				TextView tv_status = (TextView) arg1.findViewById(R.id.row_wish_available);
 				tv_status.setText("Pending");
 				tv_status.setTextColor(Color.GRAY);
@@ -166,8 +169,13 @@ public class WishlistActivity extends MainBaseActivity {
             //Toast.makeText(getBaseContext(), result, Toast.LENGTH_SHORT).show();
             //lv_list.getChildAt(Integer.parseInt(result)).setBackgroundColor(Color.RED);
 			TextView tv_status = (TextView) lv_list.getChildAt(Integer.parseInt(result)).findViewById(R.id.row_wish_available);
-			tv_status.setText("Unavailable");
-			tv_status.setTextColor(Color.RED);
+			tv_status.setText(available);
+			if (available.equalsIgnoreCase("available")){
+				tv_status.setTextColor(Color.argb(255, 34, 139, 34));
+			}
+			else if (available.equalsIgnoreCase("unavailable")){
+				tv_status.setTextColor(Color.RED);
+			}
         }
 
         @Override
@@ -256,6 +264,14 @@ public void getWishlist(){
 			adapter.add(new WishItem(StaticObjects.getUserWishlist().get(i).getName(), StaticObjects.getUserWishlist().get(i).getStatus()));
 		}
 	    lv_wish.setAdapter(adapter);
+	}
+}
+
+public void checkWishlist(String wishName){
+	for(int i=0; i<StaticObjects.getAllProducts().size(); i++){
+		if (wishName.equalsIgnoreCase(StaticObjects.getAllProducts().get(i).getName())){
+			available = "Available";
+		}
 	}
 }
 
