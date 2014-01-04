@@ -35,9 +35,9 @@ public class LeftListFragment extends ListFragment {
 		//1-6
 		adapter.add(new SampleItem("Account", R.drawable.ic_left_menu_title,0)); //int 0 for title, custom set	
 		adapter.add(new SampleItem("Profile", android.R.drawable.ic_menu_myplaces,0));
-		adapter.add(new SampleItem("My Items", android.R.drawable.ic_menu_search,1));
+		adapter.add(new SampleItem("My Items", android.R.drawable.ic_menu_search,0));
 		adapter.add(new SampleItem("Others", R.drawable.ic_left_menu_title,0)); //int 0 for title, custom set
-		adapter.add(new SampleItem("Wish List", android.R.drawable.ic_menu_my_calendar,3));
+		adapter.add(new SampleItem("Wish List", android.R.drawable.ic_menu_my_calendar,0));
 		adapter.add(new SampleItem("Settings", android.R.drawable.ic_menu_preferences,0));
 		adapter.add(new SampleItem("Logout", android.R.drawable.ic_lock_power_off,0));
 		
