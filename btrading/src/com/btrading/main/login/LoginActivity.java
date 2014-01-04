@@ -136,13 +136,6 @@ public class LoginActivity extends Activity {
 	  		message = "Wrong Password.";
 	  	}
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.login, menu);
-		return true;
-	}
 	
 	private class CheckLogin extends AsyncTask<String, Void, String> {
 
