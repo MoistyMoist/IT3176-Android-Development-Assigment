@@ -29,10 +29,12 @@ import android.widget.TextView;
 public class ProfileActivity extends Activity {
 
 	StaticObjects staticObjects;
-	EditText etEmail, etSex, etDob, etContact, nickName;
+	EditText etEmail, etSex, etDob, etContact, nickName, etPassword;
 	TextView tvUserName;
 	Button editProfile, btnUpdate, btnClear;
 	SmartImageView imageView1;
+	String updateUserName, updateEmail, updateSex, updateDob, updateContact, updateNickName, updateImageUrl, updateStatus, updatePassword;
+	int userId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class ProfileActivity extends Activity {
 		btnUpdate = (Button) findViewById(R.id.btnProfileUpdate);
 		btnClear = (Button) findViewById(R.id.btnClear);
 		imageView1 = (SmartImageView) findViewById(R.id.imageView1);
+		etPassword = (EditText) findViewById(R.id.etPassword);
 
 		tvUserName.setText(Integer.toString(StaticObjects.getCurrentUser()
 				.getUserID()));
@@ -150,18 +153,19 @@ public class ProfileActivity extends Activity {
 			}
 		});
 
+		
 		btnUpdate.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 
-				String updateUserName, updateEmail, updateSex, updateDob, updateContact, updateNickName, updateImageUrl, updateStatus;
-				int userId;
+				
 				userId = StaticObjects.getCurrentUser().getUserID();
 
 				updateUserName = tvUserName.getText().toString();
 				updateEmail = etEmail.getText().toString();
+				updatePassword = etPassword.getText().toString();
 				// updateSex = etSex.getText().toString();
 				updateSex = "testUpdate";
 				updateImageUrl = "testImage";
@@ -192,9 +196,9 @@ public class ProfileActivity extends Activity {
 				  {
 					  	ExecutorService executor = Executors.newFixedThreadPool(1);
 					  	
-				       // UpdateUserRequest updateUserRequest = new UpdateUserRequest(etEmail.getText().toString(),etPassword2.getText().toString(),etNickName.getText().toString(),etContact.getText().toString(),etDOB.getText().toString(),"test", "test","test" );
+					  	UpdateUserRequest updateUserRequest = new UpdateUserRequest(userId, updateUserName, updateEmail,updatePassword, updateSex, updateDob, updateContact, updateNickName);
 				          
-				 //       executor.execute(createUserRequest);
+				        executor.execute(updateUserRequest);
 						executor.shutdown();
 				        try {
 				        	executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
