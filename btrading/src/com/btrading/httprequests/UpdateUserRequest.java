@@ -21,15 +21,18 @@ public class UpdateUserRequest implements Runnable {
 	private User userToUpdate;
 	private StaticObjects staticObjects;
 	private String email, password, nickName, contact, dob, sex, imageUrl, status ;
-	
-	public UpdateUserRequest(String email, String password, String nickName, String contact, String dob )
+	private int userID;
+	public UpdateUserRequest(int userID,String email, String password, String nickName, String contact, String dob, String imageUrl, String status )
 	{
+		this.userID = userID;
 		this.staticObjects = new StaticObjects();
 		this.email = email;
 		this.password = password;
 		this.nickName = nickName;
 		this.contact = contact;
 		this.dob = dob;
+		this.imageUrl = imageUrl;
+		this.status = status;
 		
 	}
 	
@@ -39,8 +42,8 @@ public class UpdateUserRequest implements Runnable {
 		HttpClient httpclient = new DefaultHttpClient();
 
 		//PREPARE REQUEST OBJECT
-		//HttpGet httpget = new HttpGet("http://bartertrading.cloudapp.net/api/UpdateProduct?token="+staticObjects.getToken()+"&INproductID="+this.productToUpdate.getProductID()+"&INname="+this.productToUpdate.getName()+"&INdescription="+this.productToUpdate.getDescription()+"&INqty="+this.productToUpdate.getQty()+"&INstatus="+this.productToUpdate.getStatus()+"&INx="+this.productToUpdate.getX()+"&INy="+this.productToUpdate.getY()+"&INquality="+this.productToUpdate.getQuality()+"&INimageURL="+this.productToUpdate.getImageURL());
-		HttpGet httpget = new HttpGet("http://bartertrading.cloudapp.net/api/UpdateUser?token="+staticObjects.getToken()+"&INemail=email&INnickname=nick&INcontact=contact&INdob=dob&INsex=sex&INimageUrl=imageUrl&INstatus=status");
+		HttpGet httpget = new HttpGet("http://bartertrading.cloudapp.net/api/UpdateUser?token="+staticObjects.getToken()+"&INuserID="+userID+"&INemail="+email+"&INpassword="+password+"&INnickname="+nickName+"&INcontact="+contact+"&INdob="+dob+"&INsex="+sex+"&INimageUrl="+imageUrl+"&INstatus="+status);
+	//	HttpGet httpget = new HttpGet("http://bartertrading.cloudapp.net/api/UpdateUser?token="+staticObjects.getToken()+"&INemail=email&INnickname=nick&INcontact=contact&INdob=dob&INsex=sex&INimageUrl=imageUrl&INstatus=status");
         Log.i("UPDATE User REQUEST :",httpget.getURI().toString());
         //EXCUTE REQUEST
         HttpResponse response;

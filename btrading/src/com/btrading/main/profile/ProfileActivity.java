@@ -156,11 +156,16 @@ public class ProfileActivity extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				
-				String updateUserName, updateEmail, updateSex, updateDob, updateContact, updateNickName; 
+				String updateUserName, updateEmail, updateSex, updateDob, updateContact, updateNickName, updateImageUrl, updateStatus;
+				int userId;
+				userId = StaticObjects.getCurrentUser().getUserID();
 				
 				updateUserName = tvUserName.getText().toString();
 				updateEmail = etEmail.getText().toString();
-				updateSex = etSex.getText().toString();
+				//updateSex = etSex.getText().toString();
+				updateSex="testUpdate";
+				updateImageUrl ="testImage";
+				updateStatus="testStatus";
 				updateDob = etDob.getText().toString();
 				updateContact = etContact.getText().toString();
 				updateNickName = nickName.getText().toString();
