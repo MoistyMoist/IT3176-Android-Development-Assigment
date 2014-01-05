@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import com.btrading.httprequests.CreateUserRequest;
 import com.btrading.httprequests.RetrieveUserRequest;
 import com.btrading.httprequests.UpdateUserRequest;
+import com.btrading.main.login.RegisterActivity;
 import com.btrading.models.User;
 import com.btrading.utils.StaticObjects;
 import com.example.btrading.R;
@@ -25,6 +26,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ProfileActivity extends Activity {
 
@@ -49,7 +51,7 @@ public class ProfileActivity extends Activity {
 		nickName = (EditText) findViewById(R.id.nickName);
 		editProfile = (Button) findViewById(R.id.btnEditProfile);
 		btnUpdate = (Button) findViewById(R.id.btnProfileUpdate);
-		btnClear = (Button) findViewById(R.id.btnClear);
+	
 		imageView1 = (SmartImageView) findViewById(R.id.imageView1);
 		etPassword = (EditText) findViewById(R.id.etPassword);
 
@@ -60,6 +62,8 @@ public class ProfileActivity extends Activity {
 		etDob.setText(StaticObjects.getCurrentUser().getDob());
 		etContact.setText(StaticObjects.getCurrentUser().getContact());
 		nickName.setText(StaticObjects.getCurrentUser().getNickname());
+		etPassword.setText(StaticObjects.getCurrentUser().getPassword());
+
 
 		imageView1.setImageUrl(StaticObjects.getCurrentUser().getImageURL());
 
@@ -114,52 +118,27 @@ public class ProfileActivity extends Activity {
 			}
 		});
 
-		btnClear.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-
-				etEmail.setText("");
-				etSex.setText("");
-
-				etDob.setText("");
-				etContact.setText("");
-				nickName.setText("");
-
-				etEmail.setHint("hint: abc@gmail.com");
-				etSex.setHint("hint: m/f");
-
-				etDob.setHint("hint: 01/01/1991");
-				etContact.setHint("hint: 98765432");
-				nickName.setHint("hint: jack");
-
-				tvUserName.setEnabled(true);
-				etEmail.setEnabled(true);
-				etSex.setEnabled(true);
-				tvUserName.setEnabled(true);
-				etDob.setEnabled(true);
-				etContact.setEnabled(true);
-				nickName.setEnabled(true);
-
-				tvUserName.setBackgroundColor(0xffcccccc);
-				etEmail.setBackgroundColor(0xffcccccc);
-				etSex.setBackgroundColor(0xffcccccc);
-
-				etDob.setBackgroundColor(0xffcccccc);
-				etContact.setBackgroundColor(0xffcccccc);
-				nickName.setBackgroundColor(0xffcccccc);
-
-			}
-		});
+		
 
 		
 		btnUpdate.setOnClickListener(new OnClickListener() {
+			
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				 if (etEmail.getText().toString().isEmpty()
+							|| etPassword.getText().toString().isEmpty()|| nickName.getText().toString().isEmpty() || etContact.getText().toString().isEmpty()|| etDob.getText().toString().isEmpty())
+						
+					{
+						Toast.makeText(
+								ProfileActivity.this,
+								"Please fill in the empty fields",
+								Toast.LENGTH_LONG).show();
+					}
+					
 
+					else{
 				
 				userId = StaticObjects.getCurrentUser().getUserID();
 
@@ -177,6 +156,7 @@ public class ProfileActivity extends Activity {
 				
 			updateUser();	
 
+					}
 			}
 		});
 

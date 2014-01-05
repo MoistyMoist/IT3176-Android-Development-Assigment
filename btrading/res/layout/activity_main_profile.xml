@@ -82,6 +82,10 @@
                 android:paddingBottom="10dp"
                 android:text="Tan@email.com" />
 
+            
+           
+            
+            
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -126,6 +130,22 @@
                 android:enabled="false"
                 android:paddingBottom="10dp"
                 android:text="68920503" />
+            
+             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password:" />
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@null"
+                android:enabled="false"
+               android:inputType="textPassword"
+                android:paddingBottom="10dp"
+                android:text="Tan@email.com" />
         </LinearLayout>
 
         <RelativeLayout
@@ -141,14 +161,8 @@
                 android:textSize="20sp"
                 android:visibility="gone" />
 
-            <Button
-                android:id="@+id/btnClear"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/btnUpdate"
-                android:text="Clear all"
-                android:textSize="20sp"
-                android:visibility="gone" />
+           
+            
         </RelativeLayout>
     </LinearLayout>
 
