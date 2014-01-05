@@ -51,7 +51,7 @@ public class ProfileActivity extends Activity {
 		nickName = (EditText) findViewById(R.id.nickName);
 		editProfile = (Button) findViewById(R.id.btnEditProfile);
 		btnUpdate = (Button) findViewById(R.id.btnProfileUpdate);
-	
+		btnClear = (Button) findViewById(R.id.btnClear);
 		imageView1 = (SmartImageView) findViewById(R.id.imageView1);
 		etPassword = (EditText) findViewById(R.id.etPassword);
 
@@ -62,8 +62,6 @@ public class ProfileActivity extends Activity {
 		etDob.setText(StaticObjects.getCurrentUser().getDob());
 		etContact.setText(StaticObjects.getCurrentUser().getContact());
 		nickName.setText(StaticObjects.getCurrentUser().getNickname());
-		etPassword.setText(StaticObjects.getCurrentUser().getPassword());
-
 
 		imageView1.setImageUrl(StaticObjects.getCurrentUser().getImageURL());
 
@@ -75,7 +73,7 @@ public class ProfileActivity extends Activity {
 				if (etEmail.isEnabled() == false) {
 
 					btnUpdate.setVisibility(View.VISIBLE);
-					btnClear.setVisibility(View.VISIBLE);
+					
 					tvUserName.setEnabled(true);
 					etEmail.setEnabled(true);
 					etSex.setEnabled(true);
@@ -118,15 +116,53 @@ public class ProfileActivity extends Activity {
 			}
 		});
 
-		
+		btnClear.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+
+				etEmail.setText("");
+				etSex.setText("");
+
+				etDob.setText("");
+				etContact.setText("");
+				nickName.setText("");
+
+				etEmail.setHint("hint: abc@gmail.com");
+				etSex.setHint("hint: m/f");
+
+				etDob.setHint("hint: 01/01/1991");
+				etContact.setHint("hint: 98765432");
+				nickName.setHint("hint: jack");
+
+				tvUserName.setEnabled(true);
+				etEmail.setEnabled(true);
+				etSex.setEnabled(true);
+				tvUserName.setEnabled(true);
+				etDob.setEnabled(true);
+				etContact.setEnabled(true);
+				nickName.setEnabled(true);
+
+				tvUserName.setBackgroundColor(0xffcccccc);
+				etEmail.setBackgroundColor(0xffcccccc);
+				etSex.setBackgroundColor(0xffcccccc);
+
+				etDob.setBackgroundColor(0xffcccccc);
+				etContact.setBackgroundColor(0xffcccccc);
+				nickName.setBackgroundColor(0xffcccccc);
+
+			}
+		});
 
 		
 		btnUpdate.setOnClickListener(new OnClickListener() {
-			
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				
+				
 				 if (etEmail.getText().toString().isEmpty()
 							|| etPassword.getText().toString().isEmpty()|| nickName.getText().toString().isEmpty() || etContact.getText().toString().isEmpty()|| etDob.getText().toString().isEmpty())
 						
@@ -136,9 +172,8 @@ public class ProfileActivity extends Activity {
 								"Please fill in the empty fields",
 								Toast.LENGTH_LONG).show();
 					}
-					
+				 else{
 
-					else{
 				
 				userId = StaticObjects.getCurrentUser().getUserID();
 
@@ -156,10 +191,10 @@ public class ProfileActivity extends Activity {
 				
 			updateUser();	
 
-					}
-			}
+		
+				 }}
 		});
-
+		
 	}
 
 	

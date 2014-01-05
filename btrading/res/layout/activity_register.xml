@@ -19,7 +19,7 @@
 
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="481dp" >
+            android:layout_height="412dp" >
             
             <TextView
                 android:id="@+id/tvEmail"
@@ -147,33 +147,9 @@
                     android:text="Female" />
             </RadioGroup>
             
-             <com.loopj.android.image.SmartImageView
-        android:id="@+id/userImage"
-         android:layout_below="@+id/rgSex"
-        android:layout_gravity="left"
-        android:layout_width="120dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginLeft="5dp"
-        android:layout_height="100dp"
-        android:background="@drawable/shape"/>
-	<Button 
-            android:id="@+id/addUserImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
            
-            android:layout_toRightOf="@+id/userImage"
-            android:text="Add Profile Picture"
-            android:layout_alignBottom="@+id/userImage"/>
 
-	<TextView
-	    android:id="@+id/textView1"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_above="@+id/addUserImage"
-	    android:layout_alignRight="@+id/addUserImage"
-	    android:text="Optional"
-	    android:textAppearance="?android:attr/textAppearanceSmall" />
+	
 
         </RelativeLayout>
     

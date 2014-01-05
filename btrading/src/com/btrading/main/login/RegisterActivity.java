@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.btrading.httprequests.CreateUserRequest;
 import com.btrading.httprequests.RetrieveUserRequest;
+
 import com.btrading.models.User;
 import com.btrading.utils.StaticObjects;
 import com.example.btrading.R;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -30,10 +32,11 @@ public class RegisterActivity extends Activity {
 	User createUser;
 	EditText etEmail, etPassword2, etNickName, etContact, etDOB, etPassword;
 	RadioGroup rgSex;
-	Button register, cancel;
+	Button register, cancel, addUserImage;
 	Boolean validUser = true;
 	StaticObjects staticObjects;
 	String message = "No message";
+	ImageView userImage;
 	private RadioButton rb;
 
 	@Override
@@ -51,6 +54,7 @@ public class RegisterActivity extends Activity {
 		rgSex = (RadioGroup) findViewById(R.id.rgSex);
 		register = (Button) findViewById(R.id.register);
 		cancel = (Button) findViewById(R.id.cancel);
+		
 
 		etEmail.clearFocus();
 

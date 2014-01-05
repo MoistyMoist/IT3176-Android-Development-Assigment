@@ -160,6 +160,14 @@
                 android:text="Update"
                 android:textSize="20sp"
                 android:visibility="gone" />
+              <Button
+                android:id="@+id/btnClear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/btnUpdate"
+                android:text="Clear all"
+                android:textSize="20sp"
+                android:visibility="gone" />
 
            
             
