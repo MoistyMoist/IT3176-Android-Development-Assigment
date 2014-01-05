@@ -14,12 +14,14 @@ import com.example.btrading.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 public class RegisterActivity extends Activity {
@@ -31,6 +33,7 @@ public class RegisterActivity extends Activity {
 	Boolean validUser = true;
 	StaticObjects staticObjects;
 	String message = "No message";
+	private RadioButton rb;
 	
 	
 	
@@ -50,6 +53,22 @@ public class RegisterActivity extends Activity {
 		cancel = (Button) findViewById(R.id.cancel);
 		
 		
+		etEmail.clearFocus();
+		
+		cancel.setOnClickListener(new OnClickListener(){
+
+            @Override
+            public void onClick(View arg0) {
+            	
+            	Intent intent = new Intent();
+            	intent.setClass(getBaseContext(), LoginActivity.class);
+				startActivity(intent);
+               finish();
+            }
+
+        });
+		
+		
 		register.setOnClickListener(new OnClickListener(){
 
 			@Override
@@ -67,6 +86,8 @@ public class RegisterActivity extends Activity {
 				
 				
 			}
+			
+			
 
 			private void validateUser() {
 				// TODO Auto-generated method stub
@@ -92,21 +113,17 @@ public class RegisterActivity extends Activity {
 	public void checkUser()
 	{
 		
-		//go in with empty fields
-//		if (etEmail.getText().toString().equals("") || etPassword2.getText().toString().isEmpty()){
-//			validUser = true;
-//		}
-//		else {
-//			
-			if(StaticObjects.getCurrentUser()==null)
-			{
+		 int selectedOption = rgSex.getCheckedRadioButtonId();
+		 rb = (RadioButton) findViewById(selectedOption);
+
+
 			    new Thread(new Runnable() {
 					  @Override
 					  public void run()
 					  {
 						  	ExecutorService executor = Executors.newFixedThreadPool(1);
 						  	
-					        CreateUserRequest createUserRequest = new CreateUserRequest(etEmail.getText().toString(),etPassword2.getText().toString(),etNickName.getText().toString(),etContact.getText().toString(),etDOB.getText().toString(),"test", "test","test" );
+					        CreateUserRequest createUserRequest = new CreateUserRequest(etEmail.getText().toString(),etPassword2.getText().toString(),etNickName.getText().toString(),etContact.getText().toString(),etDOB.getText().toString(),rb.getText().toString(), "test","test" );
 					          
 					        executor.execute(createUserRequest);
 							executor.shutdown();
@@ -137,14 +154,11 @@ public class RegisterActivity extends Activity {
 					  }
 					}).start();
 			}
-			else
-			{
-				Log.i("USER", "weird USER");
-			}
-			} 
-		//}
+		
+			
+		}
 		
 		
 	
 
-}
+

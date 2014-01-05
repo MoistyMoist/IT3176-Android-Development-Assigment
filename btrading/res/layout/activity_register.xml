@@ -13,6 +13,9 @@
         android:text="Fill in your informations here"
         android:textSize="20dp" />
 
+    <ScrollView
+         android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -31,7 +34,8 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/tvEmail"
             android:layout_below="@+id/tvEmail"
-            android:hint="Example abc@email.com" />
+            android:inputType="textEmailAddress"
+            android:hint="Eg abc@email.com" />
 
         <TextView
             android:id="@+id/tvPassword"
@@ -47,6 +51,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/tvPassword"
+            android:inputType="textPassword"
             android:layout_below="@+id/tvPassword" />
 
         <TextView
@@ -62,6 +67,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/tvPassword2"
+            android:inputType="textPassword"
             android:layout_below="@+id/tvPassword2" />
 
         <TextView
@@ -76,6 +82,7 @@
             android:id="@+id/etNickName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+             android:hint="Eg jack"
             android:layout_alignStart="@+id/tvNickName"
             android:layout_below="@+id/tvNickName" />
 
@@ -92,7 +99,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/tvContact"
-            android:hint="Eg 999999999"
+            android:hint="Eg 61612141"
+            android:inputType="phone"
             android:layout_below="@+id/tvContact" />
 
         <TextView
@@ -108,6 +116,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/tvDOB"
+            android:inputType="date"
             android:layout_below="@+id/tvDOB" />
 
         <TextView
@@ -137,6 +146,7 @@
          
      </RadioGroup>
     </RelativeLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/register"
@@ -148,6 +158,7 @@
          android:id="@+id/cancel"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:onClick="finishActivity"
         android:text="Cancel" />
 
   
