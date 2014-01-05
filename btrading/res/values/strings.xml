@@ -14,6 +14,8 @@
     <string name="title_activity_product">My Products</string>
     <string name="title_activity_setting">Settings</string>
 
+	<string name="dialog_add_wishlist">Add Wish</string>
+    
     <string-array name="syncFrequency">
         <item name="1">1 Hour</item>
         <item name="2">2 Hours</item>

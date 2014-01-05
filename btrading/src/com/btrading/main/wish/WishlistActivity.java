@@ -4,6 +4,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import com.actionbarsherlock.app.SherlockDialogFragment;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.MenuInflater;
@@ -21,13 +22,18 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.support.v4.app.DialogFragment;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -37,6 +43,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Button;
 import android.widget.TextView;
@@ -237,28 +244,7 @@ public class WishlistActivity extends MainBaseActivity {
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case R.id.menu_add_wishlist:
-			
-			new AlertDialog.Builder(context)
-            //.setIcon(R.drawable.alert_dialog_icon)
-            .setTitle("ss")
-            .setMessage("alerting")
-            .create();
-            /*
-            .setPositiveButton("Ok",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        ((FragmentAlertDialog)getActivity()).doPositiveClick();
-                    }
-                }
-            )
-            .setNegativeButton("Cancel",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        ((FragmentAlertDialog)context).doNegativeClick();
-                    }
-                }
-            ) */
-			
+			showDialog();
 			/*
 			Intent intent = new Intent();
 			intent.setClass(getBaseContext(), AddWishlistActivity.class);
@@ -301,6 +287,68 @@ public void checkWishlist(String wishName){
 			available = "Available";
 		}
 	}
+}
+
+
+void showDialog() {
+    DialogFragment newFragment = MyAlertDialogFragment.newInstance(
+            R.string.dialog_add_wishlist);
+    newFragment.show(getSupportFragmentManager(), "dialog");
+}
+
+public static void doPositiveClick() {
+    // Do stuff here.
+	//shah codes - add button onclick method to call request > url create wish 
+    Log.i("FragmentAlertDialog", "Positive click!");
+}
+
+public static void doNegativeClick() {
+    // Do stuff here.
+    Log.i("FragmentAlertDialog", "Negative click!");
+}
+
+
+
+public static class MyAlertDialogFragment extends SherlockDialogFragment {
+
+    public static MyAlertDialogFragment newInstance(int title) {
+        MyAlertDialogFragment frag = new MyAlertDialogFragment();
+        Bundle args = new Bundle();
+        args.putInt("title", title);
+        frag.setArguments(args);
+        return frag;
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        int title = getArguments().getInt("title");
+        
+     // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        EditText input = new EditText(getActivity());
+        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        
+        return new AlertDialog.Builder(getActivity())
+                .setIcon(R.drawable.ic_1_navigation_accept)
+                .setTitle(title)
+                .setView(input)
+                .setPositiveButton("Add",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            //((FragmentAlertDialogSupport)getActivity()).doPositiveClick();
+                        	doPositiveClick();
+                        }
+                    }
+                )
+                .setNegativeButton("Cancel",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            //((FragmentAlertDialogSupport)getActivity()).doNegativeClick();
+                        	doNegativeClick();
+                        }
+                    }
+                )
+                .create();
+    }
 }
 
 private class BackgroundTask extends AsyncTask<Runnable, Integer, Long> {
