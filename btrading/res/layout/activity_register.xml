@@ -1,152 +1,177 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    
     android:orientation="vertical"
     tools:context=".RegisterActivity" >
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.16"
-        android:paddingBottom="15dp"
-        android:text="Fill in your informations here"
-        android:textSize="20dp" />
-
-    <ScrollView
-         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.60" >
-
-        <TextView
-            android:id="@+id/tvEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Email Address"
-            android:textSize="15dp" />
-
-        <EditText
-            android:id="@+id/etEmail"
+    
+    
+     <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/tvEmail"
-            android:layout_below="@+id/tvEmail"
-            android:inputType="textEmailAddress"
-            android:hint="Eg abc@email.com" />
+            android:layout_weight="0.16"
+            android:paddingBottom="15dp"
+            android:text="Fill in your informations here"
+            android:textSize="20dp" />
 
-        <TextView
-            android:id="@+id/tvPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/etEmail"
-            android:layout_below="@+id/etEmail"
-            android:text="Password"
-            android:textSize="15dp" />
-
-        <EditText
-            android:id="@+id/etPassword"
+  
+        <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/tvPassword"
-            android:inputType="textPassword"
-            android:layout_below="@+id/tvPassword" />
+            android:layout_weight="0.60" >
 
-        <TextView
-            android:id="@+id/tvPassword2"
+            
+            
+       
+            
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email Address"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tvEmail"
+                android:layout_below="@+id/tvEmail"
+                android:hint="Eg abc@email.com"
+                android:inputType="textEmailAddress" />
+
+            <TextView
+                android:id="@+id/tvPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/etEmail"
+                android:layout_below="@+id/etEmail"
+                android:text="Password"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tvPassword"
+                android:layout_below="@+id/tvPassword"
+                android:inputType="textPassword" />
+
+            <TextView
+                android:id="@+id/tvPassword2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etPassword"
+                android:text="Confirm Password"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/etPassword2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tvPassword2"
+                android:layout_below="@+id/tvPassword2"
+                android:inputType="textPassword" />
+
+            <TextView
+                android:id="@+id/tvNickName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etPassword2"
+                android:text="Nickname"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/etNickName"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tvNickName"
+                android:layout_below="@+id/tvNickName"
+                android:hint="Eg jack" />
+
+            <TextView
+                android:id="@+id/tvContact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etNickName"
+                android:text="Contact Number"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/etContact"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tvContact"
+                android:layout_below="@+id/tvContact"
+                android:hint="Eg 61612141"
+                android:inputType="phone" />
+
+            <TextView
+                android:id="@+id/tvDOB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etContact"
+                android:text="Date of Birth"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/etDOB"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tvDOB"
+                android:layout_below="@+id/tvDOB"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/tvSex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etDOB"
+                android:text="Gender"
+                android:textSize="15dp" />
+
+            <RadioGroup
+                android:id="@+id/rgSex"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvSex"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/rbMale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male" />
+
+                <RadioButton
+                    android:id="@+id/rbFemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female" />
+            </RadioGroup>
+            
+             <com.loopj.android.image.SmartImageView
+        android:id="@+id/userImage"
+         android:layout_below="@+id/rgSex"
+        android:layout_gravity="left"
+        android:layout_width="120dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="5dp"
+        android:layout_height="100dp"
+        android:background="@drawable/shape"/>
+	<Button 
+            android:id="@+id/addUserImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/etPassword"
-            android:text="Confirm Password"
-            android:textSize="15dp" />
-
-        <EditText
-            android:id="@+id/etPassword2"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/tvPassword2"
-            android:inputType="textPassword"
-            android:layout_below="@+id/tvPassword2" />
-
-        <TextView
-            android:id="@+id/tvNickName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/etPassword2"
-            android:text="Nickname"
-            android:textSize="15dp" />
-
-        <EditText
-            android:id="@+id/etNickName"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-             android:hint="Eg jack"
-            android:layout_alignStart="@+id/tvNickName"
-            android:layout_below="@+id/tvNickName" />
-
-        <TextView
-            android:id="@+id/tvContact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/etNickName"
-            android:text="Contact Number"
-            android:textSize="15dp" />
-
-        <EditText
-            android:id="@+id/etContact"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/tvContact"
-            android:hint="Eg 61612141"
-            android:inputType="phone"
-            android:layout_below="@+id/tvContact" />
-
-        <TextView
-            android:id="@+id/tvDOB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/etContact"
-            android:text="Date of Birth"
-            android:textSize="15dp" />
-
-        <EditText
-            android:id="@+id/etDOB"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/tvDOB"
-            android:inputType="date"
-            android:layout_below="@+id/tvDOB" />
-
-        <TextView
-            android:id="@+id/tvSex"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/etDOB"
-            android:text="Gender"
-            android:textSize="15dp" />
-
-     <RadioGroup
-         android:id="@+id/rgSex"
-         android:layout_width="fill_parent"
-         android:layout_height="wrap_content"
-         android:layout_below="@+id/tvSex"
-         android:orientation="horizontal">
-         <RadioButton
-             android:id="@+id/rbMale"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text="Male"/>
-            <RadioButton
-             android:id="@+id/rbFemale"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text="Female"/>
-         
-     </RadioGroup>
-    </RelativeLayout>
-    </ScrollView>
+            android:layout_marginTop="10dp"
+           
+            android:layout_toRightOf="@+id/userImage"
+            android:text="Add Profile Picture"
+            android:layout_alignBottom="@+id/userImage"/>
+        </RelativeLayout>
+    
 
     <Button
         android:id="@+id/register"
@@ -155,12 +180,11 @@
         android:text="Register" />
 
     <Button
-         android:id="@+id/cancel"
+        android:id="@+id/cancel"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:onClick="finishActivity"
         android:text="Cancel" />
 
-  
-
 </LinearLayout>
+</ScrollView>

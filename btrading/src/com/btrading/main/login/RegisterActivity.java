@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 public class RegisterActivity extends Activity {
 
@@ -153,10 +154,17 @@ public class RegisterActivity extends Activity {
 		                        });
 					  }
 					}).start();
+			    Toast.makeText(RegisterActivity.this,  "Account Created for\n"+etNickName.getText()+"\n Thank You",   Toast.LENGTH_LONG).show();
+			    Intent intent = new Intent();
+            	intent.setClass(getBaseContext(), LoginActivity.class);
+				startActivity(intent);
+               finish();
+            }
+			    
 			}
-		
+
 			
-		}
+		
 		
 		
 	
