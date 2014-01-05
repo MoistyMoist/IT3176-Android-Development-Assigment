@@ -9,12 +9,16 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.btrading.httprequests.CreateUserRequest;
+import com.btrading.httprequests.CreateWishRequest;
 import com.btrading.httprequests.RetrieveAllProductRequest;
 import com.btrading.httprequests.RetrieveUserRequest;
 import com.btrading.httprequests.RetrieveWishRequest;
 import com.btrading.main.MainBaseActivity;
 import com.btrading.main.ProductListAdapter;
 import com.btrading.main.LeftListFragment.SampleAdapter;
+import com.btrading.main.login.LoginActivity;
+import com.btrading.main.login.RegisterActivity;
 import com.btrading.models.User;
 import com.btrading.utils.StaticObjects;
 import com.example.btrading.R;
@@ -290,17 +294,22 @@ public void checkWishlist(String wishName){
 }
 
 
-void showDialog() {
-    DialogFragment newFragment = MyAlertDialogFragment.newInstance(
-            R.string.dialog_add_wishlist);
+public void showDialog() {
+    //DialogFragment newFragment = MyAlertDialogFragment.newInstance(R.string.dialog_add_wishlist);
+	//DialogFragment newFragment = new DialogFragment();
+	//mind push to git? need to try
+	DialogFragment newFragment = new MyAlertDialogFragment();
     newFragment.show(getSupportFragmentManager(), "dialog");
 }
 
-public static void doPositiveClick() {
+public void doPositiveClick() {
     // Do stuff here.
 	//shah codes - add button onclick method to call request > url create wish 
+	addWish();
     Log.i("FragmentAlertDialog", "Positive click!");
 }
+
+
 
 public static void doNegativeClick() {
     // Do stuff here.
@@ -308,10 +317,57 @@ public static void doNegativeClick() {
 }
 
 
+private void addWish() {
+	// TODO Auto-generated method stub
+	
+	new Thread(new Runnable() {
+		@Override
+		public void run() {
+			ExecutorService executor = Executors.newFixedThreadPool(1);
 
-public static class MyAlertDialogFragment extends SherlockDialogFragment {
+			CreateWishRequest createWishRequest = new CreateWishRequest();
 
-    public static MyAlertDialogFragment newInstance(int title) {
+			executor.execute(createWishRequest);
+			executor.shutdown();
+			try {
+				executor.awaitTermination(Long.MAX_VALUE,
+						TimeUnit.NANOSECONDS);
+				Log.i(" RESPONSE :", "ENDED REQUEST");
+
+			} catch (InterruptedException e) {
+			}
+//dosent seem to accept statics... these are the parts u said dun disturbb
+			runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					staticObjects = new StaticObjects();
+					if (StaticObjects.getCurrentUser() == null) {
+						Log.i("USER", "NO USER");
+					} else {
+						// User user = StaticObjects.getCurrentUser();
+						// if(et_pass.getText().toString().equals(user.getPassword())){
+						// validUser=true;
+						// }
+					}
+				}
+			});
+		}
+	}).start();
+	Toast.makeText(
+			WishlistActivity.this,
+			"Item added to your wishlist",
+			Toast.LENGTH_LONG).show();
+	
+
+}
+	
+
+@SuppressLint("ValidFragment")
+public class MyAlertDialogFragment extends SherlockDialogFragment {
+
+	public MyAlertDialogFragment(){}
+	
+    public MyAlertDialogFragment newInstance(int title) {
         MyAlertDialogFragment frag = new MyAlertDialogFragment();
         Bundle args = new Bundle();
         args.putInt("title", title);
@@ -393,3 +449,5 @@ private class BackgroundTask extends AsyncTask<Runnable, Integer, Long> {
  }
 
 }
+
+
