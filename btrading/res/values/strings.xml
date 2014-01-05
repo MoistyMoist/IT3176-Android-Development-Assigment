@@ -13,9 +13,8 @@
     <string name="title_activity_trading">TradingActivity</string>
     <string name="title_activity_product">My Products</string>
     <string name="title_activity_setting">Settings</string>
+    <string name="dialog_add_wishlist">Add Wish</string>
 
-	<string name="dialog_add_wishlist">Add Wish</string>
-    
     <string-array name="syncFrequency">
         <item name="1">1 Hour</item>
         <item name="2">2 Hours</item>
@@ -48,5 +47,6 @@
     <string name="title_activity_update_product">UpdateProductActivity</string>
     <string name="title_activity_register">Registration </string>
     <string name="title_activity_product_list">ProductList</string>
+    <string name="title_activity_retrieve_trades">RetrieveTrades</string>
 
 </resources>

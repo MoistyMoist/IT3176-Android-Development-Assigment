@@ -47,7 +47,6 @@ public class TradingActivity extends Activity {
 		
 		productTakeID = getIntent().getIntExtra("ptake",0);
 		userTakeID = getIntent().getIntExtra("utake",0);
-		Toast.makeText(getBaseContext(), productTakeID+","+userTakeID, Toast.LENGTH_SHORT).show();
 		intent = new Intent(this, MainActivity.class);
 		
 		lv_products = (ListView)findViewById(R.id.listviewtradingofferingproducts);

@@ -91,6 +91,10 @@
             android:name="com.btrading.main.trading.ProductList"
             android:label="@string/title_activity_product_list" >
         </activity>
+        <activity
+            android:name="com.btrading.main.trading.RetrieveTrades"
+            android:label="@string/title_activity_retrieve_trades" >
+        </activity>
     </application>
 
 </manifest>
