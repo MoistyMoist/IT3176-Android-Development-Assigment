@@ -716,5 +716,67 @@ public class JSONExtractor {
 			}
             instream.close();
         }
+	
 	}
-}
+
+
+
+	public void ExtractCreateWishListRequest(HttpResponse data) throws IllegalStateException, IOException, JSONException
+	{
+		HttpEntity entity = data.getEntity();
+        
+        if (entity != null) {
+            InputStream instream = entity.getContent();
+            String result= convertStreamToString(instream);
+            
+            JSONObject json = null;
+            json = new JSONObject(result);
+	
+            Log.i("ABCD - Created Wish",json.toString() );
+            
+            //check status if all green to extract
+			StaticObjects.setRequestStatus((Integer) json.get(TAG_STATUS));
+			StaticObjects.setRequestMessage(json.getString(TAG_MESSAGE));
+			JSONArray RawData= json.getJSONArray(TAG_DATA);
+			//JSONArray errors=json.getJSONArray(TAG_ERRORS);
+			
+			Log.i("ABCD - Created Wish",RawData.toString() );
+			
+			ArrayList<Wish>wish1= new ArrayList<Wish>();
+			if(StaticObjects.getRequestStatus()==0)
+			{
+				
+				for(int i=0;i<RawData.length();i++)
+				{
+					JSONObject c=RawData.getJSONObject(i);
+					
+					Wish wish= new Wish();
+					wish.setName(TAG_WISH_NAME);
+					wish.setStatus(TAG_WISH_STATUS);
+					
+					
+					
+					
+					
+					
+
+					
+					wish1.add(wish);
+				}
+				//What to do in this???
+			//	StaticObjects.getAllUser().add(User.get(0));
+			}
+			else
+			{
+				Log.i("ERROR", "status==1");
+				Log.i("Message",StaticObjects.getRequestMessage());
+			}
+            instream.close();
+        }
+	
+    	}}
+
+
+      //THIS METHOD EXTRACTS THE RESULT FOR CREATING A NEW USER
+   
+	

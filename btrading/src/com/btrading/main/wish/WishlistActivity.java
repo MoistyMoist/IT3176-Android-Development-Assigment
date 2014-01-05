@@ -297,7 +297,7 @@ public void checkWishlist(String wishName){
 public void showDialog() {
     //DialogFragment newFragment = MyAlertDialogFragment.newInstance(R.string.dialog_add_wishlist);
 	//DialogFragment newFragment = new DialogFragment();
-	//mind push to git? need to try
+	
 	DialogFragment newFragment = new MyAlertDialogFragment();
     newFragment.show(getSupportFragmentManager(), "dialog");
 }
@@ -325,7 +325,7 @@ private void addWish() {
 		public void run() {
 			ExecutorService executor = Executors.newFixedThreadPool(1);
 
-			CreateWishRequest createWishRequest = new CreateWishRequest();
+			CreateWishRequest createWishRequest = new CreateWishRequest("", "", "");//////////
 
 			executor.execute(createWishRequest);
 			executor.shutdown();

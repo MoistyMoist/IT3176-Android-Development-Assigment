@@ -20,13 +20,16 @@ public class CreateWishRequest implements Runnable {
 	
 	private StaticObjects staticObjects;
 	private Wish wishToCreate;
-	private String email, password, nickName, contact, dob, sex, imageUrl, status;
+	private String  name, status, userID;
 	
 	
 	
-	public CreateWishRequest()
+	public CreateWishRequest(String  name, String status,String userID)
 	{
 		this.staticObjects = new StaticObjects();
+		this.name=name;
+		this.status= status;
+		this.userID = userID;
 		
 	}
 	
@@ -37,7 +40,7 @@ public class CreateWishRequest implements Runnable {
 
 		//PREPARE REQUEST OBJECT
 		//url take from webservice
-		HttpGet httpget = new HttpGet("http://bartertrading.cloudapp.net/api/CreateUser?token="+staticObjects.getToken()+"&INemail="+email);
+		HttpGet httpget = new HttpGet("http://bartertrading.cloudapp.net/api/CreateWishList?token="+staticObjects.getToken()+"&INname="+name+"INstatus="+status+"INuserID="+userID);
 		//HttpGet httpget = new HttpGet("http://bartertrading.cloudapp.net/api/CreateUser?token="+staticObjects.getToken()+"&INemail=email&INpassword=password&INnickname=nick&INcontact=contact&INdob=dob&INsex=sex&INimageUrl=imageUrl&INstatus=status");
 
 		//"&password"+password+
@@ -50,7 +53,7 @@ public class CreateWishRequest implements Runnable {
             Log.i("Create WISH RESPONSE :",response.getStatusLine().toString());
             //PASS THE RESPONSE TO THE EXTRACTOR
             JSONExtractor paser= new JSONExtractor();
-            paser.ExtractCreateUserRequest(response);
+            paser.ExtractCreateWishListRequest(response);
 
         } catch (ClientProtocolException e) {
             e.printStackTrace();
