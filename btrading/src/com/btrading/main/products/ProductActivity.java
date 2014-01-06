@@ -104,9 +104,9 @@ public class ProductActivity  extends MainBaseActivity{
 		if(StaticObjects.getUserProducts()==null||StaticObjects.getUserProducts().size()==0)
 		{
 			progress = ProgressDialog.show(this, "Retrieving items","please wait...", true);
-			User user= new User();
-		  	user.setUserID(1);
-			RetrieveUserProductRequest retrieveUserProductRequest = new RetrieveUserProductRequest(user);
+//			User user= new User();
+//		  	user.setUserID(1);
+			RetrieveUserProductRequest retrieveUserProductRequest = new RetrieveUserProductRequest(StaticObjects.getCurrentUser());
 			new BackgroundTask().execute(retrieveUserProductRequest,null);
 		}
 		else

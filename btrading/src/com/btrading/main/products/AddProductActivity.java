@@ -161,9 +161,9 @@ public class AddProductActivity extends MainBaseActivity{
 			}
 			else
 			{
-				User user= new User();
-			  	user.setUserID(1);
-				StaticObjects.getProductToCreate().setUser(user);
+//				User user= new User();
+//			  	user.setUserID(1);
+				StaticObjects.getProductToCreate().setUser(StaticObjects.getCurrentUser());
 				progress = ProgressDialog.show(this, "Uploading item","please wait...", true);
 				StaticObjects.getProductToCreate().setX(mMap.getMyLocation().getLatitude()+"");
 				StaticObjects.getProductToCreate().setY(mMap.getMyLocation().getLongitude()+"");
