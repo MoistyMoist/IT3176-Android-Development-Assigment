@@ -4,6 +4,7 @@ import com.btrading.main.login.LoginActivity;
 import com.btrading.main.products.ProductActivity;
 import com.btrading.main.profile.ProfileActivity;
 import com.btrading.main.wish.WishlistActivity;
+import com.btrading.utils.StaticObjects;
 import com.example.btrading.R;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
@@ -74,6 +75,7 @@ public class LeftListFragment extends ListFragment {
 			startActivity(intent);
 			break;
 		case 7: //Logout
+			StaticObjects.setStaticEmpty();
 			Intent logIntent = new Intent();
 			logIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			logIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

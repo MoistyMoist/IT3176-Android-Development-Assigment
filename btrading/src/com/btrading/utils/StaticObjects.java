@@ -87,6 +87,16 @@ public class StaticObjects {
 	public static void setProductToCreate(Product productToCreate) {
 		StaticObjects.productToCreate = productToCreate;
 	}
-	
+	//Set all null for logout
+	public static void setStaticEmpty(){
+		AllProducts = null;
+		currentUser = null;
+		selectedProduct = null;
+		RequestStatus = 0;
+		RequestMessage = null;
+		userProducts = null;
+		productToCreate = null;
+		userWishlist = null;
+	}
 	
 }
