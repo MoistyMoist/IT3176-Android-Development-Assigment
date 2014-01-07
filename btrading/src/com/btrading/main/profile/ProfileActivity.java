@@ -4,10 +4,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import com.btrading.httprequests.CreateUserRequest;
-import com.btrading.httprequests.RetrieveUserRequest;
 import com.btrading.httprequests.UpdateUserRequest;
 import com.btrading.main.login.RegisterActivity;
+import com.btrading.main.trading.RetrieveTrades;
+import com.btrading.main.trading.TradingActivity;
 import com.btrading.models.User;
 import com.btrading.utils.StaticObjects;
 import com.example.btrading.R;
@@ -17,6 +17,7 @@ import com.loopj.android.image.SmartImageView;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
@@ -33,7 +34,7 @@ public class ProfileActivity extends Activity {
 	StaticObjects staticObjects;
 	EditText etEmail, etSex, etDob, etContact, nickName, etPassword;
 	TextView tvUserName;
-	Button editProfile, btnUpdate, btnClear;
+	Button editProfile, btnUpdate, btnClear, btnPastTrades;
 	SmartImageView imageView1;
 	String updateUserName, updateEmail, updateSex, updateDob, updateContact, updateNickName, updateImageUrl, updateStatus, updatePassword;
 	int userId;
@@ -54,6 +55,8 @@ public class ProfileActivity extends Activity {
 		btnClear = (Button) findViewById(R.id.btnClear);
 		imageView1 = (SmartImageView) findViewById(R.id.imageView1);
 		etPassword = (EditText) findViewById(R.id.etPassword);
+		btnPastTrades = (Button) findViewById(R.id.btnPastTrades);
+		
 
 		tvUserName.setText(Integer.toString(StaticObjects.getCurrentUser()
 				.getUserID()));
@@ -155,6 +158,18 @@ public class ProfileActivity extends Activity {
 			}
 		});
 
+		btnPastTrades.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent();
+				intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+				intent.setClass(getBaseContext(), RetrieveTrades.class);		
+				startActivity(intent);
+			}
+			
+		});
+		
 		
 		btnUpdate.setOnClickListener(new OnClickListener() {
 

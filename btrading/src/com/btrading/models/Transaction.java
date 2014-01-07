@@ -1,5 +1,7 @@
 package com.btrading.models;
 
+import android.os.AsyncTask;
+
 public class Transaction {
 	
 	private int transactionID;
@@ -43,8 +45,6 @@ public class Transaction {
 	}
 	public void setTakingUser(User takingUser) {
 		this.takingUser = takingUser;
-	}
-	
-	
+	}	
 
 }

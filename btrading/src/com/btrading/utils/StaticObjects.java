@@ -23,6 +23,8 @@ public class StaticObjects {
 	static Product productToCreate;
 	//THE CURRENT USER WISHLIST
 	static ArrayList<Wish> userWishlist;
+	//TRANSCATIONS
+	static ArrayList<Transaction> allTrades;
 	
 
 
@@ -32,6 +34,12 @@ public class StaticObjects {
 	
 	
 	
+	public static ArrayList<Transaction> getAllTrades() {
+		return allTrades;
+	}
+	public static void setAllTrades(ArrayList<Transaction> allTrades) {
+		StaticObjects.allTrades = allTrades;
+	}
 	public static ArrayList<Wish> getUserWishlist() {
 		return userWishlist;
 	}

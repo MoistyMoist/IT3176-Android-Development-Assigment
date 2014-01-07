@@ -146,6 +146,7 @@ public class WishlistActivity extends MainBaseActivity {
 
 		public SampleAdapter(Context context) {
 			super(context, 0);
+			
 		}
 
 		public View getView(int position, View convertView, ViewGroup parent) {
