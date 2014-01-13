@@ -20,5 +20,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_wish_longpress" />
+    
+        <Button
+        android:id="@+id/b_wish_refresh"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" 
+        android:text="Refresh"/>
 
 </RelativeLayout>

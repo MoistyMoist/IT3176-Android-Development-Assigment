@@ -42,6 +42,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -64,6 +65,7 @@ public class WishlistActivity extends MainBaseActivity {
 	ProgressDialog progress;
 	Context context = this;
 	String available = "Unavailable";
+	Button wish_refresh;
 	
 	public WishlistActivity(){
 		super(R.string.title_activity_wishlist);
@@ -73,6 +75,7 @@ public class WishlistActivity extends MainBaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_wish);
 		
+		wish_refresh = (Button) findViewById(R.id.b_wish_refresh);
 		lv_wish = (ListView) findViewById(R.id.lv_wish);
 		getWishlist();
 		//SampleAdapter adapter = new SampleAdapter(this);
@@ -116,6 +119,16 @@ public class WishlistActivity extends MainBaseActivity {
 				return true;
 			}
 		}); */
+		wish_refresh.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				getWishlist();
+			}
+			
+		});
+
 		lv_wish.setOnItemClickListener(new OnItemClickListener(){
 
 			@Override
@@ -267,23 +280,11 @@ public class WishlistActivity extends MainBaseActivity {
 	}
 
 public void getWishlist(){
-		
-	if(StaticObjects.getUserWishlist()==null||StaticObjects.getUserWishlist().size()==0)
-	{
+	
 		progress = ProgressDialog.show(this, "Getting your wishes","please wait...", true);
 		RetrieveWishRequest retrieveWishRequest = new RetrieveWishRequest();
 		 //UploadImageRequest upload= new UploadImageRequest();
 		 new BackgroundTask().execute( retrieveWishRequest,null);
-	}
-	else
-	{
-		Log.i("WISH", "weird WISH");
-		adapter = new SampleAdapter(context);
-		for (int i=0; i<StaticObjects.getUserWishlist().size(); i++){
-			adapter.add(new WishItem(StaticObjects.getUserWishlist().get(i).getName(), StaticObjects.getUserWishlist().get(i).getStatus()));
-		}
-	    lv_wish.setAdapter(adapter);
-	}
 }
 
 public void checkWishlist(String wishName){
