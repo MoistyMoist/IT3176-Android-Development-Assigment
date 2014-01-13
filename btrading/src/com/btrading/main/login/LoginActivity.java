@@ -77,11 +77,12 @@ public class LoginActivity extends Activity {
 	
 	public void checkUser(){
 		
+		/*
 		if (et_username.getText().toString().equals("") || et_username.getText().toString().isEmpty()){
 			validUser = true;
-		}
+		} 
 		
-		else {
+		else { */
 		
 		if(StaticObjects.getCurrentUser()==null)
 		{
@@ -124,7 +125,7 @@ public class LoginActivity extends Activity {
 			Log.i("USER", "weird USER");
 			checkingUser();
 		}
-		} 
+		//} 
 	}
 	
 	public void checkingUser(){

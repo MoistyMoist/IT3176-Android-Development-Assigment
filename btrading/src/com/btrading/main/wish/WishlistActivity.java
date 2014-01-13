@@ -58,7 +58,7 @@ public class WishlistActivity extends MainBaseActivity {
 	ActionMode mActionMode;
 	ListView lv_wish;
 	ArrayAdapter<WishItem> adapter;
-	String[] wish_items = {"ABC Duck","TV controller","Water Bottle"};
+	//String[] wish_items = {"ABC Duck","TV controller","Water Bottle"};
 	String item_selected;
 	StaticObjects staticObjects;
 	ProgressDialog progress;
@@ -74,16 +74,16 @@ public class WishlistActivity extends MainBaseActivity {
 		setContentView(R.layout.activity_main_wish);
 		
 		lv_wish = (ListView) findViewById(R.id.lv_wish);
-		
+		getWishlist();
 		//SampleAdapter adapter = new SampleAdapter(this);
 		//for (int i=0; i<wish_items.length; i++){
 		//	adapter.add(new WishItem(wish_items[i], "Unavailable"));
 		//}
 		//lv_wish.setAdapter(adapter);
-		getWishlist();
 		
 		//adapter = new ArrayAdapter<CharSequence>(this,android.R.layout.simple_spinner_dropdown_item, wish_items);
 		//lv_wish.setAdapter(adapter);
+		/*
 		lv_wish.setOnItemLongClickListener(new OnItemLongClickListener(){
 
 			@Override
@@ -115,7 +115,7 @@ public class WishlistActivity extends MainBaseActivity {
 			        
 				return true;
 			}
-		}); 
+		}); */
 		lv_wish.setOnItemClickListener(new OnItemClickListener(){
 
 			@Override
@@ -132,7 +132,7 @@ public class WishlistActivity extends MainBaseActivity {
 			
 		});
 	}
-	
+
 	private class WishItem {
 		public String name;
 		public String status;
@@ -187,9 +187,9 @@ public class WishlistActivity extends MainBaseActivity {
 			TextView tv_status = (TextView) lv_list.getChildAt(Integer.parseInt(result)).findViewById(R.id.row_wish_available);
 			tv_status.setText(available);
 			if (available.equalsIgnoreCase("available")){
-				tv_status.setTextColor(Color.argb(255, 34, 139, 34));
+				tv_status.setTextColor(Color.argb(255, 34, 139, 34)); available="Unavailable";
 			}
-			else if (available.equalsIgnoreCase("unavailable")){
+			else {
 				tv_status.setTextColor(Color.RED);
 			}
         }

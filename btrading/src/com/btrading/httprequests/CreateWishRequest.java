@@ -20,11 +20,11 @@ public class CreateWishRequest implements Runnable {
 	
 	private StaticObjects staticObjects;
 	private Wish wishToCreate;
-	private String  name, status, userID;
+	private String  name, status;
+	private int userID;
 	
 	
-	
-	public CreateWishRequest(String  name, String status,String userID)
+	public CreateWishRequest(String  name, String status,int userID)
 	{
 		this.staticObjects = new StaticObjects();
 		this.name=name;
@@ -40,7 +40,7 @@ public class CreateWishRequest implements Runnable {
 
 		//PREPARE REQUEST OBJECT
 		//url take from webservice
-		HttpGet httpget = new HttpGet("http://bartertrading.cloudapp.net/api/CreateWishList?token="+staticObjects.getToken()+"&INname="+name+"INstatus="+status+"INuserID="+userID);
+		HttpGet httpget = new HttpGet("http://bartertrading.cloudapp.net/api/CreateWishList?token="+staticObjects.getToken()+"&INname="+name+"&INstatus="+status+"&INuserID="+userID);
 		//HttpGet httpget = new HttpGet("http://bartertrading.cloudapp.net/api/CreateUser?token="+staticObjects.getToken()+"&INemail=email&INpassword=password&INnickname=nick&INcontact=contact&INdob=dob&INsex=sex&INimageUrl=imageUrl&INstatus=status");
 
 		//"&password"+password+

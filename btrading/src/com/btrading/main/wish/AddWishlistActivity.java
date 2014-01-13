@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.btrading.httprequests.CreateUserRequest;
 import com.btrading.httprequests.CreateWishRequest;
+import com.btrading.main.MainActivity;
 import com.btrading.main.login.LoginActivity;
 import com.btrading.main.login.RegisterActivity;
 import com.btrading.utils.StaticObjects;
@@ -13,8 +14,11 @@ import com.example.btrading.R;
 import com.example.btrading.R.layout;
 import com.example.btrading.R.menu;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
@@ -29,6 +33,8 @@ public class AddWishlistActivity extends Activity {
 	EditText wishProduct;
 	Button addWishButton;
 	StaticObjects staticObjects;
+	ProgressDialog progress;
+	Context context = this;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,72 +49,14 @@ public class AddWishlistActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-
-				for (int i = 0; i < staticObjects.getUserWishlist().size(); i++) {
-					if (StaticObjects.getUserWishlist().get(i).getName()
-							.equals(wishProduct.getText().toString())) {
-						Toast.makeText(AddWishlistActivity.this,
-								"Item Already in your Wish list",
-								Toast.LENGTH_LONG).show();
-					} else {
-
-						new Thread(new Runnable() {
-							@Override
-							public void run() {
-								ExecutorService executor = Executors
-										.newFixedThreadPool(1);
-								int i = staticObjects.getCurrentUser()
-										.getUserID();
-								String userID = String.valueOf(i);
-
-								CreateWishRequest createWishRequest = new CreateWishRequest(
-										wishProduct.getText().toString(),
-										"unavailable", userID);
-
-								executor.execute(createWishRequest);
-								executor.shutdown();
-								try {
-									executor.awaitTermination(Long.MAX_VALUE,
-											TimeUnit.NANOSECONDS);
-									Log.i(" RESPONSE :", "ENDED REQUEST");
-
-								} catch (InterruptedException e) {
-								}
-
-								runOnUiThread(new Runnable() {
-									@Override
-									public void run() {
-										staticObjects = new StaticObjects();
-										if (StaticObjects.getCurrentUser() == null) {
-											Log.i("USER", "NO USER");
-										} else {
-											// User user =
-											// StaticObjects.getCurrentUser();
-											// if(et_pass.getText().toString().equals(user.getPassword())){
-											// validUser=true;
-											// }
-										}
-									}
-								});
-							}
-						}).start();
-						Toast.makeText(
-								AddWishlistActivity.this,
-								"Wishlist Created for\n"
-										+ staticObjects.getCurrentUser()
-												.getNickname() + "\n Thank You",
-								Toast.LENGTH_LONG).show();
-						Intent intent = new Intent();
-						intent.setClass(getBaseContext(),
-								WishlistActivity.class);
-						startActivity(intent);
-						finish();
-
-					}
-
-				}
-			}
-		});
+				int userID = StaticObjects.getCurrentUser().getUserID();
+				CreateWishRequest createWishRequest = new CreateWishRequest(
+						wishProduct.getText().toString(),
+						"unavailable", userID);
+				new AddWishList().execute(createWishRequest, null);
+				
+			} 
+		}); 
 
 	}
 
@@ -117,6 +65,41 @@ public class AddWishlistActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.add_wishlist, menu);
 		return true;
+	}
+	
+
+	private class AddWishList extends AsyncTask<Runnable, Integer, Long> {
+
+		@Override
+		protected void onPostExecute(Long result) {
+
+			super.onPostExecute(result);
+			if (progress != null)
+				progress.dismiss();
+			//return to wishlist
+			Intent intent = new Intent();
+			intent.setClass(getBaseContext(),
+					WishlistActivity.class);
+			startActivity(intent);
+			finish();
+		}
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+		}
+
+		@Override
+		protected Long doInBackground(Runnable... task) {
+
+			for (int i = 0; i < task.length; i++) {
+				if (task[i] != null)
+					task[i].run();
+				if (isCancelled())
+					break;
+			}
+			return null;
+		}
 	}
 
 }
