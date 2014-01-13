@@ -5,6 +5,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import com.btrading.httprequests.UpdateUserRequest;
+import com.btrading.main.MainActivity;
 import com.btrading.main.login.RegisterActivity;
 import com.btrading.main.trading.RetrieveTrades;
 import com.btrading.main.trading.TradingActivity;
@@ -196,7 +197,7 @@ public class ProfileActivity extends Activity {
 				updateEmail = etEmail.getText().toString();
 				//updatePassword = etPassword.getText().toString();
 				// updateSex = etSex.getText().toString();
-				updateSex = "testUpdate";
+				updateSex = etSex.getText().toString();
 				updateImageUrl = "testImage";
 				updateStatus = "testStatus";
 				updateDob = etDob.getText().toString();
@@ -253,7 +254,15 @@ public class ProfileActivity extends Activity {
 	                        });
 				  }
 				}).start();
+		    Toast.makeText(
+					ProfileActivity.this,
+					"Account Updated Successfully",
+					Toast.LENGTH_LONG).show();
+		    Intent intent = new Intent();
+		    intent.setClass(getBaseContext(), MainActivity.class);		
+			startActivity(intent);
 		}
+		
 		
 		 
 	

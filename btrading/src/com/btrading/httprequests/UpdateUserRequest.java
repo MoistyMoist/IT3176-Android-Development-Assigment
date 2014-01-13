@@ -27,7 +27,7 @@ public class UpdateUserRequest implements Runnable {
 		this.userID = userID;
 		this.staticObjects = new StaticObjects();
 		this.email = email;
-		this.sex = "testSex";
+		this.sex =sex;
 		this.password = password;
 		this.nickName = nickName;
 		this.contact = contact;
