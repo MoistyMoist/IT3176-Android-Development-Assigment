@@ -25,11 +25,14 @@
             android:id="@+id/requestButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+          
             android:layout_above="@+id/scrollView"
             android:layout_toRightOf="@+id/productImage"
             android:text="Send Trade Request"
             android:layout_alignBottom="@+id/productImage"/>
+	
+	
+	  
 	<ScrollView 
 	    android:id="@+id/scrollView"
 	    android:layout_below="@+id/productImage"

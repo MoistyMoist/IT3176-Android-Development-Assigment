@@ -298,15 +298,18 @@ public void checkWishlist(String wishName){
 public void showDialog() {
     //DialogFragment newFragment = MyAlertDialogFragment.newInstance(R.string.dialog_add_wishlist);
 	//DialogFragment newFragment = new DialogFragment();
+	Intent intent = new Intent();
+	intent.setClass(getBaseContext(), AddWishlistActivity.class);
+	startActivity(intent);
 	
-	DialogFragment newFragment = new MyAlertDialogFragment();
-    newFragment.show(getSupportFragmentManager(), "dialog");
+	//DialogFragment newFragment = new MyAlertDialogFragment();
+    //newFragment.show(getSupportFragmentManager(), "dialog");
 }
 
 public void doPositiveClick() {
-    // Do stuff here.
-	//shah codes - add button onclick method to call request > url create wish 
-	addWish();
+
+
+  
     Log.i("FragmentAlertDialog", "Positive click!");
 }
 
@@ -319,46 +322,7 @@ public static void doNegativeClick() {
 
 
 private void addWish() {
-	// TODO Auto-generated method stub
-	
-	new Thread(new Runnable() {
-		@Override
-		public void run() {
-			ExecutorService executor = Executors.newFixedThreadPool(1);
 
-			CreateWishRequest createWishRequest = new CreateWishRequest("", "", "");//////////
-
-			executor.execute(createWishRequest);
-			executor.shutdown();
-			try {
-				executor.awaitTermination(Long.MAX_VALUE,
-						TimeUnit.NANOSECONDS);
-				Log.i(" RESPONSE :", "ENDED REQUEST");
-
-			} catch (InterruptedException e) {
-			}
-//dosent seem to accept statics... these are the parts u said dun disturbb
-			runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					staticObjects = new StaticObjects();
-					if (StaticObjects.getCurrentUser() == null) {
-						Log.i("USER", "NO USER");
-					} else {
-						// User user = StaticObjects.getCurrentUser();
-						// if(et_pass.getText().toString().equals(user.getPassword())){
-						// validUser=true;
-						// }
-					}
-				}
-			});
-		}
-	}).start();
-	Toast.makeText(
-			WishlistActivity.this,
-			"Item added to your wishlist",
-			Toast.LENGTH_LONG).show();
-	
 
 }
 	
@@ -432,7 +396,8 @@ private class BackgroundTask extends AsyncTask<Runnable, Integer, Long> {
 
 	@Override
 	protected void onPreExecute() {
-		Toast.makeText(context, "Refreshing..", Toast.LENGTH_SHORT).show();
+		Toast.makeText(
+				context, "Refreshing..", Toast.LENGTH_SHORT).show();
 		super.onPreExecute();
 	}
 

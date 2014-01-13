@@ -61,6 +61,9 @@ public class ProductDetailActivity extends MainBaseActivity {
 		productTakeID = StaticObjects.getSelectedProduct().getProductID();
 		userTakeID = StaticObjects.getSelectedProduct().getUser().getUserID();
 		Toast.makeText(getBaseContext(), productTakeID+","+userTakeID, Toast.LENGTH_SHORT).show();
+		
+		
+	
 		sendTradeRequest = (Button)findViewById(R.id.requestButton);
 		sendTradeRequest.setOnClickListener(new OnClickListener(){
 			@Override

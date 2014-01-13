@@ -1,10 +1,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+ 
+    android:orientation="horizontal" >
+  
+    <RelativeLayout 
+       android:layout_width="wrap_content"
+      android:layout_height="wrap_content">
+  <TextView 
+      android:id="@+id/tvAddwish"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:text="Add Wish List"
+      android:textSize="20dp"
+      />
     
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/wishProduct"
         android:inputType="textEmailAddress"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -12,6 +24,16 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
-        android:hint="Enter Name of Product" />
-   
+        android:hint="Enter Name of Product" 
+        android:layout_below="@+id/tvAddwish"
+        />
+    
+    <Button 
+        android:id="@+id/addWishButton"
+        android:text="Add wish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/wishProduct"
+        android:layout_below="@+id/wishProduct"/>
+   </RelativeLayout>
 </LinearLayout>
