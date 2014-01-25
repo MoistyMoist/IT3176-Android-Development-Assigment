@@ -110,7 +110,7 @@ public class RegisterActivity extends Activity {
 					"Please fill in the empty fields",
 					Toast.LENGTH_LONG).show();
 		}
-		 else if(!(etPassword.getText().toString()==etPassword2.getText().toString()))
+		 else if(!(etPassword.getText().toString().equals(etPassword2.getText().toString())))
 			{
 				
 				Toast.makeText(
